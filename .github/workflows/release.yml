@@ -13,7 +13,7 @@ jobs:
     permissions:
       contents: write
     outputs:
-      version: ${{ steps.semantic_release.outputs.new_release_version }}
+      version: v${{ steps.semantic_release.outputs.new_release_version }}
     steps:
       - uses: actions/checkout@v4
       - id: sha
@@ -46,7 +46,7 @@ jobs:
             ]
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: echo ${{ steps.semantic_release.outputs.new_release_version }}
+      - run: echo v${{ steps.semantic_release.outputs.new_release_version }}
 
   go-build:
     runs-on: ubuntu-latest
