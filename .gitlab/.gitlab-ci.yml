@@ -1,0 +1,38 @@
+stages:
+  - cleanup
+
+.artifacts-cleanup:
+  stage: analysis
+  image:
+    name: github.com/kilianpaquier/gitlab-storage-cleaner
+    entrypoint: [""]
+  needs: []
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+      when: manual
+  variables:
+    GITLAB_TOKEN: $CICD_RW_TOKEN
+    PATHS: ^$CI_PROJECT_NAMESPACE\/.*$ # regexp matching
+    THRESHOLD_DURATION: 168h
+    THRESHOLD_SIZE: "10000000" # 10 MB
+  script:
+    - /app/gitlab-storage-cleaner artifacts \
+      --token "$CICD_RW_TOKEN" \
+      --server "$CI_SERVER_HOST" \
+      --paths "$PATHS" \
+      --threshold-duration "$THRESHOLD_DURATION" \
+      --threshold-size "$THRESHOLD_SIZE" \
+      --dry-run
+
+artifacts-cleanup:dry-run:
+  extends: .artifacts-cleanup
+
+artifacts-cleanup:
+  extends: .artifacts-cleanup
+  script:
+    - /app/gitlab-storage-cleaner artifacts \
+      --token "$CICD_RW_TOKEN" \
+      --server "$CI_SERVER_HOST" \
+      --paths "$PROJECTS" \
+      --threshold-duration "$THRESHOLD_DURATION" \
+      --threshold-size "$THRESHOLD_SIZE"
