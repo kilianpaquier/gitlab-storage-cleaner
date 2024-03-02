@@ -16,7 +16,7 @@ updates:
       timezone: Etc/UTC
     commit-message:
       include: scope
-      prefix: "chore(github-actions): "
+      prefix: chore
     pull-request-branch-name:
       separator: /
     rebase-strategy: auto
@@ -34,7 +34,7 @@ updates:
       timezone: Etc/UTC
     commit-message:
       include: scope
-      prefix: "chore(gomod): "
+      prefix: chore
     pull-request-branch-name:
       separator: /
     rebase-strategy: auto
@@ -52,7 +52,7 @@ updates:
       timezone: Etc/UTC
     commit-message:
       include: scope
-      prefix: "chore(docker): "
+      prefix: chore
     pull-request-branch-name:
       separator: /
     rebase-strategy: auto

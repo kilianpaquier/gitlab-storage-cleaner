@@ -4,9 +4,9 @@ go 1.22.0
 
 require (
 	github.com/ezian/pipe v0.1.0
-	github.com/go-playground/validator/v10 v10.18.0
+	github.com/go-playground/validator/v10 v10.19.0
 	github.com/jarcoal/httpmock v1.3.1
-	github.com/kilianpaquier/pooling v0.0.0-20240301094017-0c5c3a325f68
+	github.com/kilianpaquier/pooling v0.0.0-20240302190619-1cb3bc8efe6a
 	github.com/kilianpaquier/testlogrus v0.0.0-20240302124840-f94674d38ad3
 	github.com/panjf2000/ants/v2 v2.9.0
 	github.com/samber/lo v1.39.0
