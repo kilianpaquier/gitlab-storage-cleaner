@@ -3,6 +3,7 @@ ci: github
 maintainers:
     - url: https://kilianpaquier.com
       name: kilianpaquier
+codecov: true
 dependabot: true
 no_api: true
 no_chart: true
