@@ -4,7 +4,7 @@ stages:
 .artifacts-cleanup:
   stage: analysis
   image:
-    name: github.com/kilianpaquier/gitlab-storage-cleaner
+    name: kilianpaquier/gitlab-storage-cleaner
     entrypoint: [""]
   needs: []
   rules:
