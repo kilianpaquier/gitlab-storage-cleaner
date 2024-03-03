@@ -1,3 +1,11 @@
+## [1.0.0-alpha.2](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2024-03-03)
+
+
+### Chores
+
+* **ci:** add strategy execution for tests ([ba612e6](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/ba612e6557ffd99b1f8485b98c1a2c7bcbbc9990))
+* migrate docker image to ghcr.io ([e1b0114](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/e1b01148819ea5947b48b41628a4a71a7d1837c4))
+
 ## 1.0.0-alpha.1 (2024-03-03)
 
 
