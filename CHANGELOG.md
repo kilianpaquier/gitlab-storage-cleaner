@@ -1,3 +1,17 @@
+## [1.0.0-alpha.3](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2024-03-03)
+
+
+### Bug Fixes
+
+* **ci:** bad image name for gitlab-ci template ([deb288e](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/deb288e9360177583831131810c2a17f10780aff))
+* **ci:** gitlab-ci template image name ([ebf38ac](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/ebf38ac3ab604d77e69644ee0079b01daf678712))
+
+
+### Reverts
+
+* "chore: migrate docker image to ghcr.io" because of private ([1cee781](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/1cee78145eab7eab7d6bf2ac6a5aa4da0a4e0715))
+* **ci:** "revert: "chore: migrate docker image to ghcr.io" because of private" ([025f9a6](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/025f9a6f4885f532c17a8098ba411bf9bdd477f6))
+
 ## [1.0.0-alpha.2](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2024-03-03)
 
 
