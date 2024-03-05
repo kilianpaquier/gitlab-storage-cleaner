@@ -10,8 +10,8 @@ on:
       - main
       - staging
       - develop
-      - v[0-9]+
-      - v[0-9]+.[0-9]+
+      - v[0-9]+.x
+      - v[0-9]+.[0-9]+.x
   workflow_dispatch:
 
 jobs:
@@ -51,7 +51,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
       - run: ${{ matrix.os.args }} go test ./... -coverpkg="./..." -covermode="count" -coverprofile="coverage.out"
       - uses: codecov/codecov-action@v4
-        if: ${{ ! startsWith(github.ref_name, 'dependabot') }} # ignore codecov on dependabot branches
+        if: ${{ ! startsWith(github.base_ref, 'dependabot') }} # ignore codecov on dependabot branches
         with:
           codecov_yml_path: codecov.yml
           disable_search: true
@@ -67,7 +67,7 @@ jobs:
       pull-requests: write
       security-events: write
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: hadolint/hadolint-action@v3.1.0
         continue-on-error: true # enforce scan upload to codeql
         with:
