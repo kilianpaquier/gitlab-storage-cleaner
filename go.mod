@@ -1,6 +1,6 @@
 module github.com/kilianpaquier/gitlab-storage-cleaner
 
-go 1.22.0
+go 1.22
 
 require (
 	github.com/ezian/pipe v0.1.0

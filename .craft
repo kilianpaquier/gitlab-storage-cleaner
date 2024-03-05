@@ -1,9 +1,12 @@
+ci:
+  name: github
+  options:
+    - codecov
+    - dependabot
+docker:
+  registry: ghcr.io
 license: mit
-ci: github
 maintainers:
-    - url: https://kilianpaquier.com
-      name: kilianpaquier
-codecov: true
-dependabot: true
-no_api: true
+  - url: https://kilianpaquier.com
+    name: kilianpaquier
 no_chart: true
