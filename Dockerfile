@@ -3,7 +3,7 @@
 #############################
 #        STAGE BUILD        #
 #############################
-FROM golang:1.22 AS build
+FROM golang:1.22.1 AS build
 
 WORKDIR /app
 
