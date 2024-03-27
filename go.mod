@@ -8,7 +8,7 @@ require (
 	github.com/jarcoal/httpmock v1.3.1
 	github.com/kilianpaquier/pooling v0.0.0-20240311190636-a6b618842113
 	github.com/kilianpaquier/testlogrus v0.0.0-20240302124840-f94674d38ad3
-	github.com/panjf2000/ants/v2 v2.9.0
+	github.com/panjf2000/ants/v2 v2.9.1
 	github.com/samber/lo v1.39.0
 	github.com/sirupsen/logrus v1.9.3
 	github.com/spf13/cobra v1.8.0
