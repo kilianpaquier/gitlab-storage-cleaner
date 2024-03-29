@@ -8,13 +8,14 @@ import (
 	"time"
 
 	"github.com/jarcoal/httpmock"
-	testlogrus "github.com/kilianpaquier/testlogrus/pkg"
+	"github.com/sirupsen/logrus/hooks/test"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"github.com/xanzy/go-gitlab"
 
 	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/artifacts/v1"
 	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/artifacts/v1/tests"
+	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/testlogs"
 )
 
 func TestNeedCleanup(t *testing.T) {
@@ -146,13 +147,15 @@ func TestDeleteArtifacts(t *testing.T) {
 		t.Cleanup(httpmock.Reset)
 		httpmock.RegisterResponder(http.MethodDelete, url,
 			httpmock.NewStringResponder(http.StatusInternalServerError, "an error"))
-		testlogrus.CatchLogs(t)
+
+		hook := test.NewGlobal()
+		t.Cleanup(func() { hook.Reset() })
 
 		// Act
 		job.DeleteArtifacts(ctx, client)(nil)
 
 		// Assert
-		logs := testlogrus.Logs()
+		logs := testlogs.ToString(hook.AllEntries())
 		assert.Contains(t, logs, "an error")
 		assert.Contains(t, logs, "failed to delete job's artifacts")
 	})
@@ -162,13 +165,15 @@ func TestDeleteArtifacts(t *testing.T) {
 		t.Cleanup(httpmock.Reset)
 		httpmock.RegisterResponder(http.MethodDelete, url,
 			httpmock.NewStringResponder(http.StatusNoContent, ""))
-		testlogrus.CatchLogs(t)
+
+		hook := test.NewGlobal()
+		t.Cleanup(func() { hook.Reset() })
 
 		// Act
 		job.DeleteArtifacts(ctx, client)(nil)
 
 		// Assert
-		logs := testlogrus.Logs()
+		logs := testlogs.ToString(hook.AllEntries())
 		assert.Equal(t, logs, "")
 		assert.Equal(t, 1, httpmock.GetTotalCallCount())
 	})

@@ -6,6 +6,7 @@
 
 # basic root files
 .editorconfig
+.env
 .vscode
 AUTHORS.md
 CONTRIBUTING.md
@@ -14,7 +15,18 @@ Makefile
 NOTICE
 README.md
 
-# docs
+# various folders
 docs/
+reports/
+dist/
 
-# go specificities
+# binaries
+gitlab-storage-cleaner
+!gitlab-storage-cleaner/
+
+# test files
+**/*_test.go
+**/*.test
+
+# vendor dependencies
+vendor/

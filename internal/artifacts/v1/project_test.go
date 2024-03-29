@@ -10,8 +10,8 @@ import (
 
 	"github.com/jarcoal/httpmock"
 	pooling "github.com/kilianpaquier/pooling/pkg"
-	testlogrus "github.com/kilianpaquier/testlogrus/pkg"
 	"github.com/samber/lo"
+	"github.com/sirupsen/logrus/hooks/test"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"github.com/xanzy/go-gitlab"
@@ -19,6 +19,7 @@ import (
 	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/artifacts/mocks"
 	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/artifacts/v1"
 	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/artifacts/v1/tests"
+	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/testlogs"
 )
 
 func TestReadProjects(t *testing.T) {
@@ -48,7 +49,9 @@ func TestReadProjects(t *testing.T) {
 		t.Cleanup(httpmock.Reset)
 		httpmock.RegisterResponder(http.MethodGet, url,
 			httpmock.NewStringResponder(http.StatusInternalServerError, "an error"))
-		testlogrus.CatchLogs(t)
+
+		hook := test.NewGlobal()
+		t.Cleanup(func() { hook.Reset() })
 
 		// Act
 		projects := artifacts.ReadProjects(ctx, client, *opts)
@@ -56,7 +59,7 @@ func TestReadProjects(t *testing.T) {
 		// Assert
 		// verify channel first because it will block until its closed
 		assert.Empty(t, lo.ChannelToSlice(projects))
-		logs := testlogrus.Logs()
+		logs := testlogs.ToString(hook.AllEntries())
 		assert.Contains(t, logs, "an error")
 		assert.Contains(t, logs, "failed to retrieve projects")
 	})
@@ -69,7 +72,9 @@ func TestReadProjects(t *testing.T) {
 			{ID: 9, PathWithNamespace: "two_hey"},
 			{ID: 10, PathWithNamespace: "hoï_one"},
 		})
-		testlogrus.CatchLogs(t)
+
+		hook := test.NewGlobal()
+		t.Cleanup(func() { hook.Reset() })
 
 		// Act
 		projects := artifacts.ReadProjects(ctx, client, *opts)
@@ -77,7 +82,7 @@ func TestReadProjects(t *testing.T) {
 		// Assert
 		// verify channel first because it will block until its closed
 		assert.Len(t, lo.ChannelToSlice(projects), 3)
-		logs := testlogrus.Logs()
+		logs := testlogs.ToString(hook.AllEntries())
 		assert.Equal(t, logs, "")
 	})
 }
@@ -108,13 +113,15 @@ func TestCleanArtifacts(t *testing.T) {
 			httpmock.NewStringResponder(http.StatusInternalServerError, "an error"))
 
 		opts := tests.NewOptionsBuilder().Build()
-		testlogrus.CatchLogs(t)
+
+		hook := test.NewGlobal()
+		t.Cleanup(func() { hook.Reset() })
 
 		// Act
 		project.CleanArtifacts(ctx, client, *opts)(nil)
 
 		// Assert
-		logs := testlogrus.Logs()
+		logs := testlogs.ToString(hook.AllEntries())
 		assert.Contains(t, logs, "an error")
 		assert.Contains(t, logs, "failed to retrieve project jobs")
 	})
@@ -131,13 +138,15 @@ func TestCleanArtifacts(t *testing.T) {
 			Build()
 		jobs := make(chan pooling.PoolerFunc, 10)
 		t.Cleanup(func() { close(jobs) })
-		testlogrus.CatchLogs(t)
+
+		hook := test.NewGlobal()
+		t.Cleanup(func() { hook.Reset() })
 
 		// Act
 		project.CleanArtifacts(ctx, client, *opts)(jobs)
 
 		// Assert
-		logs := testlogrus.Logs()
+		logs := testlogs.ToString(hook.AllEntries())
 		assert.Contains(t, logs, "should run project cleanup")
 		assert.Equal(t, 2, httpmock.GetTotalCallCount())
 		assert.Len(t, jobs, 0) // no elements since dry run doesn't send into channel
@@ -174,13 +183,15 @@ func TestCleanArtifacts(t *testing.T) {
 			Build()
 		jobs := make(chan pooling.PoolerFunc, 10)
 		t.Cleanup(func() { close(jobs) })
-		testlogrus.CatchLogs(t)
+
+		hook := test.NewGlobal()
+		t.Cleanup(func() { hook.Reset() })
 
 		// Act
 		project.CleanArtifacts(ctx, client, *opts)(jobs)
 
 		// Assert
-		logs := testlogrus.Logs()
+		logs := testlogs.ToString(hook.AllEntries())
 		assert.Contains(t, logs, "running project cleanup")
 		assert.Contains(t, logs, "ended project cleanup")
 		assert.Equal(t, 2, httpmock.GetTotalCallCount())

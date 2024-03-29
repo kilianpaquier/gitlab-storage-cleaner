@@ -1,19 +1,20 @@
 module github.com/kilianpaquier/gitlab-storage-cleaner
 
-go 1.22
+go 1.22.0
+
+toolchain go1.22.1
 
 require (
 	github.com/ezian/pipe v0.1.0
 	github.com/go-playground/validator/v10 v10.19.0
 	github.com/jarcoal/httpmock v1.3.1
-	github.com/kilianpaquier/pooling v0.0.0-20240311190636-a6b618842113
-	github.com/kilianpaquier/testlogrus v0.0.0-20240302124840-f94674d38ad3
-	github.com/panjf2000/ants/v2 v2.9.0
+	github.com/kilianpaquier/pooling v1.0.0
+	github.com/panjf2000/ants/v2 v2.9.1
 	github.com/samber/lo v1.39.0
 	github.com/sirupsen/logrus v1.9.3
 	github.com/spf13/cobra v1.8.0
 	github.com/stretchr/testify v1.9.0
-	github.com/xanzy/go-gitlab v0.100.0
+	github.com/xanzy/go-gitlab v0.101.0
 )
 
 require (
@@ -30,7 +31,7 @@ require (
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	golang.org/x/crypto v0.21.0 // indirect
-	golang.org/x/exp v0.0.0-20240222234643-814bf88cf225 // indirect
+	golang.org/x/exp v0.0.0-20240325151524-a685a6edb6d8 // indirect
 	golang.org/x/net v0.22.0 // indirect
 	golang.org/x/oauth2 v0.18.0 // indirect
 	golang.org/x/sync v0.6.0 // indirect

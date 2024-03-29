@@ -9,8 +9,8 @@ import (
 	"time"
 
 	"github.com/jarcoal/httpmock"
-	testlogrus "github.com/kilianpaquier/testlogrus/pkg"
 	"github.com/samber/lo"
+	"github.com/sirupsen/logrus/hooks/test"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"github.com/xanzy/go-gitlab"
@@ -18,6 +18,7 @@ import (
 	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/artifacts/mocks"
 	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/artifacts/v2"
 	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/artifacts/v2/tests"
+	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/testlogs"
 )
 
 func TestRun(t *testing.T) {
@@ -102,14 +103,15 @@ func TestRun(t *testing.T) {
 			"DELETE " + fmt.Sprintf(deleteURL, projectID, jobID):                    1,
 		}
 
-		testlogrus.CatchLogs(t)
+		hook := test.NewGlobal()
+		t.Cleanup(func() { hook.Reset() })
 
 		// Act
 		err := artifacts.Run(ctx, client, *opts)
 
 		// Assert
 		assert.NoError(t, err)
-		logs := testlogrus.Logs()
+		logs := testlogs.ToString(hook.AllEntries())
 		assert.NotContains(t, logs, "failed to retrieve projects")
 		assert.Contains(t, logs, "starting project execution")
 		assert.NotContains(t, logs, "failed to retrieve project jobs")

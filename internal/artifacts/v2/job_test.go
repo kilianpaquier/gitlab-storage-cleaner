@@ -7,13 +7,14 @@ import (
 	"time"
 
 	"github.com/jarcoal/httpmock"
-	testlogrus "github.com/kilianpaquier/testlogrus/pkg"
+	"github.com/sirupsen/logrus/hooks/test"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"github.com/xanzy/go-gitlab"
 
 	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/artifacts/v2"
 	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/artifacts/v2/tests"
+	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/testlogs"
 )
 
 func TestNeedCleanup(t *testing.T) {
@@ -145,14 +146,16 @@ func TestDeleteArtifacts(t *testing.T) {
 			httpmock.NewStringResponder(http.StatusInternalServerError, "an error"))
 
 		opts := tests.NewOptionsBuilder().Build()
-		testlogrus.CatchLogs(t)
+
+		hook := test.NewGlobal()
+		t.Cleanup(func() { hook.Reset() })
 
 		// Act
 		job := artifacts.DeleteArtifacts(client, *opts)(*job)
 
 		// Assert
 		assert.False(t, job.Cleaned)
-		logs := testlogrus.Logs()
+		logs := testlogs.ToString(hook.AllEntries())
 		assert.Contains(t, logs, "an error")
 		assert.Contains(t, logs, "failed to delete job's artifacts")
 	})
@@ -162,14 +165,16 @@ func TestDeleteArtifacts(t *testing.T) {
 		opts := tests.NewOptionsBuilder().
 			SetDryRun(true).
 			Build()
-		testlogrus.CatchLogs(t)
+
+		hook := test.NewGlobal()
+		t.Cleanup(func() { hook.Reset() })
 
 		// Act
 		job := artifacts.DeleteArtifacts(client, *opts)(*job)
 
 		// Assert
 		assert.True(t, job.Cleaned)
-		logs := testlogrus.Logs()
+		logs := testlogs.ToString(hook.AllEntries())
 		assert.Equal(t, logs, "")
 		assert.Equal(t, 0, httpmock.GetTotalCallCount())
 	})
@@ -181,14 +186,16 @@ func TestDeleteArtifacts(t *testing.T) {
 			httpmock.NewStringResponder(http.StatusNoContent, ""))
 
 		opts := tests.NewOptionsBuilder().Build()
-		testlogrus.CatchLogs(t)
+
+		hook := test.NewGlobal()
+		t.Cleanup(func() { hook.Reset() })
 
 		// Act
 		job := artifacts.DeleteArtifacts(client, *opts)(*job)
 
 		// Assert
 		assert.True(t, job.Cleaned)
-		logs := testlogrus.Logs()
+		logs := testlogs.ToString(hook.AllEntries())
 		assert.Equal(t, logs, "")
 		assert.Equal(t, 1, httpmock.GetTotalCallCount())
 	})
