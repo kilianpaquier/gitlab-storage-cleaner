@@ -9,8 +9,8 @@ import (
 	"time"
 
 	"github.com/jarcoal/httpmock"
-	testlogrus "github.com/kilianpaquier/testlogrus/pkg"
 	"github.com/samber/lo"
+	"github.com/sirupsen/logrus/hooks/test"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"github.com/xanzy/go-gitlab"
@@ -18,6 +18,7 @@ import (
 	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/artifacts/mocks"
 	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/artifacts/v2"
 	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/artifacts/v2/tests"
+	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/testlogs"
 )
 
 func TestSplitProject(t *testing.T) {
@@ -44,13 +45,15 @@ func TestSplitProject(t *testing.T) {
 			httpmock.NewStringResponder(http.StatusInternalServerError, "an error"))
 
 		opts := tests.NewOptionsBuilder().Build()
-		testlogrus.CatchLogs(t)
+
+		hook := test.NewGlobal()
+		t.Cleanup(func() { hook.Reset() })
 
 		// Act
 		artifacts.SplitProject(client, *opts)(*project, nil)
 
 		// Assert
-		logs := testlogrus.Logs()
+		logs := testlogs.ToString(hook.AllEntries())
 		assert.Contains(t, logs, "an error")
 		assert.Contains(t, logs, "failed to retrieve project jobs")
 	})
@@ -147,7 +150,9 @@ func TestReadProjects(t *testing.T) {
 		t.Cleanup(httpmock.Reset)
 		httpmock.RegisterResponder(http.MethodGet, url,
 			httpmock.NewStringResponder(http.StatusInternalServerError, "an error"))
-		testlogrus.CatchLogs(t)
+
+		hook := test.NewGlobal()
+		t.Cleanup(func() { hook.Reset() })
 
 		// Act
 		projects := artifacts.ReadProjects(ctx, client, *opts)
@@ -155,7 +160,7 @@ func TestReadProjects(t *testing.T) {
 		// Assert
 		// verify channel first because it will block until its closed
 		assert.Empty(t, lo.ChannelToSlice(projects))
-		logs := testlogrus.Logs()
+		logs := testlogs.ToString(hook.AllEntries())
 		assert.Contains(t, logs, "an error")
 		assert.Contains(t, logs, "failed to retrieve projects")
 	})
@@ -168,7 +173,9 @@ func TestReadProjects(t *testing.T) {
 			{ID: 9, PathWithNamespace: "two_hey"},
 			{ID: 10, PathWithNamespace: "hoï_one"},
 		})
-		testlogrus.CatchLogs(t)
+
+		hook := test.NewGlobal()
+		t.Cleanup(func() { hook.Reset() })
 
 		// Act
 		projects := artifacts.ReadProjects(ctx, client, *opts)
@@ -176,7 +183,7 @@ func TestReadProjects(t *testing.T) {
 		// Assert
 		// verify channel first because it will block until its closed
 		assert.Len(t, lo.ChannelToSlice(projects), 3)
-		logs := testlogrus.Logs()
+		logs := testlogs.ToString(hook.AllEntries())
 		assert.Equal(t, logs, "")
 	})
 }
