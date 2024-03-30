@@ -17,7 +17,7 @@ var (
 
 	cleanCmd = &cobra.Command{
 		Use:    "artifacts",
-		Short:  "Cleans artifacts of provided project(s)' gitlab storage",
+		Short:  "Clean artifacts of provided project(s)' gitlab storage",
 		PreRun: SetLogLevel,
 		Run: func(cmd *cobra.Command, _ []string) {
 			ctx := cmd.Context()

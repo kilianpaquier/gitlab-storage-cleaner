@@ -11,13 +11,13 @@ stages:
     - if: $CI_PIPELINE_SOURCE == "schedule"
       when: manual
   variables:
-    GITLAB_TOKEN: $CICD_RW_TOKEN
+    GITLAB_TOKEN: <your_gitlab_access_token>
     PATHS: ^$CI_PROJECT_NAMESPACE\/.*$ # regexp matching
     THRESHOLD_DURATION: 168h
     THRESHOLD_SIZE: "10000000" # 10 MB
   script:
     - /app/gitlab-storage-cleaner artifacts \
-      --token "$CICD_RW_TOKEN" \
+      --token "$GITLAB_TOKEN" \
       --server "$CI_SERVER_HOST" \
       --paths "$PATHS" \
       --threshold-duration "$THRESHOLD_DURATION" \
@@ -31,7 +31,7 @@ artifacts-cleanup:
   extends: .artifacts-cleanup
   script:
     - /app/gitlab-storage-cleaner artifacts \
-      --token "$CICD_RW_TOKEN" \
+      --token "$GITLAB_TOKEN" \
       --server "$CI_SERVER_HOST" \
       --paths "$PROJECTS" \
       --threshold-duration "$THRESHOLD_DURATION" \
