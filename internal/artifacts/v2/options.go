@@ -22,7 +22,7 @@ type Options struct {
 }
 
 // EnsureDefaults ensures that all options in CleanOpts are valid
-// or valorized with their default values.
+// or valued with their default values.
 func (c *Options) EnsureDefaults() error {
 	var errs []error
 
