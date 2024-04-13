@@ -10,7 +10,6 @@ docker:
   registry: ghcr.io
 license: mit
 maintainers:
-  - url: https://kilianpaquier.com
-    name: kilianpaquier
+  - name: kilianpaquier
 no_chart: true
 platform: github

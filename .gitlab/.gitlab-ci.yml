@@ -2,7 +2,7 @@ stages:
   - cleanup
 
 .artifacts-cleanup:
-  stage: analysis
+  stage: cleanup
   image:
     name: ghcr.io/kilianpaquier/gitlab-storage-cleaner
     entrypoint: [""]
@@ -33,6 +33,6 @@ artifacts-cleanup:
     - /app/gitlab-storage-cleaner artifacts \
       --token "$GITLAB_TOKEN" \
       --server "$CI_SERVER_HOST" \
-      --paths "$PROJECTS" \
+      --paths "$PATHS" \
       --threshold-duration "$THRESHOLD_DURATION" \
       --threshold-size "$THRESHOLD_SIZE"
