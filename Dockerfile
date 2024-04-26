@@ -3,16 +3,9 @@
 #############################
 #        STAGE BUILD        #
 #############################
-FROM golang:1.22.2 AS build
+FROM python:3
 
 WORKDIR /app
-
-COPY . .
-
-# hadolint ignore=DL3059
-RUN go mod download
-# hadolint ignore=DL3059
-RUN CGO_ENABLED=0 go build -o gitlab-storage-cleaner cmd/gitlab-storage-cleaner/main.go
 
 #############################
 #         STAGE RUN         #
@@ -29,11 +22,3 @@ LABEL org.opencontainers.image.source="github.com/kilianpaquier/gitlab-storage-c
 LABEL org.opencontainers.image.documentation="github.com/kilianpaquier/gitlab-storage-cleaner"
 
 WORKDIR /app
-
-COPY --from=build \
-    /app/gitlab-storage-cleaner \
-    ./
-
-EXPOSE 3000
-
-ENTRYPOINT [ "/app/gitlab-storage-cleaner" ]

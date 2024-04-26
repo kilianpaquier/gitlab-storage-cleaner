@@ -1,8 +1,8 @@
 stages:
   - cleanup
 
-.artifacts-cleanup:
-  stage: cleanup
+.storage-cleanup:
+  stage: analysis
   image:
     name: ghcr.io/kilianpaquier/gitlab-storage-cleaner
     entrypoint: [""]
@@ -14,25 +14,22 @@ stages:
     GITLAB_TOKEN: <your_gitlab_access_token>
     PATHS: ^$CI_PROJECT_NAMESPACE\/.*$ # regexp matching
     THRESHOLD_DURATION: 168h
-    THRESHOLD_SIZE: "10000000" # 10 MB
   script:
-    - /app/gitlab-storage-cleaner artifacts \
-      --token "$GITLAB_TOKEN" \
+    - /app/cli-storage-cleaner clean \
+      --token "$CICD_RW_TOKEN" \
       --server "$CI_SERVER_HOST" \
       --paths "$PATHS" \
-      --threshold-duration "$THRESHOLD_DURATION" \
-      --threshold-size "$THRESHOLD_SIZE" \
+      --threshold "$THRESHOLD_DURATION" \
       --dry-run
 
-artifacts-cleanup:dry-run:
-  extends: .artifacts-cleanup
+storage-cleanup:dry-run:
+  extends: .storage-cleanup
 
-artifacts-cleanup:
-  extends: .artifacts-cleanup
+storage-cleanup:
+  extends: .storage-cleanup
   script:
-    - /app/gitlab-storage-cleaner artifacts \
-      --token "$GITLAB_TOKEN" \
+    - /app/cli-storage-cleaner clean \
+      --token "$CICD_RW_TOKEN" \
       --server "$CI_SERVER_HOST" \
-      --paths "$PATHS" \
-      --threshold-duration "$THRESHOLD_DURATION" \
-      --threshold-size "$THRESHOLD_SIZE"
+      --paths "$PROJECTS" \
+      --threshold "$THRESHOLD_DURATION"
