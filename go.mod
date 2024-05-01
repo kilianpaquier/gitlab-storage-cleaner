@@ -6,7 +6,7 @@ toolchain go1.22.2
 
 require (
 	github.com/ezian/pipe v0.1.0
-	github.com/go-playground/validator/v10 v10.19.0
+	github.com/go-playground/validator/v10 v10.20.0
 	github.com/jarcoal/httpmock v1.3.1
 	github.com/kilianpaquier/pooling v1.0.0
 	github.com/panjf2000/ants/v2 v2.9.1
