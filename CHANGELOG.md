@@ -1,3 +1,21 @@
+## [1.0.1](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.0.0...v1.0.1) (2024-05-01)
+
+
+### Bug Fixes
+
+* **gitlab-ci:** bad template stage and run paths ([37085da](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/37085da922e87526e5ef4b9e8a32f91dec246d56))
+
+
+### Chores
+
+* **deps:** bump github.com/go-playground/validator/v10 ([1fa29d5](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/1fa29d5be2e366fd2eef3b9b94dc25d8997779e5))
+* **deps:** bump github.com/xanzy/go-gitlab in the all group ([e951b12](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/e951b125ebbd0985ce35ef107f7e29fb9ec58f9d))
+* **deps:** bump github.com/xanzy/go-gitlab in the all group ([9c7cd40](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/9c7cd405fb709d6b132424f8be867d3500a7c3de))
+* **deps:** bump golangci/golangci-lint-action from 4 to 5 ([2e42b83](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/2e42b836a47a4bde997d88dd369360487c7221d2))
+* **deps:** upgrade dependencies ([eac3d85](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/eac3d85140259131f6ecb86edcb031f366e9d9c8))
+* **golangci:** remove govet deleted option ([3836ef3](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/3836ef342d60dc22124e9a0ff9226ca7fcbdc67d))
+* **go:** update go to 1.22.2 ([4818496](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/4818496c8b4c78fd918ea583b424852e7c6d6d87))
+
 ## 1.0.0 (2024-03-30)
 
 
