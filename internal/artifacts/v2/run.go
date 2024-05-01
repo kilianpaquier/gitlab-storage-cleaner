@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/ezian/pipe"
+	"github.com/fogfactory/pipe"
 	"github.com/panjf2000/ants/v2"
 	"github.com/sirupsen/logrus"
 	"github.com/xanzy/go-gitlab"

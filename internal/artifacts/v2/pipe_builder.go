@@ -1,7 +1,7 @@
 package artifacts
 
 import (
-	"github.com/ezian/pipe"
+	"github.com/fogfactory/pipe"
 	"github.com/samber/lo"
 )
 
