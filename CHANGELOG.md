@@ -1,3 +1,12 @@
+## [1.0.2](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.0.1...v1.0.2) (2024-05-08)
+
+
+### Chores
+
+* **deps:** bump github.com/xanzy/go-gitlab in the minor-patch group ([01ca109](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/01ca10973145a7c403da7ba24350a4bdefb9b866))
+* **deps:** bump github.com/xanzy/go-gitlab in the minor-patch group ([b11e858](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/b11e8588382ed9f4ad49021158fb614dea27adbe))
+* **deps:** upgrade toolchain to go1.22.3 ([10c37b6](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/10c37b6910538b42a27b1011ddc91512829d392f))
+
 ## [1.0.1](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.0.0...v1.0.1) (2024-05-01)
 
 
