@@ -34,7 +34,7 @@ updates:
           - patch
     commit-message:
       include: scope
-      prefix: ci
+      prefix: chore
     reviewers:
       - kilianpaquier
   - package-ecosystem: gomod
@@ -48,6 +48,6 @@ updates:
           - patch
     commit-message:
       include: scope
-      prefix: ci
+      prefix: chore
     reviewers:
       - kilianpaquier
