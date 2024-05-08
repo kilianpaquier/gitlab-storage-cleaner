@@ -2,7 +2,7 @@ module github.com/kilianpaquier/gitlab-storage-cleaner
 
 go 1.22.0
 
-toolchain go1.22.2
+toolchain go1.22.3
 
 require (
 	github.com/fogfactory/pipe v0.1.1-0.20240425052025-035dba557fff
