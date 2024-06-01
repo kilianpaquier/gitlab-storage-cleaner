@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.0.3...v1.0.4) (2024-06-01)
+
+
+### Chores
+
+* **deps:** upgrade validator dependency ([4ac8cf5](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/4ac8cf5c5fb76f6366dedd4f56958bb7a687f9bc))
+
 ## [1.0.3](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.0.2...v1.0.3) (2024-05-13)
 
 
