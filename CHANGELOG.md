@@ -1,3 +1,11 @@
+## [1.0.5](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.0.4...v1.0.5) (2024-06-16)
+
+
+### Chores
+
+* **deps:** upgrade cobra and validator dependencies ([76907e3](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/76907e3862f0d8d127ae2b4bde344117d6427c23))
+* **deps:** upgrade Dockerfile go version ([034f863](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/034f863b16c2c046df244dd67e0da292f3e3ba99))
+
 ## [1.0.4](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.0.3...v1.0.4) (2024-06-01)
 
 
