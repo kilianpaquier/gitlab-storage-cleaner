@@ -8,7 +8,7 @@ require (
 	github.com/fogfactory/pipe v0.1.1-0.20240425052025-035dba557fff
 	github.com/go-playground/validator/v10 v10.22.0
 	github.com/jarcoal/httpmock v1.3.1
-	github.com/kilianpaquier/pooling v1.0.1
+	github.com/kilianpaquier/pooling v1.0.2
 	github.com/panjf2000/ants/v2 v2.10.0
 	github.com/samber/lo v1.39.0
 	github.com/sirupsen/logrus v1.9.3
