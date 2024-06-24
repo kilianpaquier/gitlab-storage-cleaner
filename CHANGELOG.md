@@ -1,3 +1,10 @@
+## [1.0.7](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.0.6...v1.0.7) (2024-06-24)
+
+
+### Chores
+
+* **deps:** bump github.com/kilianpaquier/pooling ([1d361a6](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/1d361a6b237a828bcb512c6c13771911fb4a2029))
+
 ## [1.0.6](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.0.5...v1.0.6) (2024-06-18)
 
 
