@@ -1,3 +1,10 @@
+## [1.0.8](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.0.7...v1.0.8) (2024-06-25)
+
+
+### Chores
+
+* **deps:** bump github.com/xanzy/go-gitlab in the minor-patch group ([0dd6458](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/0dd645839822d2f2d0c338bad895ab3d3fe48cb2))
+
 ## [1.0.7](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.0.6...v1.0.7) (2024-06-24)
 
 
