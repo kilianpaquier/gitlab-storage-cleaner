@@ -1,3 +1,10 @@
+## [1.0.10](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.0.9...v1.0.10) (2024-06-28)
+
+
+### Chores
+
+* **deps:** bump github.com/samber/lo in the minor-patch group ([614c5e3](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/614c5e31a97c2a1671cc36cf618291e5638891a1))
+
 ## [1.0.9](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.0.8...v1.0.9) (2024-06-27)
 
 
