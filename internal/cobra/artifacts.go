@@ -1,9 +1,9 @@
 package cobra
 
 import (
+	"fmt"
 	"time"
 
-	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	"github.com/xanzy/go-gitlab"
 
@@ -19,25 +19,23 @@ var (
 		Use:    "artifacts",
 		Short:  "Clean artifacts of provided project(s)' gitlab storage",
 		PreRun: SetLogLevel,
-		Run: func(cmd *cobra.Command, _ []string) {
-			ctx := cmd.Context()
-			log := logrus.WithContext(ctx)
-
+		RunE: func(cmd *cobra.Command, _ []string) error {
 			// check gitlab client
 			client, err := gitlab.NewClient(token, gitlab.WithBaseURL(server), gitlab.WithoutRetries())
 			if err != nil {
-				log.WithError(err).Fatal("failed to create gitlab client")
+				return fmt.Errorf("new gitlab client: %w", err)
 			}
 
 			// ensure options are all here
 			if err := cleanOpts.EnsureDefaults(); err != nil {
-				log.WithError(err).Fatal("failed to ensure options default values")
+				return fmt.Errorf("ensure default options: %w", err)
 			}
 
 			// run artifacts clean command
-			if err := artifacts.Run(ctx, client, cleanOpts); err != nil {
-				log.WithError(err).Fatal("failed to clean projects storage")
+			if err := artifacts.Run(cmd.Context(), client, cleanOpts); err != nil {
+				return fmt.Errorf("artifacts cleaning: %w", err)
 			}
+			return nil
 		},
 	}
 )

@@ -227,6 +227,7 @@ linters-settings:
       - name: unhandled-error
         arguments:
           - bytes.Buffer.Write.*
+          - fmt.Print
           - fmt.Printf
           - fmt.Println
       - name: unnecessary-stmt
