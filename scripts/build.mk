@@ -39,5 +39,6 @@ build-%:
 local-%:
 	@go run cmd/$*/main.go
 
+.PHONY: build-docker
 build-docker:
 	@docker build -t gitlab-storage-cleaner .
