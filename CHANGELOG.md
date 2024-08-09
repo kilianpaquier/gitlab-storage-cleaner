@@ -1,3 +1,10 @@
+## [1.0.13](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.0.12...v1.0.13) (2024-08-09)
+
+
+### Chores
+
+* **deps:** upgrade go toolchain to go1.22.6 ([b4b456d](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/b4b456d4945b084395d6c2e69cbb4804a30c4179))
+
 ## [1.0.12](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.0.11...v1.0.12) (2024-07-16)
 
 
