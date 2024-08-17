@@ -1,3 +1,15 @@
+## [1.1.0](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.0.13...v1.1.0) (2024-08-17)
+
+
+### Features
+
+* **upgrade:** add new command for easier upgrade of gitlab-storage-cleaner ([442eb51](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/442eb51ff2561269c62b011e962ddb0eee65a858))
+
+
+### Chores
+
+* **deps:** upgrade Dockerfile go version to go1.23.0 ([2a4cbb9](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/2a4cbb9be4d693912a9353a708f28fc82eca67d6))
+
 ## [1.0.13](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.0.12...v1.0.13) (2024-08-09)
 
 
