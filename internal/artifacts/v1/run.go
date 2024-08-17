@@ -22,7 +22,7 @@ func Run(ctx context.Context, client *gitlab.Client, opts Options) error {
 		SetOptions(ants.WithLogger(log)).
 		Build()
 	if err != nil {
-		return fmt.Errorf("failed to initialize pooler routines: %w", err)
+		return fmt.Errorf("pooler initialization: %w", err)
 	}
 	defer pooler.Close()
 

@@ -15,27 +15,55 @@
 ---
 
 - [How to use ?](#how-to-use-)
+  - [Go](#go)
+  - [Docker](#docker)
   - [Gitlab CICD](#gitlab-cicd)
+  - [Linux](#linux)
 - [Commands](#commands)
   - [Artifacts](#artifacts)
+  - [Upgrade](#upgrade)
 
 ## How to use ?
 
+### Go
+
 ```sh
 go install github.com/kilianpaquier/gitlab-storage-cleaner/cmd/gitlab-storage-cleaner@latest
+```
+
+### Docker
+
+```sh
+docker run ghcr.io/kilianpaquier/gitlab-storage-cleaner:v1 artifacts
 ```
 
 ### Gitlab CICD
 
 A potential usage can be to schedule a job once a while with given [`.gitlab-ci.yml`](./.gitlab/.gitlab-ci.yml).
 
+### Linux
+
+```sh
+if which gitlab-storage-cleaner >/dev/null; then
+  gitlab-storage-cleaner upgrade
+  return $?
+fi
+
+OS="linux" # change it depending on our case
+ARCH="amd64" # change it depending on our case
+
+echo "installing gitlab-storage-cleaner"
+new_version=$(curl -fsSL "https://api.github.com/repos/kilianpaquier/gitlab-storage-cleaner/releases/latest" | jq -r '.tag_name')
+url="https://github.com/kilianpaquier/gitlab-storage-cleaner/releases/download/${new_version}/gitlab-storage-cleaner_${OS}_${ARCH}.tar.gz"
+curl -fsSL "$url" -o "/tmp/gitlab-storage-cleaner_${OS}_${ARCH}.tar.gz"
+mkdir -p "/tmp/gitlab-storage-cleaner/${new_version}"
+tar -xzf "/tmp/gitlab-storage-cleaner_${OS}_${ARCH}.tar.gz" -C "/tmp/gitlab-storage-cleaner/${new_version}"
+cp "/tmp/gitlab-storage-cleaner/${new_version}/gitlab-storage-cleaner" "${HOME}/.local/bin/gitlab-storage-cleaner"
+```
+
 ## Commands
 
 ```
-gitlab-storage-cleaner stands here to help in a small gitlab 
-continuous integration's step to clean all old or outdated storage of a given 
-or even multiple projects.
-
 Usage:
   gitlab-storage-cleaner [command]
 
@@ -43,11 +71,13 @@ Available Commands:
   artifacts   Clean artifacts of provided project(s)' gitlab storage
   completion  Generate the autocompletion script for the specified shell
   help        Help about any command
-  version     Shows current gitlab-storage-cleaner version
+  upgrade     Upgrade or install gitlab-storage-cleaner
+  version     Show current gitlab-storage-cleaner version
 
 Flags:
-  -h, --help               help for gitlab-storage-cleaner
-  -l, --log-level string   set logging level
+  -h, --help                help for gitlab-storage-cleaner
+      --log-format string   set logging format (either "text" or "json") (default "text")
+      --log-level string    set logging level (default "info")
 
 Use "gitlab-storage-cleaner [command] --help" for more information about a command.
 ```
@@ -70,5 +100,26 @@ Flags:
       --token string                  gitlab read/write token with maintainer rights to delete artifacts
 
 Global Flags:
-  -l, --log-level string   set logging level
+      --log-format string   set logging format (either "text" or "json") (default "text")
+      --log-level string    set logging level (default "info")
+```
+
+### Upgrade
+
+```
+Upgrade or install gitlab-storage-cleaner
+
+Usage:
+  gitlab-storage-cleaner upgrade [flags]
+
+Flags:
+      --dest string    destination directory where gitlab-storage-cleaner will be upgraded / installed
+  -h, --help           help for upgrade
+      --major string   which major version to upgrade / install (must be of the form "v1", "v2", etc.) - mutually exclusive with --minor option
+      --minor string   which minor version to upgrade / install (must be of the form "v1.5", "v2.4", etc.) - mutually exclusive with --major option
+      --prereleases    whether prereleases are accepted for installation or not
+
+Global Flags:
+      --log-format string   set logging format (either "text" or "json") (default "text")
+      --log-level string    set logging level (default "info")
 ```

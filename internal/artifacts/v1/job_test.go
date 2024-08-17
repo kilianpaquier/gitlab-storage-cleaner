@@ -14,14 +14,12 @@ import (
 	"github.com/xanzy/go-gitlab"
 
 	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/artifacts/v1"
-	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/artifacts/v1/tests"
-	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/testlogs"
 )
 
 func TestNeedCleanup(t *testing.T) {
 	t.Run("false_no_artifacts", func(t *testing.T) {
 		// Arrange
-		job := tests.NewJobBuilder().Build()
+		job := artifacts.Job{}
 
 		// Act
 		clean := job.NeedCleanup(0, time.Time{})
@@ -33,10 +31,10 @@ func TestNeedCleanup(t *testing.T) {
 	t.Run("false_already_expired", func(t *testing.T) {
 		// Arrange
 		now := time.Now()
-		job := tests.NewJobBuilder().
-			SetArtifacts(artifacts.Artifact{}).
-			SetArtifactsExpireAt(now.Add(-1 * time.Hour)).
-			Build()
+		job := artifacts.Job{
+			Artifacts:         []artifacts.Artifact{{}},
+			ArtifactsExpireAt: now.Add(-1 * time.Hour),
+		}
 
 		// Act
 		clean := job.NeedCleanup(0, now)
@@ -48,10 +46,10 @@ func TestNeedCleanup(t *testing.T) {
 	t.Run("false_not_above_size_threshold", func(t *testing.T) {
 		// Arrange
 		now := time.Now()
-		job := tests.NewJobBuilder().
-			SetArtifacts(artifacts.Artifact{}).
-			SetArtifactsExpireAt(now.Add(time.Hour)).
-			Build()
+		job := artifacts.Job{
+			Artifacts:         []artifacts.Artifact{{}},
+			ArtifactsExpireAt: now.Add(time.Hour),
+		}
 
 		// Act
 		clean := job.NeedCleanup(10, now)
@@ -63,10 +61,10 @@ func TestNeedCleanup(t *testing.T) {
 	t.Run("false_too_recent", func(t *testing.T) {
 		// Arrange
 		now := time.Now().Add(time.Hour)
-		job := tests.NewJobBuilder().
-			SetArtifacts(artifacts.Artifact{}).
-			SetArtifactsExpireAt(now.Add(-1 * time.Minute)).
-			Build()
+		job := artifacts.Job{
+			Artifacts:         []artifacts.Artifact{{}},
+			ArtifactsExpireAt: now.Add(-1 * time.Minute),
+		}
 
 		// Act
 		clean := job.NeedCleanup(0, now)
@@ -78,10 +76,10 @@ func TestNeedCleanup(t *testing.T) {
 	t.Run("success_true", func(t *testing.T) {
 		// Arrange
 		now := time.Now()
-		job := tests.NewJobBuilder().
-			SetArtifacts(artifacts.Artifact{Size: 1000}).
-			SetArtifactsExpireAt(now.Add(time.Hour)).
-			Build()
+		job := artifacts.Job{
+			Artifacts:         []artifacts.Artifact{{Size: 1000}},
+			ArtifactsExpireAt: now.Add(time.Hour),
+		}
 
 		// Act
 		clean := job.NeedCleanup(100, now)
@@ -93,10 +91,10 @@ func TestNeedCleanup(t *testing.T) {
 	t.Run("success_true_exact_thresholds", func(t *testing.T) {
 		// Arrange
 		now := time.Now()
-		job := tests.NewJobBuilder().
-			SetArtifacts(artifacts.Artifact{Size: 1000}).
-			SetArtifactsExpireAt(now.Add(time.Hour)).
-			Build()
+		job := artifacts.Job{
+			Artifacts:         []artifacts.Artifact{{Size: 1000}},
+			ArtifactsExpireAt: now.Add(time.Hour),
+		}
 
 		// Act
 		clean := job.NeedCleanup(1000, now)
@@ -108,9 +106,7 @@ func TestNeedCleanup(t *testing.T) {
 	t.Run("success_true_no_expiration", func(t *testing.T) {
 		// Arrange
 		now := time.Now()
-		job := tests.NewJobBuilder().
-			SetArtifacts(artifacts.Artifact{Size: 1000}).
-			Build()
+		job := artifacts.Job{Artifacts: []artifacts.Artifact{{Size: 1000}}}
 
 		// Act
 		clean := job.NeedCleanup(100, now)
@@ -137,10 +133,7 @@ func TestDeleteArtifacts(t *testing.T) {
 	jobID := 5
 	url := fmt.Sprintf("https://gitlab.com/api/v4/projects/%d/jobs/%d/artifacts", projectID, jobID)
 
-	job := tests.NewJobBuilder().
-		SetID(jobID).
-		SetProjectID(projectID).
-		Build()
+	job := artifacts.Job{ID: jobID, ProjectID: projectID}
 
 	t.Run("error_delete_call", func(t *testing.T) {
 		// Arrange
@@ -155,7 +148,7 @@ func TestDeleteArtifacts(t *testing.T) {
 		job.DeleteArtifacts(ctx, client)(nil)
 
 		// Assert
-		logs := testlogs.ToString(hook.AllEntries())
+		logs := toString(hook.AllEntries())
 		assert.Contains(t, logs, "an error")
 		assert.Contains(t, logs, "failed to delete job's artifacts")
 	})
@@ -173,7 +166,7 @@ func TestDeleteArtifacts(t *testing.T) {
 		job.DeleteArtifacts(ctx, client)(nil)
 
 		// Assert
-		logs := testlogs.ToString(hook.AllEntries())
+		logs := toString(hook.AllEntries())
 		assert.Equal(t, logs, "")
 		assert.Equal(t, 1, httpmock.GetTotalCallCount())
 	})

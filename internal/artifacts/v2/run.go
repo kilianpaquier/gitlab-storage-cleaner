@@ -19,7 +19,7 @@ func Run(ctx context.Context, client *gitlab.Client, opts Options) error {
 	sizes := []int{10, 1000}
 	pools, err := pipe.NewPoolsWithOptions(sizes, ants.WithLogger(log))
 	if err != nil {
-		return fmt.Errorf("failed to initialize routines pools: %w", err)
+		return fmt.Errorf("pools initialization: %w", err)
 	}
 	defer pools.Release()
 
