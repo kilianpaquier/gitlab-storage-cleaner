@@ -1,7 +1,6 @@
 package cobra
 
 import (
-	"fmt"
 	"time"
 
 	"github.com/spf13/cobra"
@@ -12,30 +11,31 @@ import (
 
 var (
 	cleanOpts = artifacts.Options{}
-	server    string
-	token     string
+
+	server string
+	token  string
 
 	cleanCmd = &cobra.Command{
-		Use:    "artifacts",
-		Short:  "Clean artifacts of provided project(s)' gitlab storage",
-		PreRun: SetLogLevel,
-		RunE: func(cmd *cobra.Command, _ []string) error {
+		Use:   "artifacts",
+		Short: "Clean artifacts of provided project(s)' gitlab storage",
+		Run: func(cmd *cobra.Command, _ []string) {
+			ctx := cmd.Context()
+
 			// check gitlab client
 			client, err := gitlab.NewClient(token, gitlab.WithBaseURL(server), gitlab.WithoutRetries())
 			if err != nil {
-				return fmt.Errorf("new gitlab client: %w", err)
+				fatal(ctx, err)
 			}
 
 			// ensure options are all here
 			if err := cleanOpts.EnsureDefaults(); err != nil {
-				return fmt.Errorf("ensure default options: %w", err)
+				fatal(ctx, err)
 			}
 
 			// run artifacts clean command
-			if err := artifacts.Run(cmd.Context(), client, cleanOpts); err != nil {
-				return fmt.Errorf("artifacts cleaning: %w", err)
+			if err := artifacts.Run(ctx, client, cleanOpts); err != nil {
+				fatal(ctx, err)
 			}
-			return nil
 		},
 	}
 )

@@ -9,8 +9,6 @@ import (
 	"github.com/go-playground/validator/v10"
 )
 
-//go:generate go-builder-generator generate -f options.go -s Options -d tests
-
 // Options is the struct containing all available options in artifacts command.
 type Options struct {
 	DryRun            bool
@@ -40,7 +38,7 @@ func (c *Options) EnsureDefaults() error {
 
 	// validate overall struct
 	if err := validator.New().Struct(c); err != nil {
-		errs = append(errs, fmt.Errorf("failed to validate artifacts clean options: %w", err))
+		errs = append(errs, fmt.Errorf("options validation: %w", err))
 	}
 
 	return errors.Join(errs...)

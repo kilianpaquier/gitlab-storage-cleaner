@@ -10,8 +10,6 @@ import (
 	"github.com/xanzy/go-gitlab"
 )
 
-//go:generate go-builder-generator generate -f project.go -s Project -d tests
-
 // Project is a simplified view of a gitlab project with only useful information used during artifacts command.
 type Project struct {
 	ID                int
@@ -119,9 +117,7 @@ func (p Project) CleanArtifacts(ctx context.Context, client *gitlab.Client, opts
 					Artifacts: func() []Artifact {
 						artifacts := make([]Artifact, 0, len(job.Artifacts))
 						for _, artifact := range job.Artifacts {
-							artifacts = append(artifacts, Artifact{
-								Size: uint64(artifact.Size),
-							})
+							artifacts = append(artifacts, Artifact{Size: uint64(artifact.Size)})
 						}
 						return artifacts
 					}(),

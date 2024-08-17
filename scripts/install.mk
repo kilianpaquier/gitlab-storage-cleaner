@@ -8,11 +8,11 @@ define install_go
 current_version=$(go version || echo "go0.0.0")
 new_version=$(curl -fsSL "https://go.dev/dl/?mode=json" | jq -r '.[0].version')
 if echo "${current_version}" | grep -Eq "${new_version}"; then
-	echo "latest go version already installed"
+	echo "latest go version ${new_version} already installed"
 	exit 0
 fi
 
-echo "installing latest go version"
+echo "installing latest go version ${new_version}"
 rm -rf "${HOME}/.local/go" && mkdir -p "${HOME}/.local/go"
 curl -fsSL "https://go.dev/dl/${new_version}.linux-amd64.tar.gz" | (cd "${HOME}/.local/go" && tar -xz --strip-components=1)
 for item in "go" "gofmt"; do 

@@ -10,8 +10,6 @@ import (
 	"github.com/xanzy/go-gitlab"
 )
 
-//go:generate go-builder-generator generate -f job.go -s Job -d tests
-
 // Job is a simplified view of a gitlab job with only useful information for artifacts deletion feature.
 type Job struct {
 	Artifacts         []Artifact `builder:"append"`
