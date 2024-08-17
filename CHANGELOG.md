@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.1.0...v1.1.1) (2024-08-17)
+
+
+### Documentation
+
+* **upgrade:** add default installation destination path in help ([07670f9](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/07670f9b43845d966c917271267fc844f9244df3))
+
 ## [1.1.0](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.0.13...v1.1.0) (2024-08-17)
 
 
