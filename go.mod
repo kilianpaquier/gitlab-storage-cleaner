@@ -5,7 +5,7 @@ go 1.21
 toolchain go1.23.0
 
 require (
-	github.com/fogfactory/pipe v0.1.1-0.20240425052025-035dba557fff
+	github.com/fogfactory/pipe v0.1.1
 	github.com/go-playground/validator/v10 v10.22.0
 	github.com/hashicorp/go-cleanhttp v0.5.2
 	github.com/jarcoal/httpmock v1.3.1

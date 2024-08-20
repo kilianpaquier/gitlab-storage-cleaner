@@ -7,8 +7,8 @@ github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/fatih/color v1.16.0 h1:zmkK9Ngbjj+K0yRhTVONQh1p/HknKYSlNT+vZCzyokM=
 github.com/fatih/color v1.16.0/go.mod h1:fL2Sau1YI5c0pdGEVCbKQbLXB6edEj1ZgiY4NijnWvE=
-github.com/fogfactory/pipe v0.1.1-0.20240425052025-035dba557fff h1:q2MEmSVzAN+0i+Xyka4B5Ru9seYRgvcpvcOGncc+7PI=
-github.com/fogfactory/pipe v0.1.1-0.20240425052025-035dba557fff/go.mod h1:Di2H9M8ZBka43GUDce3FqgadEdmAUK6YiVDjgjpMNC0=
+github.com/fogfactory/pipe v0.1.1 h1:dLcBYit94+Od97LrSRtjxPVdQKJ9MwLrvtx0LyXtY1A=
+github.com/fogfactory/pipe v0.1.1/go.mod h1:5/rIn6kuCHu0RH/GzZ8VyAC3IjwXZ9E+enuM/p3bpyc=
 github.com/gabriel-vasile/mimetype v1.4.5 h1:J7wGKdGu33ocBOhGy0z653k/lFKLFDPJMG8Gql0kxn4=
 github.com/gabriel-vasile/mimetype v1.4.5/go.mod h1:ibHel+/kbxn9x2407k1izTA1S81ku1z/DlgOW2QE0M4=
 github.com/go-playground/assert/v2 v2.2.0 h1:JvknZsQTYeFEAhQwI4qEt9cyV5ONwRHC+lYKSsYSR8s=
