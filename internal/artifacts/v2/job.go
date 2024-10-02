@@ -19,11 +19,11 @@ type Job struct {
 
 // Artifact represents a simplified view of a gitlab artifact.
 type Artifact struct {
-	Size uint64
+	Size int
 }
 
 // NeedCleanup returns truthy if the job needs to be cleaned up.
-func (j Job) NeedCleanup(thresholdSize uint64, thresholdTime time.Time) bool {
+func (j Job) NeedCleanup(thresholdSize int, thresholdTime time.Time) bool {
 	// don't clean job not having artifacts
 	if len(j.Artifacts) == 0 {
 		return false
@@ -34,31 +34,31 @@ func (j Job) NeedCleanup(thresholdSize uint64, thresholdTime time.Time) bool {
 		return false
 	}
 
-	// compute artifacts max size
-	var max uint64
+	// compute artifacts maxSize size
+	var maxSize int
 	for _, artifact := range j.Artifacts {
-		max += artifact.Size
+		maxSize += artifact.Size
 	}
 
 	// clean job if artifacts size is bigger than threshold size and expiration is zero (no expiration) or after threshold time
-	return max >= thresholdSize && (j.ArtifactsExpireAt.IsZero() || j.ArtifactsExpireAt.After(thresholdTime))
+	return maxSize >= thresholdSize && (j.ArtifactsExpireAt.IsZero() || j.ArtifactsExpireAt.After(thresholdTime))
 }
 
 // DeleteArtifacts returns the function to delete a specific job artifacts.
 // Deletion will only occur if input opts has DryRun to false.
 func DeleteArtifacts(client *gitlab.Client, opts Options) func(j Job) Job {
-	return func(j Job) Job {
+	return func(job Job) Job {
 		log := logrus.WithFields(logrus.Fields{
-			"job_id":     j.ID,
-			"project_id": j.ProjectID,
+			"job_id":     job.ID,
+			"project_id": job.ProjectID,
 		})
 
 		if !opts.DryRun {
 			// call jobs artifacts deletion
-			response, err := client.Jobs.DeleteArtifacts(j.ProjectID, j.ID)
+			response, err := client.Jobs.DeleteArtifacts(job.ProjectID, job.ID)
 			if err != nil {
 				log.WithError(err).Warn("failed to delete job's artifacts")
-				return j
+				return job
 			}
 			defer response.Body.Close()
 
@@ -71,7 +71,7 @@ func DeleteArtifacts(client *gitlab.Client, opts Options) func(j Job) Job {
 			}
 		}
 
-		j.Cleaned = true
-		return j
+		job.Cleaned = true
+		return job
 	}
 }

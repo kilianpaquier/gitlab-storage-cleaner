@@ -167,7 +167,7 @@ func TestDeleteArtifacts(t *testing.T) {
 
 		// Assert
 		logs := toString(hook.AllEntries())
-		assert.Equal(t, logs, "")
+		assert.Equal(t, "", logs)
 		assert.Equal(t, 1, httpmock.GetTotalCallCount())
 	})
 }

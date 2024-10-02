@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 
 	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/artifacts/v2"
 )
@@ -57,14 +58,14 @@ func TestEnsureDefaults(t *testing.T) {
 		opts := artifacts.Options{
 			Paths:             []string{".*", ".+"},
 			ThresholdDuration: time.Second,
-			ThresholdSize:     uint64(1),
+			ThresholdSize:     1,
 		}
 
 		// Act
 		err := opts.EnsureDefaults()
 
 		// Assert
-		assert.NoError(t, err)
+		require.NoError(t, err)
 		assert.Equal(t, []*regexp.Regexp{regexp.MustCompile(".*"), regexp.MustCompile(".+")}, opts.PathRegexps)
 		assert.WithinDuration(t, time.Now().Add(time.Second), opts.ThresholdTime, 10*time.Millisecond)
 	})

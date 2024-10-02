@@ -109,7 +109,7 @@ func TestRun(t *testing.T) {
 		err := artifacts.Run(ctx, client, opts)
 
 		// Assert
-		assert.NoError(t, err)
+		require.NoError(t, err)
 		logs := toString(hook.AllEntries())
 		assert.NotContains(t, logs, "failed to retrieve projects")
 		assert.Contains(t, logs, "starting project execution")

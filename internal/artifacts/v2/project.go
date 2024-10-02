@@ -22,7 +22,7 @@ type Project struct {
 
 // Start starts the timer for Project execution and logs the Project start execution.
 func (p Project) Start() Project {
-	p.executionStart = time.Now() // nolint:revive
+	p.executionStart = time.Now() //nolint:revive
 	logrus.WithFields(logrus.Fields{
 		"project_id":   p.ID,
 		"project_path": p.PathWithNamespace,
@@ -32,7 +32,7 @@ func (p Project) Start() Project {
 
 // Stop stops the project timer execution and logs the Project execution result.
 func (p Project) Stop() Project {
-	p.executionDuration = time.Since(p.executionStart) // nolint:revive
+	p.executionDuration = time.Since(p.executionStart) //nolint:revive
 	logrus.WithFields(logrus.Fields{
 		"execution_duration": p.executionDuration,
 		"jobs_cleaned":       p.JobsCleaned,
@@ -44,10 +44,10 @@ func (p Project) Stop() Project {
 
 // SplitProject returns the function to send all Jobs of a given Project into pipe processing.
 func SplitProject(client *gitlab.Client, opts Options) func(p Project, jobs chan<- Job) {
-	return func(p Project, in chan<- Job) {
+	return func(project Project, in chan<- Job) {
 		log := logrus.WithFields(logrus.Fields{
-			"project_id":   p.ID,
-			"project_path": p.PathWithNamespace,
+			"project_id":   project.ID,
+			"project_path": project.PathWithNamespace,
 		})
 
 		jobsOpts := &gitlab.ListJobsOptions{
@@ -59,7 +59,7 @@ func SplitProject(client *gitlab.Client, opts Options) func(p Project, jobs chan
 		}
 
 		for {
-			jobs, _, err := client.Jobs.ListProjectJobs(p.ID, jobsOpts)
+			jobs, _, err := client.Jobs.ListProjectJobs(project.ID, jobsOpts)
 			if err != nil {
 				log.WithError(err).Warn("failed to retrieve project jobs")
 				break
@@ -71,23 +71,23 @@ func SplitProject(client *gitlab.Client, opts Options) func(p Project, jobs chan
 			}
 			jobsOpts.Page++
 
-			for _, job := range jobs {
-				j := Job{
+			for _, j := range jobs {
+				job := Job{
 					Artifacts: func() []Artifact {
-						artifacts := make([]Artifact, 0, len(job.Artifacts))
-						for _, artifact := range job.Artifacts {
-							artifacts = append(artifacts, Artifact{Size: uint64(artifact.Size)})
+						artifacts := make([]Artifact, 0, len(j.Artifacts))
+						for _, artifact := range j.Artifacts {
+							artifacts = append(artifacts, Artifact{Size: artifact.Size})
 						}
 						return artifacts
 					}(),
-					ArtifactsExpireAt: lo.FromPtr(job.ArtifactsExpireAt),
-					ID:                job.ID,
-					ProjectID:         p.ID,
+					ArtifactsExpireAt: lo.FromPtr(j.ArtifactsExpireAt),
+					ID:                j.ID,
+					ProjectID:         project.ID,
 				}
 
 				// check that the job needs cleanup before sending it
-				if j.NeedCleanup(opts.ThresholdSize, opts.ThresholdTime) {
-					in <- j
+				if job.NeedCleanup(opts.ThresholdSize, opts.ThresholdTime) {
+					in <- job
 				}
 			}
 		}
@@ -143,18 +143,18 @@ func ReadProjects(ctx context.Context, client *gitlab.Client, opts Options) <-ch
 			}
 
 			// send all projects for cleanup and iterate to next page
-			for _, project := range projects {
-				p := Project{
-					ID:                project.ID,
-					PathWithNamespace: project.PathWithNamespace,
+			for _, p := range projects {
+				project := Project{
+					ID:                p.ID,
+					PathWithNamespace: p.PathWithNamespace,
 				}
 
 				// confirm that project is inside cleanup regexp slice
 				_, found := lo.Find(opts.PathRegexps, func(reg *regexp.Regexp) bool {
-					return reg.MatchString(p.PathWithNamespace)
+					return reg.MatchString(project.PathWithNamespace)
 				})
 				if found {
-					tasks <- p
+					tasks <- project
 				}
 			}
 		}

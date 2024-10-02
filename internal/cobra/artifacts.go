@@ -58,7 +58,7 @@ func init() {
 	)
 
 	// threshold size
-	cleanCmd.Flags().Uint64Var(
+	cleanCmd.Flags().IntVar(
 		&cleanOpts.ThresholdSize, "threshold-size", 1000000,
 		"threshold size (in bytes) where jobs artifacts size sum is bigger will be cleaned up",
 	)
