@@ -54,8 +54,8 @@ jobs:
     needs: version
     uses: ./.github/workflows/docker.yml
     with:
-      version: ${{ steps.version.outputs.version }}
-      release: ${{ steps.version.outputs.release }}
+      version: ${{ needs.version.outputs.version }}
+      release: ${{ needs.version.outputs.release }}
     secrets: inherit
 
   release:
