@@ -305,6 +305,7 @@ linters:
   enable:
     - bodyclose
     - contextcheck
+    - copyloopvar
     - cyclop
     - decorder
     - dogsled
@@ -313,7 +314,6 @@ linters:
     - errcheck
     - errname
     - errorlint
-    - exportloopref
     - forcetypeassert
     - funlen
     - gci

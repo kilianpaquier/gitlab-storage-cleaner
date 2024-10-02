@@ -55,18 +55,18 @@ func ReadProjects(ctx context.Context, client *gitlab.Client, opts Options) <-ch
 			}
 
 			// send all projects for cleanup and iterate to next page
-			for _, project := range projects {
-				p := Project{
-					ID:                project.ID,
-					PathWithNamespace: project.PathWithNamespace,
+			for _, p := range projects {
+				project := Project{
+					ID:                p.ID,
+					PathWithNamespace: p.PathWithNamespace,
 				}
 
 				// confirm that project is inside cleanup slice
 				_, found := lo.Find(opts.PathRegexps, func(reg *regexp.Regexp) bool {
-					return reg.MatchString(p.PathWithNamespace)
+					return reg.MatchString(project.PathWithNamespace)
 				})
 				if found {
-					tasks <- p.CleanArtifacts(ctx, client, opts)
+					tasks <- project.CleanArtifacts(ctx, client, opts)
 				}
 			}
 		}
@@ -112,23 +112,23 @@ func (p Project) CleanArtifacts(ctx context.Context, client *gitlab.Client, opts
 			}
 			jobsOpts.Page++
 
-			for _, job := range jobs {
-				j := Job{
+			for _, j := range jobs {
+				job := Job{
 					Artifacts: func() []Artifact {
-						artifacts := make([]Artifact, 0, len(job.Artifacts))
-						for _, artifact := range job.Artifacts {
-							artifacts = append(artifacts, Artifact{Size: uint64(artifact.Size)})
+						artifacts := make([]Artifact, 0, len(j.Artifacts))
+						for _, artifact := range j.Artifacts {
+							artifacts = append(artifacts, Artifact{Size: artifact.Size})
 						}
 						return artifacts
 					}(),
-					ArtifactsExpireAt: lo.FromPtr(job.ArtifactsExpireAt),
-					ID:                job.ID,
+					ArtifactsExpireAt: lo.FromPtr(j.ArtifactsExpireAt),
+					ID:                j.ID,
 					ProjectID:         p.ID,
 				}
 
 				// check that the job needs to be cleaned up
-				if !opts.DryRun && j.NeedCleanup(opts.ThresholdSize, opts.ThresholdTime) {
-					funcs <- j.DeleteArtifacts(ctx, client)
+				if !opts.DryRun && job.NeedCleanup(opts.ThresholdSize, opts.ThresholdTime) {
+					funcs <- job.DeleteArtifacts(ctx, client)
 				}
 			}
 		}

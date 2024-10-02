@@ -82,7 +82,7 @@ func TestReadProjects(t *testing.T) {
 		// verify channel first because it will block until its closed
 		assert.Len(t, lo.ChannelToSlice(projects), 3)
 		logs := toString(hook.AllEntries())
-		assert.Equal(t, logs, "")
+		assert.Equal(t, "", logs)
 	})
 }
 
@@ -140,7 +140,7 @@ func TestCleanArtifacts(t *testing.T) {
 		project.CleanArtifacts(ctx, client, opts)(jobs)
 
 		// Assert
-		assert.Len(t, jobs, 0) // no elements since dry run doesn't send into channel
+		assert.Empty(t, jobs) // no elements since dry run doesn't send into channel
 		assert.Equal(t, 2, httpmock.GetTotalCallCount())
 		logs := toString(hook.AllEntries())
 		assert.Contains(t, logs, "should run project cleanup")

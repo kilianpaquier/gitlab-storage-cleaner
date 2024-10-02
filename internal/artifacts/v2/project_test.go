@@ -103,13 +103,13 @@ func TestMergeProject(t *testing.T) {
 		jobs <- artifacts.Job{Cleaned: true}
 		close(jobs)
 
-		p := artifacts.Project{}
+		project := artifacts.Project{}
 
 		// Act
-		p = p.Merge(jobs)
+		project = project.Merge(jobs)
 
 		// Assert
-		assert.Equal(t, 2, p.JobsCleaned)
+		assert.Equal(t, 2, project.JobsCleaned)
 	})
 }
 
@@ -176,6 +176,6 @@ func TestReadProjects(t *testing.T) {
 		// verify channel first because it will block until its closed
 		assert.Len(t, lo.ChannelToSlice(projects), 3)
 		logs := toString(hook.AllEntries())
-		assert.Equal(t, logs, "")
+		assert.Equal(t, "", logs)
 	})
 }

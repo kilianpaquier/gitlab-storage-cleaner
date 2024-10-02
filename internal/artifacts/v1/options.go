@@ -14,7 +14,7 @@ type Options struct {
 	DryRun            bool
 	PathRegexps       []*regexp.Regexp `builder:"append"`
 	Paths             []string         `builder:"append" validate:"required,dive,required"`
-	ThresholdSize     uint64           `                 validate:"required,gt=0"`
+	ThresholdSize     int              `                 validate:"required,gt=0"`
 	ThresholdDuration time.Duration    `                 validate:"required,gt=0"`
 	ThresholdTime     time.Time
 }

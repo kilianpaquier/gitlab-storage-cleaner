@@ -164,7 +164,7 @@ func TestDeleteArtifacts(t *testing.T) {
 		assert.True(t, job.Cleaned)
 		assert.Equal(t, 0, httpmock.GetTotalCallCount())
 		logs := toString(hook.AllEntries())
-		assert.Equal(t, logs, "")
+		assert.Equal(t, "", logs)
 	})
 
 	t.Run("success_deletion", func(t *testing.T) {
@@ -183,6 +183,6 @@ func TestDeleteArtifacts(t *testing.T) {
 		assert.True(t, job.Cleaned)
 		assert.Equal(t, 1, httpmock.GetTotalCallCount())
 		logs := toString(hook.AllEntries())
-		assert.Equal(t, logs, "")
+		assert.Equal(t, "", logs)
 	})
 }

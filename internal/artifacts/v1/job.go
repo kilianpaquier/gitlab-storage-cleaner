@@ -20,11 +20,11 @@ type Job struct {
 
 // Artifact represents a simplified view of a gitlab artifact.
 type Artifact struct {
-	Size uint64
+	Size int
 }
 
 // NeedCleanup returns truthy if the job needs to be cleaned up.
-func (j Job) NeedCleanup(thresholdSize uint64, thresholdTime time.Time) bool {
+func (j Job) NeedCleanup(thresholdSize int, thresholdTime time.Time) bool {
 	// don't clean job not having artifacts
 	if len(j.Artifacts) == 0 {
 		return false
@@ -35,14 +35,14 @@ func (j Job) NeedCleanup(thresholdSize uint64, thresholdTime time.Time) bool {
 		return false
 	}
 
-	// compute artifacts max size
-	var max uint64
+	// compute artifacts maxSize size
+	var maxSize int
 	for _, artifact := range j.Artifacts {
-		max += artifact.Size
+		maxSize += artifact.Size
 	}
 
 	// clean job if artifacts size is bigger than threshold size and expiration is zero (no expiration) or after threshold time
-	return max >= thresholdSize && (j.ArtifactsExpireAt.IsZero() || j.ArtifactsExpireAt.After(thresholdTime))
+	return maxSize >= thresholdSize && (j.ArtifactsExpireAt.IsZero() || j.ArtifactsExpireAt.After(thresholdTime))
 }
 
 // DeleteArtifacts returns a pooling PoolerFunc to be executed in a specific pool to delete job's artifacts.
