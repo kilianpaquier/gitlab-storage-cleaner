@@ -46,7 +46,7 @@ A potential usage can be to schedule a job once a while with given [`.gitlab-ci.
 ```sh
 if which gitlab-storage-cleaner >/dev/null; then
   gitlab-storage-cleaner upgrade
-  return $?
+  exit $?
 fi
 
 OS="linux" # change it depending on our case
