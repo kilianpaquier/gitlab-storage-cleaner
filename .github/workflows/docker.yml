@@ -97,8 +97,6 @@ jobs:
     name: Docker Trivy
     runs-on: ubuntu-latest
     environment: docker
-    permissions:
-      security-events: write
     needs:
       - version
       - docker-build

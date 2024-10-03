@@ -53,6 +53,8 @@ jobs:
     name: Docker
     needs: version
     uses: ./.github/workflows/docker.yml
+    permissions:
+      security-events: write
     with:
       version: ${{ needs.version.outputs.version }}
       release: ${{ needs.version.outputs.release }}
