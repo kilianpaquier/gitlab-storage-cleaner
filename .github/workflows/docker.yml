@@ -23,8 +23,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: release
     outputs:
-      release: ${{ needs.version.outputs.release }}
-      version: ${{ needs.version.outputs.version }}
+      release: ${{ steps.version.outputs.release }}
+      version: ${{ steps.version.outputs.version }}
     steps:
       - uses: actions/checkout@v4
       - id: version
