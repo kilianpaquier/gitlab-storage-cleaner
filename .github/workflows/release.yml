@@ -57,7 +57,7 @@ jobs:
       security-events: write
     with:
       version: ${{ needs.version.outputs.version }}
-      release: ${{ needs.version.outputs.release }}
+      release: ${{ needs.version.outputs.release == 'true' }}
     secrets: inherit
 
   release:
