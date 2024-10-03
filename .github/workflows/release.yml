@@ -32,6 +32,7 @@ jobs:
       issues: write
       pull-requests: write
     outputs:
+      mode: ${{ steps.mode.outputs.mode }}
       release: ${{ steps.version.outputs.release }}
       version: ${{ steps.version.outputs.version }}
     steps:
