@@ -1,3 +1,14 @@
+## [1.1.6](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.1.5...v1.1.6) (2024-10-03)
+
+### Bug Fixes
+
+* **lint:** issues on conversion and deprecated lints ([ed16004](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/ed16004b974da2b85f9d1f42d1adeeac34b73b32))
+
+### Chores
+
+* **deps:** bump golang from 1.23.1 to 1.23.2 in the minor-patch group ([ffd2958](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/ffd29588f2315f2f73dd9d0b7fd0cd4790f0542f))
+* **go.mod:** upgrade to go1.23 ([63e6ee2](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/63e6ee287dca607cb884eb4bed11c8f4e3b4fb5f))
+
 ## [1.1.5](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.1.4...v1.1.5) (2024-09-09)
 
 
