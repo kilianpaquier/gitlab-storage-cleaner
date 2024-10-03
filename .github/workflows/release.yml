@@ -41,6 +41,15 @@ jobs:
         with:
           mode: dry_run # compute only the version to build
           token: ${{ secrets.GITHUB_TOKEN }}
+      - id: mode
+        run: |
+          if [ "$GITHUB_EVENT_NAME" = "push" ]; then
+            echo "mode=release" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          echo "mode=${INPUT_MODE}" >> $GITHUB_OUTPUT
+        env:
+          INPUT_MODE: ${{ inputs.mode }}
 
   build:
     name: Build
@@ -77,5 +86,5 @@ jobs:
       - uses: ./.github/actions/version
         with:
           download_dist: true
-          mode: ${{ inputs.mode }}
+          mode: ${{ needs.version.outputs.mode }}
           token: ${{ secrets.GITHUB_TOKEN }}
