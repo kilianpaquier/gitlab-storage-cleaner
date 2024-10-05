@@ -23,7 +23,7 @@ var (
 			options := []upgrade.RunOption{
 				upgrade.WithDestination(dest),
 				upgrade.WithHTTPClient(cleanhttp.DefaultClient()),
-				upgrade.WithLogger(_log),
+				upgrade.WithLogger(log),
 				upgrade.WithMajor(major),
 				upgrade.WithMinor(minor),
 				upgrade.WithPrereleases(prereleases),

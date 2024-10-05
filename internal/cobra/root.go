@@ -9,16 +9,14 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var errInvalidLogFormat = errors.New(`invalid --log-format argument, must be either "json" or "text"`)
-
 var (
-	// _log is logrus default private logger retrieved into a variable.
+	// log is logrus default private logger retrieved into a variable.
 	//
 	// There's no need to give it to artifacts functions (v1, v2) Run since it's a shared pointer between logrus private and this variable.
 	//
 	// Unless later on there's a need to abstract Run loggers with other loggers
 	// but it shouldn't since it's a CLI and it's an internal package.
-	_log = logrus.StandardLogger()
+	log = logrus.StandardLogger()
 
 	logLevel  = "info"
 	logFormat = "text"
@@ -48,28 +46,28 @@ func Execute() {
 func preRun() error {
 	switch logFormat {
 	case "text":
-		_log.SetFormatter(&logrus.TextFormatter{
+		log.SetFormatter(&logrus.TextFormatter{
 			DisableLevelTruncation: true,
 			ForceColors:            true,
 			FullTimestamp:          true,
 			TimestampFormat:        time.RFC3339,
 		})
 	case "json":
-		_log.SetFormatter(&logrus.JSONFormatter{
+		log.SetFormatter(&logrus.JSONFormatter{
 			TimestampFormat: time.RFC3339,
 		})
 	default:
-		return errInvalidLogFormat
+		return errors.New(`invalid --log-format argument, must be either "json" or "text"`)
 	}
 
 	level, err := logrus.ParseLevel(logLevel)
 	if err != nil {
 		level = logrus.InfoLevel
 	}
-	_log.SetLevel(level)
+	log.SetLevel(level)
 	return nil
 }
 
 func fatal(ctx context.Context, err error) {
-	_log.WithContext(ctx).Fatal(err)
+	log.WithContext(ctx).Fatal(err)
 }
