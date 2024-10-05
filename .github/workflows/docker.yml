@@ -22,6 +22,10 @@ jobs:
     name: Version
     runs-on: ubuntu-latest
     environment: release
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
     outputs:
       release: ${{ steps.version_merge.outputs.release }}
       version: ${{ steps.version_merge.outputs.version }}
@@ -97,6 +101,8 @@ jobs:
     name: Docker Trivy
     runs-on: ubuntu-latest
     environment: docker
+    permissions:
+      security-events: write
     needs:
       - version
       - docker-build
