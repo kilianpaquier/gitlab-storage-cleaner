@@ -267,7 +267,13 @@ linters-settings:
       fn-pattern: ^NoErrorf?$
 
   varnamelen:
+    # The longest distance, in source lines, that is being considered a "small scope".
+    # Variables used in at most this many lines will be ignored.
+    # Default: 5
     max-distance: 10
+    # The minimum length of a variable's name that is considered "long".
+    # Variable names that are at least this long will be ignored.
+    # Default: 3
     min-name-length: 2
 
   whitespace:
@@ -296,6 +302,7 @@ issues:
     - path: _test.go
       linters:
         - dupl
+        - err113
         - funlen
         - goconst
         - maintidx
@@ -351,7 +358,6 @@ linters:
     - ineffassign
     - interfacebloat
     - intrange
-    - ireturn
     - maintidx
     - makezero
     - mirror
