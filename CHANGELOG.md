@@ -1,3 +1,9 @@
+## [1.1.7](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.1.6...v1.1.7) (2024-10-07)
+
+### Chores
+
+* **deps:** bump the minor-patch group with 2 updates ([3e9c7a9](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/3e9c7a98b7bf786668e6eea8e2193982b8effab2))
+
 ## [1.1.6](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.1.5...v1.1.6) (2024-10-03)
 
 ### Bug Fixes
