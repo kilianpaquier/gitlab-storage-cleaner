@@ -10,13 +10,13 @@ require (
 	github.com/hashicorp/go-cleanhttp v0.5.2
 	github.com/jarcoal/httpmock v1.3.1
 	github.com/kilianpaquier/cli-sdk v0.0.0-20240817193626-4b2ded52f151
-	github.com/kilianpaquier/pooling v1.0.4
+	github.com/kilianpaquier/pooling v1.0.5
 	github.com/panjf2000/ants/v2 v2.10.0
 	github.com/samber/lo v1.47.0
 	github.com/sirupsen/logrus v1.9.3
 	github.com/spf13/cobra v1.8.1
 	github.com/stretchr/testify v1.9.0
-	github.com/xanzy/go-gitlab v0.109.0
+	github.com/xanzy/go-gitlab v0.110.0
 )
 
 require (
