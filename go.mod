@@ -6,7 +6,7 @@ toolchain go1.23.3
 
 require (
 	github.com/fogfactory/pipe v0.1.1
-	github.com/go-playground/validator/v10 v10.22.1
+	github.com/go-playground/validator/v10 v10.23.0
 	github.com/hashicorp/go-cleanhttp v0.5.2
 	github.com/jarcoal/httpmock v1.3.1
 	github.com/kilianpaquier/cli-sdk v0.0.0-20240817193626-4b2ded52f151
