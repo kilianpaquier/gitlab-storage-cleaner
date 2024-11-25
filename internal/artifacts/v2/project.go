@@ -22,7 +22,7 @@ type Project struct {
 
 // Start starts the timer for Project execution and logs the Project start execution.
 func (p Project) Start() Project {
-	p.executionStart = time.Now() //nolint:revive
+	p.executionStart = time.Now()
 	logrus.WithFields(logrus.Fields{
 		"project_id":   p.ID,
 		"project_path": p.PathWithNamespace,
@@ -32,7 +32,7 @@ func (p Project) Start() Project {
 
 // Stop stops the project timer execution and logs the Project execution result.
 func (p Project) Stop() Project {
-	p.executionDuration = time.Since(p.executionStart) //nolint:revive
+	p.executionDuration = time.Since(p.executionStart)
 	logrus.WithFields(logrus.Fields{
 		"execution_duration": p.executionDuration,
 		"jobs_cleaned":       p.JobsCleaned,
