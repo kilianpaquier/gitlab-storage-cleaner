@@ -1,3 +1,11 @@
+## [1.1.11](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.1.10...v1.1.11) (2024-11-25)
+
+### ⚙️ Chores
+
+* **deps:** bump github.com/go-playground/validator/v10 ([8cee085](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/8cee0853825f8a6fdd4b9be6a7f48ef41adceb5f))
+* **deps:** bump github.com/stretchr/testify in the minor-patch group ([af24e9f](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/af24e9f6ceb0f8a026268f32b1b3cf4233e889e3))
+* **deps:** bump github.com/xanzy/go-gitlab in the minor-patch group ([ded1ddd](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/ded1ddd806bb2da3310fea9e84d46d1d9bb09548))
+
 ## [1.1.10](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.1.9...v1.1.10) (2024-11-07)
 
 ### ⚙️ Chores
