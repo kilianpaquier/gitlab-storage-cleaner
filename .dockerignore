@@ -20,6 +20,9 @@ docs/
 reports/
 dist/
 
+# vendor dependencies
+vendor/
+
 # binaries
 gitlab-storage-cleaner
 !gitlab-storage-cleaner/
@@ -27,6 +30,3 @@ gitlab-storage-cleaner
 # test files
 **/*_test.go
 **/*.test
-
-# vendor dependencies
-vendor/
