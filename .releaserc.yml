@@ -89,6 +89,4 @@ plugins:
       assets:
         - label: CHANGELOG.md
           path: CHANGELOG.md
-        - path: checksums.txt
         - path: dist
-  - "@semantic-release/exec"
