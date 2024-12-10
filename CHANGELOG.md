@@ -1,3 +1,10 @@
+## [1.1.12](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.1.11...v1.1.12) (2024-12-10)
+
+### Chores
+
+* **deps:** migrate GitLab Go SDK to https://gitlab.com/gitlab-org/api/client-go ([443242e](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/443242e725c6f84ba93dd9c58f04f97ceb70251d))
+* **go:** upgrade toolchain ([64c484c](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/64c484c48393c40d2d53bab5f45d82baa8f12fe3))
+
 ## [1.1.11](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.1.10...v1.1.11) (2024-11-25)
 
 ### ⚙️ Chores
