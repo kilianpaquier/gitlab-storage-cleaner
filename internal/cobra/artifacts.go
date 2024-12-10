@@ -4,7 +4,7 @@ import (
 	"time"
 
 	"github.com/spf13/cobra"
-	"github.com/xanzy/go-gitlab"
+	gitlab "gitlab.com/gitlab-org/api/client-go"
 
 	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/artifacts/v2"
 )

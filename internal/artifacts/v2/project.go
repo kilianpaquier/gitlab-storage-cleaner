@@ -7,7 +7,7 @@ import (
 
 	"github.com/samber/lo"
 	"github.com/sirupsen/logrus"
-	"github.com/xanzy/go-gitlab"
+	gitlab "gitlab.com/gitlab-org/api/client-go"
 )
 
 // Project is a simplified view of a gitlab project with only useful information used during artifacts command.
