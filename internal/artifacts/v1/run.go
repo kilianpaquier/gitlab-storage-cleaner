@@ -7,7 +7,7 @@ import (
 	pooling "github.com/kilianpaquier/pooling/pkg"
 	"github.com/panjf2000/ants/v2"
 	"github.com/sirupsen/logrus"
-	"gitlab.com/gitlab-org/api/client-go"
+	gitlab "gitlab.com/gitlab-org/api/client-go"
 )
 
 // Run retrieves gitlab projects and filters the one not appropriate with options (paths regexps).

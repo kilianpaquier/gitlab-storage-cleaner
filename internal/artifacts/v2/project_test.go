@@ -13,7 +13,7 @@ import (
 	"github.com/sirupsen/logrus/hooks/test"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"gitlab.com/gitlab-org/api/client-go"
+	gitlab "gitlab.com/gitlab-org/api/client-go"
 
 	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/artifacts/v2"
 )

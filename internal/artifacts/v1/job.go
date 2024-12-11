@@ -7,7 +7,7 @@ import (
 
 	pooling "github.com/kilianpaquier/pooling/pkg"
 	"github.com/sirupsen/logrus"
-	"gitlab.com/gitlab-org/api/client-go"
+	gitlab "gitlab.com/gitlab-org/api/client-go"
 )
 
 // Job is a simplified view of a gitlab job with only useful information for artifacts deletion feature.
