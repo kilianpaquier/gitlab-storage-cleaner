@@ -23,6 +23,7 @@ LABEL org.opencontainers.image.authors="kilianpaquier"
 LABEL org.opencontainers.image.vendor="kilianpaquier"
 
 LABEL org.opencontainers.image.title="gitlab-storage-cleaner"
+LABEL org.opencontainers.image.description="Easily clean gitlab maintained repositories storage (jobs artifacts only) with a simple command"
 LABEL org.opencontainers.image.licenses="MIT"
 LABEL org.opencontainers.image.url="github.com/kilianpaquier/gitlab-storage-cleaner"
 LABEL org.opencontainers.image.source="github.com/kilianpaquier/gitlab-storage-cleaner"

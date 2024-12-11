@@ -208,24 +208,26 @@ jobs:
     needs:
       - version
       - go-test
-    environment:
-      name: docker
-      url: ${{ steps.image.outputs.full_image }}
     permissions:
-        packages: write
-        security-events: write
+      packages: write
+      security-events: write
     steps:
       - uses: actions/checkout@v4
       - id: image
         run: |
-          image="$([ "${DOCKER_REGISTRY}" != "" ] && echo "${DOCKER_REGISTRY}/${GITHUB_REPOSITORY}" || echo "${GITHUB_REPOSITORY}")"
+          image_name="${GITHUB_REPOSITORY}"
+          if [[ "${IMAGE_VERSION#v}" =~ ^[0-9]+(\.[0-9]+){2}$ ]]; then
+            echo "stable=true" >> $GITHUB_OUTPUT
+          else
+            echo "stable=false" >> $GITHUB_OUTPUT
+            image_name="${image_name}/snapshot"
+          fi
+
+          image="$([ "${DOCKER_REGISTRY}" != "" ] && echo "${DOCKER_REGISTRY}/${image_name}" || echo "${image_name}")"
           echo "Building docker image with full name '${image}'"
           echo "image=${image}" >> $GITHUB_OUTPUT
 
           echo "full_image=${image}:${IMAGE_VERSION}" >> $GITHUB_OUTPUT
-          if [[ "${IMAGE_VERSION#v}" =~ ^[0-9]+(\.[0-9]+){2}$ ]]; then
-            echo "stable=true" >> $GITHUB_OUTPUT
-          fi
         env:
           DOCKER_REGISTRY: ghcr.io
           IMAGE_VERSION: ${{ needs.version.outputs.version }}
