@@ -1,9 +1,6 @@
 module github.com/kilianpaquier/gitlab-storage-cleaner
 
 go 1.23
-
-toolchain go1.23.4
-
 require (
 	github.com/fogfactory/pipe v0.1.1
 	github.com/go-playground/validator/v10 v10.23.0
@@ -16,7 +13,7 @@ require (
 	github.com/sirupsen/logrus v1.9.3
 	github.com/spf13/cobra v1.8.1
 	github.com/stretchr/testify v1.10.0
-	gitlab.com/gitlab-org/api/client-go v0.116.0
+	gitlab.com/gitlab-org/api/client-go v0.117.0
 )
 
 require (

@@ -95,8 +95,8 @@ github.com/stretchr/testify v1.10.0 h1:Xv5erBjTwe/5IxqUQTdXv5kgmIvbHo3QQyRwhJsOf
 github.com/stretchr/testify v1.10.0/go.mod h1:r2ic/lqez/lEtzL7wO/rwa5dbSLXVDPFyf8C91i36aY=
 github.com/ulikunitz/xz v0.5.12 h1:37Nm15o69RwBkXM0J6A5OlE67RZTfzUxTj8fB3dfcsc=
 github.com/ulikunitz/xz v0.5.12/go.mod h1:nbz6k7qbPmH4IRqmfOplQw/tblSgqTqBwxkY0oWt/14=
-gitlab.com/gitlab-org/api/client-go v0.116.0 h1:Dy534gtZPMrnm3fAcmQRMadrcoUyFO4FQ4rXlSAdHAw=
-gitlab.com/gitlab-org/api/client-go v0.116.0/go.mod h1:B29OfnZklmaoiR7uHANh9jTyfWEgmXvZLVEnosw2Dx0=
+gitlab.com/gitlab-org/api/client-go v0.117.0 h1:HsbKxlTjVgfYmyCU+NRQk2G42RlMOKs6gF+/o0DL+TI=
+gitlab.com/gitlab-org/api/client-go v0.117.0/go.mod h1:E+X2dndIYDuUfKVP0C3jhkWvTSE00BkLbCsXTY3edDo=
 golang.org/x/crypto v0.30.0 h1:RwoQn3GkWiMkzlX562cLB7OxWvjH1L8xutO2WoJcRoY=
 golang.org/x/crypto v0.30.0/go.mod h1:kDsLvtWBEx7MV9tJOj9bnXsPbxwJQ6csT/x4KIN4Ssk=
 golang.org/x/mod v0.22.0 h1:D4nJWe9zXqHOmWqj4VMOJhvzj7bEZg4wEYa759z1pH4=
