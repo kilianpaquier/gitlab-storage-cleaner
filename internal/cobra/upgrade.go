@@ -16,25 +16,29 @@ var (
 
 	upgradeCmd = &cobra.Command{
 		Use:   "upgrade",
-		Short: "Upgrade or install gitlab-storage-cleaner",
-		RunE: func(cmd *cobra.Command, _ []string) error {
-			ctx := cmd.Context()
-
+		Short: "Upgrade or install " + app,
+		Run: func(cmd *cobra.Command, _ []string) {
 			options := []upgrade.RunOption{
 				upgrade.WithDestination(dest),
 				upgrade.WithHTTPClient(cleanhttp.DefaultClient()),
-				upgrade.WithLogger(log),
 				upgrade.WithMajor(major),
 				upgrade.WithMinor(minor),
 				upgrade.WithPrereleases(prereleases),
 			}
-			if err := upgrade.Run(ctx, "gitlab-storage-cleaner", version, upgrade.GithubReleases("kilianpaquier", "gitlab-storage-cleaner"), options...); err != nil {
-				if errors.Is(err, upgrade.ErrInvalidOptions) {
-					return err //nolint:wrapcheck
+
+			version, err := upgrade.Run(cmd.Context(), app, version, upgrade.GithubReleases("kilianpaquier", app), options...)
+			if err != nil {
+				switch {
+				case errors.Is(err, upgrade.ErrNoNewVersion):
+					logger.Info(err)
+				case errors.Is(err, upgrade.ErrAlreadyInstalled):
+					logger.Infof("version '%s' is already installed", version)
+				default:
+					logger.Fatal(err)
 				}
-				fatal(ctx, err) // don't return err since returning an error shows the help
+				return
 			}
-			return nil
+			logger.Infof("successfully installed version '%s'", version)
 		},
 	}
 )
@@ -42,7 +46,7 @@ var (
 func init() {
 	rootCmd.AddCommand(upgradeCmd)
 
-	upgradeCmd.Flags().StringVar(&dest, "dest", "", `destination directory where gitlab-storage-cleaner will be upgraded / installed (by default "${HOME}/.local/bin")`)
+	upgradeCmd.Flags().StringVar(&dest, "dest", "", `destination directory where to upgrade / install (by default "${HOME}/.local/bin")`)
 	_ = upgradeCmd.MarkFlagDirname("dest")
 
 	upgradeCmd.Flags().StringVar(&major, "major", "", `which major version to upgrade / install (must be of the form "v1", "v2", etc.) - mutually exclusive with --minor option`)

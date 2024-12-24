@@ -1,23 +1,27 @@
 package artifacts_test
 
 import (
-	"bytes"
 	"context"
 	"fmt"
 	"net/http"
-	"regexp"
+	"strings"
 	"testing"
 	"time"
 
 	"github.com/jarcoal/httpmock"
 	"github.com/samber/lo"
-	"github.com/sirupsen/logrus"
-	"github.com/sirupsen/logrus/hooks/test"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	gitlab "gitlab.com/gitlab-org/api/client-go"
 
-	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/artifacts/v2"
+	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/artifacts/engine"
+	artifacts "github.com/kilianpaquier/gitlab-storage-cleaner/internal/artifacts/engine/v1"
+)
+
+const (
+	projectsURL  = "https://gitlab.com/api/v4/projects"
+	jobsURL      = "https://gitlab.com/api/v4/projects/%d/jobs"
+	artifactsURL = "https://gitlab.com/api/v4/projects/%d/jobs/%d/artifacts"
 )
 
 func TestRun(t *testing.T) {
@@ -35,13 +39,12 @@ func TestRun(t *testing.T) {
 	)
 	require.NoError(t, err)
 
-	projectsURL := "https://gitlab.com/api/v4/projects"
-	jobsURL := "https://gitlab.com/api/v4/projects/%d/jobs"
-	deleteURL := "https://gitlab.com/api/v4/projects/%d/jobs/%d/artifacts"
-
-	opts := artifacts.Options{
-		PathRegexps:   []*regexp.Regexp{regexp.MustCompile("^project_path$")},
-		ThresholdTime: start,
+	var buf strings.Builder
+	opts := []engine.RunOption{
+		engine.WithLogger(engine.NewTestLogger(&buf)),
+		engine.WithPaths("^project_path$"),
+		engine.WithThresholdDuration(thresholdDuration),
+		engine.WithThresholdSize(1),
 	}
 
 	t.Run("success_e2e", func(t *testing.T) {
@@ -67,7 +70,7 @@ func TestRun(t *testing.T) {
 						Filename   string `json:"filename"`
 						Size       int    `json:"size"`
 						FileFormat string `json:"file_format"`
-					}{{}}, // one artifact
+					}{{Size: 1}}, // one artifact
 					ArtifactsExpireAt: lo.ToPtr(start.Add(time.Hour)), // date is after threshold
 				},
 				{
@@ -77,7 +80,7 @@ func TestRun(t *testing.T) {
 						Filename   string `json:"filename"`
 						Size       int    `json:"size"`
 						FileFormat string `json:"file_format"`
-					}{{}}, // one artifact
+					}{{Size: 1}}, // one artifact
 					ArtifactsExpireAt: lo.ToPtr(start.Add(-time.Hour)), // date is before threshold
 				},
 				{
@@ -92,41 +95,27 @@ func TestRun(t *testing.T) {
 			}).Then(httpmock.NewJsonResponderOrPanic(http.StatusOK, []*gitlab.Job{})))
 
 		// job deletion endpoint mock
-		httpmock.RegisterResponder(http.MethodDelete, fmt.Sprintf(deleteURL, projectID, jobID),
+		httpmock.RegisterResponder(http.MethodDelete, fmt.Sprintf(artifactsURL, projectID, jobID),
 			httpmock.NewStringResponder(http.StatusNoContent, ""))
 
 		// expected calls to be made
 		expectedCalls := map[string]int{
 			"GET " + projectsURL: 2,
-			fmt.Sprint("GET ", fmt.Sprintf(jobsURL, projectID)):  2,
-			"DELETE " + fmt.Sprintf(deleteURL, projectID, jobID): 1,
+			fmt.Sprint("GET ", fmt.Sprintf(jobsURL, projectID)):     2,
+			"DELETE " + fmt.Sprintf(artifactsURL, projectID, jobID): 1,
 		}
 
-		hook := test.NewGlobal()
-		t.Cleanup(func() { hook.Reset() })
-
 		// Act
-		err := artifacts.Run(ctx, client, opts)
+		err := artifacts.Run(ctx, client, opts...)
 
 		// Assert
 		require.NoError(t, err)
-		logs := toString(hook.AllEntries())
+		assert.Equal(t, expectedCalls, httpmock.GetCallCountInfo())
+		logs := buf.String()
+		assert.Contains(t, logs, "running project cleanup")
+		assert.Contains(t, logs, "ended project cleanup")
 		assert.NotContains(t, logs, "failed to retrieve projects")
-		assert.Contains(t, logs, "starting project execution")
 		assert.NotContains(t, logs, "failed to retrieve project jobs")
 		assert.NotContains(t, logs, "failed to delete job's artifacts")
-		assert.Contains(t, logs, "ending project execution")
-		assert.Equal(t, expectedCalls, httpmock.GetCallCountInfo())
 	})
-}
-
-// toString transforms a slice of logrus entry into a string concatenation.
-func toString(entries []*logrus.Entry) string {
-	var buf bytes.Buffer
-	for _, entry := range entries {
-		b, _ := entry.Bytes()
-		buf.Write(b)
-		buf.WriteString("\n")
-	}
-	return buf.String()
 }

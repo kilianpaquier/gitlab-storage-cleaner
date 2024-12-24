@@ -8,8 +8,8 @@ var (
 
 	versionCmd = &cobra.Command{
 		Use:   "version",
-		Short: "Show current gitlab-storage-cleaner version",
-		Run:   func(_ *cobra.Command, _ []string) { log.Info(version) },
+		Short: "Show current version",
+		Run:   func(_ *cobra.Command, _ []string) { logger.Info(version) },
 	}
 )
 

@@ -1,30 +1,29 @@
 package cobra
 
 import (
-	"context"
 	"errors"
+	"os"
 	"time"
 
-	"github.com/sirupsen/logrus"
+	"github.com/charmbracelet/log"
 	"github.com/spf13/cobra"
 )
 
-var (
-	// log is logrus default private logger retrieved into a variable.
-	//
-	// There's no need to give it to artifacts functions (v1, v2) Run since it's a shared pointer between logrus private and this variable.
-	//
-	// Unless later on there's a need to abstract Run loggers with other loggers
-	// but it shouldn't since it's a CLI and it's an internal package.
-	log = logrus.StandardLogger()
+const app = "gitlab-storage-cleaner"
 
+var (
+	logger = log.NewWithOptions(os.Stderr, log.Options{
+		CallerFormatter: log.ShortCallerFormatter,
+		ReportCaller:    true,
+		ReportTimestamp: true,
+		TimeFormat:      time.RFC3339,
+	})
 	logLevel  = "info"
 	logFormat = "text"
-
-	rootCmd = &cobra.Command{
-		Use:               "gitlab-storage-cleaner",
-		SilenceErrors:     true, // errors are already logged by fatal function when Execute has an error
-		PersistentPreRunE: func(_ *cobra.Command, _ []string) error { return preRun() },
+	rootCmd   = &cobra.Command{
+		Use:               app,
+		SilenceErrors:     true, // don't print errors with cobra, let logger.Fatal handle them
+		PersistentPreRunE: func(*cobra.Command, []string) error { return preRun() },
 	}
 )
 
@@ -39,35 +38,29 @@ func init() {
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
 	if err := rootCmd.Execute(); err != nil {
-		fatal(context.Background(), err)
+		logger.Fatal(err)
 	}
 }
 
 func preRun() error {
+	styles := log.DefaultStyles()
 	switch logFormat {
 	case "text":
-		log.SetFormatter(&logrus.TextFormatter{
-			DisableLevelTruncation: true,
-			ForceColors:            true,
-			FullTimestamp:          true,
-			TimestampFormat:        time.RFC3339,
-		})
+		logger.SetFormatter(log.TextFormatter)
+		for _, level := range []log.Level{log.DebugLevel, log.InfoLevel, log.WarnLevel, log.ErrorLevel, log.FatalLevel} {
+			styles.Levels[level] = styles.Levels[level].MaxWidth(len(level.String()))
+		}
+		logger.SetStyles(styles)
 	case "json":
-		log.SetFormatter(&logrus.JSONFormatter{
-			TimestampFormat: time.RFC3339,
-		})
+		logger.SetFormatter(log.JSONFormatter)
 	default:
 		return errors.New(`invalid --log-format argument, must be either "json" or "text"`)
 	}
 
-	level, err := logrus.ParseLevel(logLevel)
+	level, err := log.ParseLevel(logLevel)
 	if err != nil {
-		level = logrus.InfoLevel
+		level = log.InfoLevel
 	}
-	log.SetLevel(level)
+	logger.SetLevel(level)
 	return nil
-}
-
-func fatal(ctx context.Context, err error) {
-	log.WithContext(ctx).Fatal(err)
 }
