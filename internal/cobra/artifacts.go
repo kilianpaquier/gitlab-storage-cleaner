@@ -6,35 +6,39 @@ import (
 	"github.com/spf13/cobra"
 	gitlab "gitlab.com/gitlab-org/api/client-go"
 
-	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/artifacts/v2"
+	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/artifacts/engine"
+	artifacts "github.com/kilianpaquier/gitlab-storage-cleaner/internal/artifacts/engine/v2"
 )
 
 var (
-	cleanOpts = artifacts.Options{}
-
-	server string
-	token  string
+	dryRun            bool
+	paths             []string
+	server            string
+	thresholdDuration time.Duration
+	thresholdSize     int
+	token             string
 
 	cleanCmd = &cobra.Command{
 		Use:   "artifacts",
 		Short: "Clean artifacts of provided project(s)' gitlab storage",
 		Run: func(cmd *cobra.Command, _ []string) {
-			ctx := cmd.Context()
-
 			// check gitlab client
 			client, err := gitlab.NewClient(token, gitlab.WithBaseURL(server), gitlab.WithoutRetries())
 			if err != nil {
-				fatal(ctx, err)
+				logger.Fatal(err)
 			}
 
-			// ensure options are all here
-			if err := cleanOpts.EnsureDefaults(); err != nil {
-				fatal(ctx, err)
+			opts := []engine.RunOption{
+				engine.WithDryRun(dryRun),
+				engine.WithLogger(logger),
+				engine.WithPaths(paths...),
+				engine.WithThresholdDuration(thresholdDuration),
+				engine.WithThresholdSize(thresholdSize),
 			}
 
 			// run artifacts clean command
-			if err := artifacts.Run(ctx, client, cleanOpts); err != nil {
-				fatal(ctx, err)
+			if err := artifacts.Run(cmd.Context(), client, opts...); err != nil {
+				logger.Fatal(err)
 			}
 		},
 	}
@@ -53,24 +57,24 @@ func init() {
 
 	// threshold duration
 	cleanCmd.Flags().DurationVar(
-		&cleanOpts.ThresholdDuration, "threshold-duration", 7*24*time.Hour,
+		&thresholdDuration, "threshold-duration", 7*24*time.Hour,
 		"threshold duration (positive) where, from now, jobs artifacts expiration is after will be cleaned up",
 	)
 
 	// threshold size
 	cleanCmd.Flags().IntVar(
-		&cleanOpts.ThresholdSize, "threshold-size", 1000000,
+		&thresholdSize, "threshold-size", 1000000,
 		"threshold size (in bytes) where jobs artifacts size sum is bigger will be cleaned up",
 	)
 
 	// dry run
 	cleanCmd.Flags().BoolVar(
-		&cleanOpts.DryRun, "dry-run", false,
+		&dryRun, "dry-run", false,
 		"truthy if run must not delete jobs' artifacts but only list matched projects")
 
 	// projects filtering options
 	cleanCmd.Flags().StringSliceVar(
-		&cleanOpts.Paths, "paths", []string{},
+		&paths, "paths", []string{},
 		"list of valid regexps to match project path (with namespace)")
 	_ = cleanCmd.MarkFlagRequired("paths")
 }

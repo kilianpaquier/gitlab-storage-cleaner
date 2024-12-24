@@ -3,6 +3,8 @@ package artifacts
 import (
 	"github.com/fogfactory/pipe"
 	"github.com/samber/lo"
+
+	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/artifacts/models"
 )
 
 // PipeProjectBuilder is the pipe builder for Project structure.
@@ -28,7 +30,7 @@ func (b *PipeProjectBuilder) Processor(proc pipe.Process[Project]) *PipeProjectB
 }
 
 // Split defines the split function to send Projects' jobs into pipe.
-func (b *PipeProjectBuilder) Split(split pipe.Split[Project, Job]) *PipeJobBuilder {
+func (b *PipeProjectBuilder) Split(split pipe.Split[Project, models.Job]) *PipeJobBuilder {
 	return &PipeJobBuilder{parent: b, split: split}
 }
 
@@ -47,19 +49,19 @@ func (b *PipeProjectBuilder) Build() pipe.PoolProcess[Project] {
 type PipeJobBuilder struct {
 	parent *PipeProjectBuilder
 
-	split pipe.Split[Project, Job]
-	procs []pipe.Process[Job]
+	split pipe.Split[Project, models.Job]
+	procs []pipe.Process[models.Job]
 }
 
 // Processor adds a processor to Job structure.
-func (b *PipeJobBuilder) Processor(proc pipe.Process[Job]) *PipeJobBuilder {
+func (b *PipeJobBuilder) Processor(proc pipe.Process[models.Job]) *PipeJobBuilder {
 	b.procs = append(b.procs, proc)
 	return b
 }
 
 // Merge defines the merge function from Jobs' to their project.
 // It returns the parent PipeProjectBuilder.
-func (b *PipeJobBuilder) Merge(merge pipe.Merge[Project, Job]) *PipeProjectBuilder {
+func (b *PipeJobBuilder) Merge(merge pipe.Merge[Project, models.Job]) *PipeProjectBuilder {
 	dispatcher, err := pipe.NewDispatch(b.split, merge)
 	if err != nil {
 		panic(err)
