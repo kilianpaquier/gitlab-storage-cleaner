@@ -1,3 +1,10 @@
+## [1.2.0](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.1.12...v1.2.0) (2024-12-25)
+
+### Code Refactoring
+
+* change how jobs are cleaned up ([2d7f929](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/2d7f9299d16375fba0b10e3c184f7f98f30968ef))
+* migrate to charmbracelet logs and merge some common behaviors between V1 and V2 engines ([468fa1e](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/468fa1e9546a5101e214ece4417de436103fe973))
+
 ## [1.1.12](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.1.11...v1.1.12) (2024-12-10)
 
 ### Chores
