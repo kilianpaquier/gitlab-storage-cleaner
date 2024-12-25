@@ -25,8 +25,7 @@ const (
 )
 
 func TestRun(t *testing.T) {
-	thresholdDuration := time.Hour
-	start := time.Now().Add(thresholdDuration)
+	now := time.Now()
 	ctx := context.Background()
 
 	httpmock.Activate()
@@ -43,8 +42,7 @@ func TestRun(t *testing.T) {
 	opts := []engine.RunOption{
 		engine.WithLogger(engine.NewTestLogger(&buf)),
 		engine.WithPaths("^project_path$"),
-		engine.WithThresholdDuration(thresholdDuration),
-		engine.WithThresholdSize(1),
+		engine.WithThresholdDuration(time.Hour),
 	}
 
 	t.Run("success_e2e", func(t *testing.T) {
@@ -70,8 +68,9 @@ func TestRun(t *testing.T) {
 						Filename   string `json:"filename"`
 						Size       int    `json:"size"`
 						FileFormat string `json:"file_format"`
-					}{{Size: 1}}, // one artifact
-					ArtifactsExpireAt: lo.ToPtr(start.Add(time.Hour)), // date is after threshold
+					}{{}}, // one artifact
+					ArtifactsExpireAt: lo.ToPtr(now.Add(time.Hour)),      // artifacts not expired
+					CreatedAt:         lo.ToPtr(now.Add(-2 * time.Hour)), // job is old
 				},
 				{
 					ID: 18,
@@ -80,8 +79,9 @@ func TestRun(t *testing.T) {
 						Filename   string `json:"filename"`
 						Size       int    `json:"size"`
 						FileFormat string `json:"file_format"`
-					}{{Size: 1}}, // one artifact
-					ArtifactsExpireAt: lo.ToPtr(start.Add(-time.Hour)), // date is before threshold
+					}{{}}, // one artifact
+					ArtifactsExpireAt: lo.ToPtr(now.Add(-time.Hour)),     // artifacts already expired
+					CreatedAt:         lo.ToPtr(now.Add(-2 * time.Hour)), // job is old
 				},
 				{
 					ID: 23,

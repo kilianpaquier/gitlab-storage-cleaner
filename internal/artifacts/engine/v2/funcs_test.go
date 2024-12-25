@@ -112,34 +112,37 @@ func TestReadJobs(t *testing.T) {
 
 	t.Run("success_populate_channel", func(t *testing.T) {
 		// Arrange
-		after := time.Now().Add(time.Hour)
+		now := time.Now()
+		start := now.Add(-2 * time.Hour) // jobs are old and artifacts not cleaned yet
 
 		t.Cleanup(httpmock.Reset)
 		httpmock.RegisterResponder(http.MethodGet, fmt.Sprintf(jobsURL, project.ID),
 			httpmock.NewJsonResponderOrPanic(http.StatusOK, []*gitlab.Job{
 				{
 					ID:                7,
-					ArtifactsExpireAt: &after,
+					ArtifactsExpireAt: lo.ToPtr(now.Add(time.Hour)),
+					CreatedAt:         &start,
 					Artifacts: []struct {
 						FileType   string `json:"file_type"`
 						Filename   string `json:"filename"`
 						Size       int    `json:"size"`
 						FileFormat string `json:"file_format"`
-					}{{Size: 1}}, // at least one element to need cleanup
+					}{{}}, // at least one element to need cleanup
 				},
 				{
 					ID:                8,
-					ArtifactsExpireAt: &after,
+					ArtifactsExpireAt: lo.ToPtr(now.Add(time.Hour)),
+					CreatedAt:         &start,
 					Artifacts: []struct {
 						FileType   string `json:"file_type"`
 						Filename   string `json:"filename"`
 						Size       int    `json:"size"`
 						FileFormat string `json:"file_format"`
-					}{{Size: 1}}, // at least one element to need cleanup
+					}{{}}, // at least one element to need cleanup
 				},
 			}).Then(httpmock.NewJsonResponderOrPanic(http.StatusOK, []*gitlab.Job{})))
 
-		ro, _ := engine.NewRunOptions(engine.WithThresholdDuration(time.Second), engine.WithThresholdSize(1))
+		ro, _ := engine.NewRunOptions(engine.WithThresholdDuration(time.Second))
 
 		jobs := make(chan models.Job, 10)
 		t.Cleanup(func() { close(jobs) })

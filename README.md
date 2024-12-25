@@ -92,8 +92,7 @@ Flags:
   -h, --help                          help for artifacts
       --paths strings                 list of valid regexps to match project path (with namespace)
       --server string                 gitlab server host
-      --threshold-duration duration   threshold duration (positive) where, from now, jobs artifacts expiration is after will be cleaned up (default 168h0m0s)
-      --threshold-size uint           threshold size (in bytes) where jobs artifacts size sum is bigger will be cleaned up (default 1000000)
+      --threshold-duration duration   threshold duration (positive) where, jobs older than command execution time minus this threshold will be deleted (default 168h0m0s)
       --token string                  gitlab read/write token with maintainer rights to delete artifacts
 
 Global Flags:

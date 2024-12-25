@@ -22,7 +22,7 @@ func TestNeedCleanup(t *testing.T) {
 		job := models.Job{}
 
 		// Act
-		clean := job.NeedCleanup(0, time.Time{})
+		clean := job.NeedCleanup(0)
 
 		// Assert
 		assert.False(t, clean)
@@ -32,27 +32,13 @@ func TestNeedCleanup(t *testing.T) {
 		// Arrange
 		now := time.Now()
 		job := models.Job{
-			Artifacts:         []models.Artifact{{}},
+			ArtifactsCount:    1,
 			ArtifactsExpireAt: now.Add(-1 * time.Hour),
+			CreatedAt:         now.Add(-1 * time.Hour),
 		}
 
 		// Act
-		clean := job.NeedCleanup(0, now)
-
-		// Assert
-		assert.False(t, clean)
-	})
-
-	t.Run("false_not_above_size_threshold", func(t *testing.T) {
-		// Arrange
-		now := time.Now()
-		job := models.Job{
-			Artifacts:         []models.Artifact{{}},
-			ArtifactsExpireAt: now.Add(time.Hour),
-		}
-
-		// Act
-		clean := job.NeedCleanup(10, now)
+		clean := job.NeedCleanup(0)
 
 		// Assert
 		assert.False(t, clean)
@@ -62,54 +48,24 @@ func TestNeedCleanup(t *testing.T) {
 		// Arrange
 		now := time.Now().Add(time.Hour)
 		job := models.Job{
-			Artifacts:         []models.Artifact{{}},
+			ArtifactsCount:    1,
 			ArtifactsExpireAt: now.Add(-1 * time.Minute),
+			CreatedAt:         now.Add(-5 * time.Minute),
 		}
 
 		// Act
-		clean := job.NeedCleanup(0, now)
+		clean := job.NeedCleanup(time.Hour)
 
 		// Assert
 		assert.False(t, clean)
 	})
 
-	t.Run("success_true", func(t *testing.T) {
+	t.Run("success_true_no_creation_date", func(t *testing.T) {
 		// Arrange
-		now := time.Now()
-		job := models.Job{
-			Artifacts:         []models.Artifact{{Size: 1000}},
-			ArtifactsExpireAt: now.Add(time.Hour),
-		}
+		job := models.Job{ArtifactsCount: 1}
 
 		// Act
-		clean := job.NeedCleanup(100, now)
-
-		// Assert
-		assert.True(t, clean)
-	})
-
-	t.Run("success_true_exact_thresholds", func(t *testing.T) {
-		// Arrange
-		now := time.Now()
-		job := models.Job{
-			Artifacts:         []models.Artifact{{Size: 1000}},
-			ArtifactsExpireAt: now.Add(time.Hour),
-		}
-
-		// Act
-		clean := job.NeedCleanup(1000, now)
-
-		// Assert
-		assert.True(t, clean)
-	})
-
-	t.Run("success_true_no_expiration", func(t *testing.T) {
-		// Arrange
-		now := time.Now()
-		job := models.Job{Artifacts: []models.Artifact{{Size: 1000}}}
-
-		// Act
-		clean := job.NeedCleanup(100, now)
+		clean := job.NeedCleanup(0)
 
 		// Assert
 		assert.True(t, clean)
@@ -170,19 +126,21 @@ func TestJobFromGitLab(t *testing.T) {
 		projectID := 5
 		gitlab := gitlab.Job{
 			ID:                1,
-			ArtifactsExpireAt: lo.ToPtr(now),
+			CreatedAt:         lo.ToPtr(now),
+			ArtifactsExpireAt: lo.ToPtr(now.Add(time.Hour)),
 			Artifacts: []struct {
 				FileType   string `json:"file_type"`
 				Filename   string `json:"filename"`
 				Size       int    `json:"size"`
 				FileFormat string `json:"file_format"`
-			}{{Size: 1}},
+			}{{}},
 		}
 		expected := models.Job{
+			ArtifactsCount:    1,
+			ArtifactsExpireAt: now.Add(time.Hour),
+			CreatedAt:         now,
 			ID:                1,
 			ProjectID:         5,
-			ArtifactsExpireAt: now,
-			Artifacts:         []models.Artifact{{Size: 1}},
 		}
 
 		// Act
