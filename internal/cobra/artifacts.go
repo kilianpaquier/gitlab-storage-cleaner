@@ -15,7 +15,6 @@ var (
 	paths             []string
 	server            string
 	thresholdDuration time.Duration
-	thresholdSize     int
 	token             string
 
 	cleanCmd = &cobra.Command{
@@ -33,7 +32,6 @@ var (
 				engine.WithLogger(logger),
 				engine.WithPaths(paths...),
 				engine.WithThresholdDuration(thresholdDuration),
-				engine.WithThresholdSize(thresholdSize),
 			}
 
 			// run artifacts clean command
@@ -57,14 +55,8 @@ func init() {
 
 	// threshold duration
 	cleanCmd.Flags().DurationVar(
-		&thresholdDuration, "threshold-duration", 7*24*time.Hour,
-		"threshold duration (positive) where, from now, jobs artifacts expiration is after will be cleaned up",
-	)
-
-	// threshold size
-	cleanCmd.Flags().IntVar(
-		&thresholdSize, "threshold-size", 1000000,
-		"threshold size (in bytes) where jobs artifacts size sum is bigger will be cleaned up",
+		&thresholdDuration, "threshold-duration", engine.DefaultThresholdDuration,
+		"threshold duration (positive) where, jobs older than command execution time minus this threshold will be deleted",
 	)
 
 	// dry run

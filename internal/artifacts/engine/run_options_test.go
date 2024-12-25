@@ -1,8 +1,8 @@
 package engine_test
 
 import (
+	"context"
 	"testing"
-	"time"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -24,7 +24,6 @@ func TestRunOptions(t *testing.T) {
 
 	t.Run("success_defaults", func(t *testing.T) {
 		// Arrange
-		now := time.Now()
 		opts := []engine.RunOption{}
 
 		// Act
@@ -33,9 +32,6 @@ func TestRunOptions(t *testing.T) {
 		// Assert
 		require.NoError(t, err)
 		assert.Equal(t, engine.DefaultThresholdDuration, runOptions.ThresholdDuration)
-		assert.Equal(t, engine.DefaultThresholdSize, runOptions.ThresholdSize)
-		assert.NotNil(t, runOptions.Logger)
-		assert.LessOrEqual(t, now.Add(engine.DefaultThresholdDuration), runOptions.ThresholdTime())
-		assert.GreaterOrEqual(t, time.Now().Add(engine.DefaultThresholdDuration), runOptions.ThresholdTime())
+		assert.NotNil(t, engine.GetLogger(runOptions.Context(context.Background())))
 	})
 }

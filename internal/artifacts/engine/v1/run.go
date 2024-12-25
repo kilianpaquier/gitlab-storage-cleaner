@@ -19,7 +19,7 @@ func Run(parent context.Context, client *gitlab.Client, opts ...engine.RunOption
 	if err != nil {
 		return fmt.Errorf("new run options: %w", err)
 	}
-	ctx := context.WithValue(parent, engine.LoggerKey, ro.Logger)
+	ctx := ro.Context(parent)
 
 	pooler, err := pooling.NewPoolerBuilder().
 		// initialize two pools of routines, one for projects and one for jobs

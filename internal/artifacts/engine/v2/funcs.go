@@ -53,7 +53,7 @@ func ReadProjects(ctx context.Context, client *gitlab.Client, runOptions engine.
 			for _, gitlab := range projects {
 				project := models.ProjectFromGitLab(gitlab)
 
-				if !project.Matches(runOptions.PathRegexps...) {
+				if !project.Matches(runOptions.Regexps()...) {
 					logger.Info("skipping project cleaning",
 						"project_id", project.ID,
 						"project_path", project.PathWithNamespace)
@@ -98,7 +98,7 @@ func ReadJobs(ctx context.Context, client *gitlab.Client, runOptions engine.RunO
 			for _, gitlab := range jobs {
 				job := models.JobFromGitLab(project.ID, gitlab)
 				// check that the job needs cleanup before sending it
-				if job.NeedCleanup(runOptions.ThresholdSize, runOptions.ThresholdTime()) {
+				if job.NeedCleanup(runOptions.ThresholdDuration) {
 					in <- job
 				}
 			}

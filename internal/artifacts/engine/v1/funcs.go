@@ -54,7 +54,7 @@ func ReadProjects(ctx context.Context, client *gitlab.Client, runOptions engine.
 			for _, gitlab := range projects {
 				project := models.ProjectFromGitLab(gitlab)
 				// confirm that project is inside cleanup slice
-				if !project.Matches(runOptions.PathRegexps...) {
+				if !project.Matches(runOptions.Regexps()...) {
 					logger.Info("skipping project cleaning",
 						"project_id", project.ID,
 						"project_path", project.PathWithNamespace)
@@ -106,7 +106,7 @@ func ReadJobs(ctx context.Context, client *gitlab.Client, project models.Project
 			for _, gitlab := range jobs {
 				job := models.JobFromGitLab(project.ID, gitlab)
 				// check that the job needs to be cleaned up
-				if job.NeedCleanup(runOptions.ThresholdSize, runOptions.ThresholdTime()) {
+				if job.NeedCleanup(runOptions.ThresholdDuration) {
 					funcs <- DeleteArtifacts(ctx, client, job, runOptions)
 				}
 			}
