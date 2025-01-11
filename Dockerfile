@@ -5,14 +5,24 @@
 #############################
 FROM golang:1.23.4 AS build
 
+ARG CGO_ENABLED=0
+ARG GIT_REF_NAME
+ARG GIT_COMMIT
+ARG VERSION=v0.0.0
+
 WORKDIR /app
 
 COPY . .
 
-# hadolint ignore=DL3059
-RUN go mod download
-# hadolint ignore=DL3059
-RUN CGO_ENABLED=0 go build -o gitlab-storage-cleaner cmd/gitlab-storage-cleaner/main.go
+RUN go mod download && \
+    CGO_ENABLED=$CGO_ENABLED go build \
+        -ldflags "\
+            -X 'github.com/kilianpaquier/gitlab-storage-cleaner/internal/build.branch=$GIT_REF_NAME' \
+            -X 'github.com/kilianpaquier/gitlab-storage-cleaner/internal/build.commit=$GIT_COMMIT' \
+            -X 'github.com/kilianpaquier/gitlab-storage-cleaner/internal/build.date=$(TZ="UTC" date '+%Y-%m-%dT%TZ')' \
+            -X 'github.com/kilianpaquier/gitlab-storage-cleaner/internal/build.version=$VERSION' \
+        " \
+        -o gitlab-storage-cleaner cmd/gitlab-storage-cleaner/main.go
 
 #############################
 #         STAGE RUN         #
