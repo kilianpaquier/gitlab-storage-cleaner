@@ -41,21 +41,14 @@ A potential usage can be to schedule a job once a while with given [`.gitlab-ci.
 ### Linux
 
 ```sh
-if which gitlab-storage-cleaner >/dev/null; then
-  gitlab-storage-cleaner upgrade
-  exit $?
-fi
+OS="linux" # change it depending on your case
+ARCH="amd64" # change it depending on your case
+INSTALL_DIR="$HOME/.local/bin" # change it depending on your case
 
-OS="linux" # change it depending on our case
-ARCH="amd64" # change it depending on our case
-
-echo "installing gitlab-storage-cleaner"
 new_version=$(curl -fsSL "https://api.github.com/repos/kilianpaquier/gitlab-storage-cleaner/releases/latest" | jq -r '.tag_name')
-url="https://github.com/kilianpaquier/gitlab-storage-cleaner/releases/download/${new_version}/gitlab-storage-cleaner_${OS}_${ARCH}.tar.gz"
-curl -fsSL "$url" -o "/tmp/gitlab-storage-cleaner_${OS}_${ARCH}.tar.gz"
-mkdir -p "/tmp/gitlab-storage-cleaner/${new_version}"
-tar -xzf "/tmp/gitlab-storage-cleaner_${OS}_${ARCH}.tar.gz" -C "/tmp/gitlab-storage-cleaner/${new_version}"
-cp "/tmp/gitlab-storage-cleaner/${new_version}/gitlab-storage-cleaner" "${HOME}/.local/bin/gitlab-storage-cleaner"
+url="https://github.com/kilianpaquier/gitlab-storage-cleaner/releases/download/$new_version/gitlab-storage-cleaner_${OS}_${ARCH}.tar.gz"
+curl -fsSL "$url" | (mkdir -p "/tmp/gitlab-storage-cleaner/$new_version" && cd "/tmp/gitlab-storage-cleaner/$new_version" && tar -xz)
+cp "/tmp/gitlab-storage-cleaner/$new_version/gitlab-storage-cleaner" "$INSTALL_DIR/gitlab-storage-cleaner"
 ```
 
 ## Commands
