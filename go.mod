@@ -6,7 +6,7 @@ require (
 	github.com/charmbracelet/log v0.4.0
 	github.com/fogfactory/pipe v0.1.1
 	github.com/jarcoal/httpmock v1.3.1
-	github.com/kilianpaquier/pooling v1.0.6
+	github.com/kilianpaquier/pooling v1.0.7
 	github.com/panjf2000/ants/v2 v2.10.0
 	github.com/samber/lo v1.47.0
 	github.com/spf13/cobra v1.8.1

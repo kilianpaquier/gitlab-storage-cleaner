@@ -32,8 +32,8 @@ github.com/inconshreveable/mousetrap v1.1.0 h1:wN+x4NVGpMsO7ErUn/mUI3vEoE6Jt13X2
 github.com/inconshreveable/mousetrap v1.1.0/go.mod h1:vpF70FUmC8bwa3OWnCshd2FqLfsEA9PFc4w1p2J65bw=
 github.com/jarcoal/httpmock v1.3.1 h1:iUx3whfZWVf3jT01hQTO/Eo5sAYtB2/rqaUuOtpInww=
 github.com/jarcoal/httpmock v1.3.1/go.mod h1:3yb8rc4BI7TCBhFY8ng0gjuLKJNquuDNiPaZjnENuYg=
-github.com/kilianpaquier/pooling v1.0.6 h1:cMsmJRfH1MnKwHBZsFBsfum4Qc+q4ld9OVoZU0eTCbI=
-github.com/kilianpaquier/pooling v1.0.6/go.mod h1:cJ29o9YPSpD2EUbQO/PF/3xWkcdDS/5I0tEVIV3vAZw=
+github.com/kilianpaquier/pooling v1.0.7 h1:z+uf1DGlSYSDV0+5Fz+ZzaltgO7uuMe/Z0zfCotn53k=
+github.com/kilianpaquier/pooling v1.0.7/go.mod h1:FXxEGLtrozDFyZnGOcLf5xYdxgkOcfEaFLaNGzAKUaM=
 github.com/kr/pretty v0.2.1/go.mod h1:ipq/a2n7PKx3OHsz4KJII5eveXtPO4qwEXGdVfWzfnI=
 github.com/kr/pretty v0.3.1 h1:flRD4NNwYAUpkphVc1HcthR4KEIFJ65n8Mw5qdRn3LE=
 github.com/kr/pretty v0.3.1/go.mod h1:hoEshYVHaxMs3cyo3Yncou5ZscifuDolrwPKZanG3xk=
