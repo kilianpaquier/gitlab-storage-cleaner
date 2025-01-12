@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.2.0...v1.2.1) (2025-01-12)
+
+### Chores
+
+* **deps:** bump github.com/kilianpaquier/pooling ([6daf265](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/6daf2659acd523896db383fb7953d56f3e1cc34d))
+* **deps:** upgrade dependencies and remove cli-sdk dependency ([0191f77](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/0191f77f5907a48ce7efcb994370b06b3ea6b823))
+
 ## [1.2.0](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.1.12...v1.2.0) (2024-12-25)
 
 ### Code Refactoring
