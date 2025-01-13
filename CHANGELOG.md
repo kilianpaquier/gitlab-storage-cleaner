@@ -1,3 +1,9 @@
+## [1.2.2](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.2.1...v1.2.2) (2025-01-13)
+
+### Chores
+
+* **deps:** bump github.com/panjf2000/ants/v2 in the minor-patch group ([a2ce490](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/a2ce490ba5ec25bbd7c8650d08ecaa23857ae11d))
+
 ## [1.2.1](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.2.0...v1.2.1) (2025-01-12)
 
 ### Chores
