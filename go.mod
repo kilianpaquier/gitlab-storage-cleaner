@@ -7,7 +7,7 @@ require (
 	github.com/fogfactory/pipe v0.1.1
 	github.com/jarcoal/httpmock v1.3.1
 	github.com/kilianpaquier/pooling v1.0.7
-	github.com/panjf2000/ants/v2 v2.10.0
+	github.com/panjf2000/ants/v2 v2.11.0
 	github.com/samber/lo v1.47.0
 	github.com/spf13/cobra v1.8.1
 	github.com/stretchr/testify v1.10.0
