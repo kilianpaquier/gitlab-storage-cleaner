@@ -1,3 +1,9 @@
+## [1.2.3](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.2.2...v1.2.3) (2025-01-15)
+
+### Chores
+
+* **deps:** bump github.com/kilianpaquier/pooling ([f9dcc4b](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/f9dcc4b5baa50067779d611e5ad2c9432c78e245))
+
 ## [1.2.2](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.2.1...v1.2.2) (2025-01-13)
 
 ### Chores
