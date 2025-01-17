@@ -1,6 +1,6 @@
 module github.com/kilianpaquier/gitlab-storage-cleaner
 
-go 1.23.4
+go 1.23.5
 
 require (
 	github.com/charmbracelet/log v0.4.0
