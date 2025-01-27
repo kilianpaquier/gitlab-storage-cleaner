@@ -1,3 +1,10 @@
+## [1.2.4](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.2.3...v1.2.4) (2025-01-27)
+
+### Chores
+
+* **deps:** bump golang from 1.23.4 to 1.23.5 in the minor-patch group ([0aaf31b](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/0aaf31b1b0b740a5d9ed3241c519f08385e8a434))
+* **deps:** bump the minor-patch group across 1 directory with 2 updates ([634df21](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/634df2174f8d4952a475d97197ca6afad37baf8b))
+
 ## [1.2.3](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.2.2...v1.2.3) (2025-01-15)
 
 ### Chores
