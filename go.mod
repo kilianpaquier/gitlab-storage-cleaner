@@ -10,10 +10,10 @@ require (
 	github.com/jarcoal/httpmock v1.3.1
 	github.com/kilianpaquier/pooling v1.0.8
 	github.com/panjf2000/ants/v2 v2.11.0
-	github.com/samber/lo v1.49.0
+	github.com/samber/lo v1.49.1
 	github.com/spf13/cobra v1.8.1
 	github.com/stretchr/testify v1.10.0
-	gitlab.com/gitlab-org/api/client-go v0.120.0
+	gitlab.com/gitlab-org/api/client-go v0.122.0
 )
 
 require (
