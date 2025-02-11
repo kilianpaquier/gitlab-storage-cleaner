@@ -8,12 +8,12 @@ require (
 	github.com/charmbracelet/log v0.4.0
 	github.com/fogfactory/pipe v0.1.1
 	github.com/jarcoal/httpmock v1.3.1
-	github.com/kilianpaquier/pooling v1.0.8
-	github.com/panjf2000/ants/v2 v2.11.0
-	github.com/samber/lo v1.49.0
+	github.com/kilianpaquier/pooling v1.0.9
+	github.com/panjf2000/ants/v2 v2.11.1
+	github.com/samber/lo v1.49.1
 	github.com/spf13/cobra v1.8.1
 	github.com/stretchr/testify v1.10.0
-	gitlab.com/gitlab-org/api/client-go v0.120.0
+	gitlab.com/gitlab-org/api/client-go v0.122.0
 )
 
 require (
@@ -37,7 +37,7 @@ require (
 	github.com/spf13/pflag v1.0.5 // indirect
 	golang.org/x/exp v0.0.0-20250106191152-7588d65b2ba8 // indirect
 	golang.org/x/oauth2 v0.25.0 // indirect
-	golang.org/x/sync v0.10.0 // indirect
+	golang.org/x/sync v0.11.0 // indirect
 	golang.org/x/sys v0.29.0 // indirect
 	golang.org/x/text v0.21.0 // indirect
 	golang.org/x/time v0.9.0 // indirect
