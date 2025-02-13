@@ -3,7 +3,7 @@
 #############################
 #        STAGE BUILD        #
 #############################
-FROM golang:1.23.5 AS build
+FROM golang:1.24.0 AS build
 
 ARG CGO_ENABLED=0
 ARG GIT_REF_NAME
