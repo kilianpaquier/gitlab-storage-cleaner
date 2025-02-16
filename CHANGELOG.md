@@ -1,3 +1,9 @@
+## [1.2.6](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.2.5...v1.2.6) (2025-02-16)
+
+### Chores
+
+* **deps:** upgrade dependencies and go toolchain ([b240238](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/b240238c114b70505bc5656ca78726ba8f57f13b))
+
 ## [1.2.5](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.2.4...v1.2.5) (2025-02-11)
 
 ### Chores
