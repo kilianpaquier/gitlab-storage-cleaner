@@ -11,7 +11,7 @@ require (
 	github.com/kilianpaquier/pooling v1.0.9
 	github.com/panjf2000/ants/v2 v2.11.1
 	github.com/samber/lo v1.49.1
-	github.com/spf13/cobra v1.9.0
+	github.com/spf13/cobra v1.9.1
 	github.com/stretchr/testify v1.10.0
 	gitlab.com/gitlab-org/api/client-go v0.123.0
 )
