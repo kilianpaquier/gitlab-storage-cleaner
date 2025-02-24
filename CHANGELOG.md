@@ -1,3 +1,10 @@
+## [1.2.7](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.2.6...v1.2.7) (2025-02-24)
+
+### Chores
+
+* add pre-commit configuration ([e7100b9](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/e7100b9f22ca4c0154bb03d256381ff60b428e4e))
+* **deps:** upgrade dependencies ([b7c6544](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/b7c654461d83f2ab9dfc526f28d8e99898dacaa2))
+
 ## [1.2.6](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.2.5...v1.2.6) (2025-02-16)
 
 ### Chores
