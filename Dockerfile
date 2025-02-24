@@ -22,7 +22,7 @@ RUN go mod download && \
             -X 'github.com/kilianpaquier/gitlab-storage-cleaner/internal/build.date=$(TZ="UTC" date '+%Y-%m-%dT%TZ')' \
             -X 'github.com/kilianpaquier/gitlab-storage-cleaner/internal/build.version=$VERSION' \
         " \
-        -o gitlab-storage-cleaner cmd/gitlab-storage-cleaner/main.go
+        -o gitlab-storage-cleaner ./cmd/gitlab-storage-cleaner
 
 #############################
 #         STAGE RUN         #

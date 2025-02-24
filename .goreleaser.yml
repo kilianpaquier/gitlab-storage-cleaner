@@ -3,7 +3,7 @@
 version: 2
 
 builds:
-  - main: cmd/gitlab-storage-cleaner/main.go
+  - main: ./cmd/gitlab-storage-cleaner
     env:
       - CGO_ENABLED=0
     ldflags:

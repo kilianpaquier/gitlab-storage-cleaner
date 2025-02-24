@@ -14,8 +14,9 @@ ci:
 description: Easily clean gitlab maintained repositories storage (jobs artifacts only) with a simple command
 docker:
   registry: ghcr.io
+exclude:
+  - chart
 license: mit
 maintainers:
   - name: kilianpaquier
-no_chart: true
 platform: github
