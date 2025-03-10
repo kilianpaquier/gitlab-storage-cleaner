@@ -9,11 +9,11 @@ require (
 	github.com/fogfactory/pipe v0.1.1
 	github.com/jarcoal/httpmock v1.3.1
 	github.com/kilianpaquier/pooling v1.0.10
-	github.com/panjf2000/ants/v2 v2.11.1
+	github.com/panjf2000/ants/v2 v2.11.2
 	github.com/samber/lo v1.49.1
 	github.com/spf13/cobra v1.9.1
 	github.com/stretchr/testify v1.10.0
-	gitlab.com/gitlab-org/api/client-go v0.123.0
+	gitlab.com/gitlab-org/api/client-go v0.124.0
 )
 
 require (
