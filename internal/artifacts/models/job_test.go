@@ -1,7 +1,6 @@
 package models_test
 
 import (
-	"context"
 	"fmt"
 	"net/http"
 	"testing"
@@ -73,7 +72,7 @@ func TestNeedCleanup(t *testing.T) {
 }
 
 func TestDeleteArtifacts(t *testing.T) {
-	ctx := context.Background()
+	ctx := t.Context()
 
 	httpmock.Activate()
 	t.Cleanup(httpmock.DeactivateAndReset)

@@ -1,7 +1,6 @@
 package artifacts_test
 
 import (
-	"context"
 	"fmt"
 	"net/http"
 	"strings"
@@ -26,7 +25,7 @@ const (
 
 func TestRun(t *testing.T) {
 	now := time.Now()
-	ctx := context.Background()
+	ctx := t.Context()
 
 	httpmock.Activate()
 	t.Cleanup(httpmock.DeactivateAndReset)

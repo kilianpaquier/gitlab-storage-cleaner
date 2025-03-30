@@ -21,7 +21,7 @@ import (
 )
 
 func TestReadProjects(t *testing.T) {
-	ctx := context.Background()
+	ctx := t.Context()
 
 	httpmock.Activate()
 	t.Cleanup(httpmock.DeactivateAndReset)
@@ -80,7 +80,7 @@ func TestReadProjects(t *testing.T) {
 }
 
 func TestReadJobs(t *testing.T) {
-	ctx := context.Background()
+	ctx := t.Context()
 
 	httpmock.Activate()
 	t.Cleanup(httpmock.DeactivateAndReset)
@@ -165,7 +165,7 @@ func TestReadJobs(t *testing.T) {
 }
 
 func TestDeleteArtifacts(t *testing.T) {
-	ctx := context.Background()
+	ctx := t.Context()
 
 	httpmock.Activate()
 	t.Cleanup(httpmock.DeactivateAndReset)

@@ -1,7 +1,6 @@
 package engine_test
 
 import (
-	"context"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -32,6 +31,6 @@ func TestRunOptions(t *testing.T) {
 		// Assert
 		require.NoError(t, err)
 		assert.Equal(t, engine.DefaultThresholdDuration, runOptions.ThresholdDuration)
-		assert.NotNil(t, engine.GetLogger(runOptions.Context(context.Background())))
+		assert.NotNil(t, engine.GetLogger(runOptions.Context(t.Context())))
 	})
 }
