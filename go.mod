@@ -1,11 +1,11 @@
 module github.com/kilianpaquier/gitlab-storage-cleaner
 
-go 1.23.0
+go 1.24
 
-toolchain go1.24.0
+toolchain go1.24.1
 
 require (
-	github.com/charmbracelet/log v0.4.0
+	github.com/charmbracelet/log v0.4.1
 	github.com/fogfactory/pipe v0.1.1
 	github.com/jarcoal/httpmock v1.3.1
 	github.com/kilianpaquier/pooling v1.0.11
@@ -13,13 +13,16 @@ require (
 	github.com/samber/lo v1.49.1
 	github.com/spf13/cobra v1.9.1
 	github.com/stretchr/testify v1.10.0
-	gitlab.com/gitlab-org/api/client-go v0.124.0
+	gitlab.com/gitlab-org/api/client-go v0.126.0
 )
 
 require (
 	github.com/aymanbagabas/go-osc52/v2 v2.0.1 // indirect
-	github.com/charmbracelet/lipgloss v1.0.0 // indirect
+	github.com/charmbracelet/colorprofile v0.3.0 // indirect
+	github.com/charmbracelet/lipgloss v1.1.0 // indirect
 	github.com/charmbracelet/x/ansi v0.8.0 // indirect
+	github.com/charmbracelet/x/cellbuf v0.0.13 // indirect
+	github.com/charmbracelet/x/term v0.2.1 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/go-logfmt/logfmt v0.6.0 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
@@ -35,12 +38,13 @@ require (
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/rogpeppe/go-internal v1.12.0 // indirect
 	github.com/spf13/pflag v1.0.6 // indirect
-	golang.org/x/exp v0.0.0-20250218142911-aa4b98e5adaa // indirect
-	golang.org/x/oauth2 v0.27.0 // indirect
-	golang.org/x/sync v0.11.0 // indirect
-	golang.org/x/sys v0.30.0 // indirect
-	golang.org/x/text v0.22.0 // indirect
-	golang.org/x/time v0.10.0 // indirect
+	github.com/xo/terminfo v0.0.0-20220910002029-abceb7e1c41e // indirect
+	golang.org/x/exp v0.0.0-20250305212735-054e65f0b394 // indirect
+	golang.org/x/oauth2 v0.28.0 // indirect
+	golang.org/x/sync v0.12.0 // indirect
+	golang.org/x/sys v0.31.0 // indirect
+	golang.org/x/text v0.23.0 // indirect
+	golang.org/x/time v0.11.0 // indirect
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
