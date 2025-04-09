@@ -2,13 +2,13 @@ module github.com/kilianpaquier/gitlab-storage-cleaner
 
 go 1.24
 
-toolchain go1.24.1
+toolchain go1.24.2
 
 require (
 	github.com/charmbracelet/log v0.4.1
 	github.com/fogfactory/pipe v0.1.1
 	github.com/jarcoal/httpmock v1.3.1
-	github.com/kilianpaquier/pooling v1.0.11
+	github.com/kilianpaquier/pooling v1.0.12
 	github.com/panjf2000/ants/v2 v2.11.2
 	github.com/samber/lo v1.49.1
 	github.com/spf13/cobra v1.9.1
