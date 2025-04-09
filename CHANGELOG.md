@@ -1,3 +1,10 @@
+## [1.2.11](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.2.10...v1.2.11) (2025-04-09)
+
+### Chores
+
+* **deps:** bump github.com/jarcoal/httpmock in the minor-patch group ([8a5a828](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/8a5a828fdb49e7b9c81490c033f14d401b8c4e72))
+* **deps:** update Go version and pooling ([5cf8504](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/5cf8504af22d6dc0270bf652abc58ad8d1fd23fb))
+
 ## [1.2.10](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.2.9...v1.2.10) (2025-04-09)
 
 ### Chores
