@@ -89,7 +89,7 @@ func (b *testLogger) Info(msg any, keyvals ...any) {
 
 // Printf implements shared.Logger.
 func (b *testLogger) Printf(format string, args ...any) {
-	b.writer.Write([]byte(fmt.Sprintf(format, args...)))
+	b.writer.Write(fmt.Appendf(nil, format, args...))
 }
 
 // Warn implements shared.Logger.
@@ -98,9 +98,9 @@ func (b *testLogger) Warn(msg any, keyvals ...any) {
 }
 
 func (b *testLogger) print(msg any, keyvals ...any) {
-	b.writer.Write([]byte(fmt.Sprint(msg)))
+	b.writer.Write(fmt.Append(nil, msg))
 	for i := 0; i < len(keyvals); i += 2 {
-		b.writer.Write([]byte(fmt.Sprintf(" %s=%v", keyvals[i], keyvals[i+1])))
+		b.writer.Write(fmt.Appendf(nil, " %s=%v", keyvals[i], keyvals[i+1]))
 	}
 	b.writer.Write([]byte("\n"))
 }
