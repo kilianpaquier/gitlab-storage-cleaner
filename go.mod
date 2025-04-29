@@ -8,19 +8,19 @@ require (
 	github.com/charmbracelet/log v0.4.1
 	github.com/fogfactory/pipe v0.1.1
 	github.com/jarcoal/httpmock v1.4.0
-	github.com/kilianpaquier/pooling v1.0.12
-	github.com/panjf2000/ants/v2 v2.11.2
-	github.com/samber/lo v1.49.1
+	github.com/kilianpaquier/pooling v1.0.13
+	github.com/panjf2000/ants/v2 v2.11.3
+	github.com/samber/lo v1.50.0
 	github.com/spf13/cobra v1.9.1
 	github.com/stretchr/testify v1.10.0
-	gitlab.com/gitlab-org/api/client-go v0.127.0
+	gitlab.com/gitlab-org/api/client-go v0.128.0
 )
 
 require (
 	github.com/aymanbagabas/go-osc52/v2 v2.0.1 // indirect
-	github.com/charmbracelet/colorprofile v0.3.0 // indirect
+	github.com/charmbracelet/colorprofile v0.3.1 // indirect
 	github.com/charmbracelet/lipgloss v1.1.0 // indirect
-	github.com/charmbracelet/x/ansi v0.8.0 // indirect
+	github.com/charmbracelet/x/ansi v0.9.2 // indirect
 	github.com/charmbracelet/x/cellbuf v0.0.13 // indirect
 	github.com/charmbracelet/x/term v0.2.1 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
