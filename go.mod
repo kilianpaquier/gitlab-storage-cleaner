@@ -5,7 +5,7 @@ go 1.24
 toolchain go1.24.3
 
 require (
-	github.com/charmbracelet/log v0.4.1
+	github.com/charmbracelet/log v0.4.2
 	github.com/fogfactory/pipe v0.1.1
 	github.com/jarcoal/httpmock v1.4.0
 	github.com/kilianpaquier/pooling v1.0.13
