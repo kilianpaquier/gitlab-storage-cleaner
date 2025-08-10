@@ -14,8 +14,6 @@ ci:
   release:
     auto: true
 description: Easily clean gitlab maintained repositories storage (jobs artifacts only) with a simple command
-exclude:
-  - chart
 license: mit
 maintainers:
   - name: kilianpaquier
