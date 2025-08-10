@@ -13,7 +13,7 @@ require (
 	github.com/samber/lo v1.51.0
 	github.com/spf13/cobra v1.9.1
 	github.com/stretchr/testify v1.10.0
-	gitlab.com/gitlab-org/api/client-go v0.134.0
+	gitlab.com/gitlab-org/api/client-go v0.137.0
 )
 
 require (
