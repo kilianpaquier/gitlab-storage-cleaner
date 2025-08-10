@@ -59,8 +59,6 @@ updates:
     commit-message:
       include: scope
       prefix: chore
-    cooldown:
-      default-days: 5
 
   - package-ecosystem: gomod
     directory: /
