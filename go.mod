@@ -7,13 +7,13 @@ toolchain go1.25.1
 require (
 	github.com/charmbracelet/log v0.4.2
 	github.com/fogfactory/pipe v0.1.1
-	github.com/jarcoal/httpmock v1.4.0
+	github.com/jarcoal/httpmock v1.4.1
 	github.com/kilianpaquier/pooling v1.0.13
 	github.com/panjf2000/ants/v2 v2.11.3
 	github.com/samber/lo v1.51.0
-	github.com/spf13/cobra v1.9.1
-	github.com/stretchr/testify v1.10.0
-	gitlab.com/gitlab-org/api/client-go v0.137.0
+	github.com/spf13/cobra v1.10.1
+	github.com/stretchr/testify v1.11.1
+	gitlab.com/gitlab-org/api/client-go v0.143.2
 )
 
 require (
@@ -37,7 +37,7 @@ require (
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/rogpeppe/go-internal v1.12.0 // indirect
-	github.com/spf13/pflag v1.0.7 // indirect
+	github.com/spf13/pflag v1.0.9 // indirect
 	github.com/xo/terminfo v0.0.0-20220910002029-abceb7e1c41e // indirect
 	golang.org/x/exp v0.0.0-20250808145144-a408d31f581a // indirect
 	golang.org/x/oauth2 v0.30.0 // indirect
