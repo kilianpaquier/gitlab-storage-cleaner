@@ -164,7 +164,7 @@ jobs:
       # https://github.com/marketplace/actions/harden-runner
       - uses: step-security/harden-runner@f4a75cfd619ee5ce8d5b864b0d183aff3c69b55a # v2.13.1
         with:
-          disable-sudo-and-containers: true
+          disable-sudo-and-containers: false # docker use
           egress-policy: audit
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - id: image
