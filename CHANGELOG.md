@@ -1,3 +1,9 @@
+## [1.2.17](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.2.16...v1.2.17) (2025-09-14)
+
+### Chores
+
+* **deps:** bump the minor-patch group with 4 updates ([943fa4c](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/943fa4cddc837153699d7ff33611562ddb87ac3e))
+
 ## [1.2.16](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.2.15...v1.2.16) (2025-08-10)
 
 ### Chores
