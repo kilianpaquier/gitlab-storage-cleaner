@@ -1,3 +1,9 @@
+## [1.2.19](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.2.18...v1.2.19) (2025-09-30)
+
+### Chores
+
+* **deps:** bump gitlab.com/gitlab-org/api/client-go ([42fb672](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/42fb672b837fa377a99178ed3d43f8d50c45fef7))
+
 ## [1.2.18](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.2.17...v1.2.18) (2025-09-21)
 
 ### Chores
