@@ -1,3 +1,18 @@
+## [1.2.22](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.2.21...v1.2.22) (2025-10-26)
+
+### Documentation
+
+* **readme:** remove deleted command ([b57922c](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/b57922cbd54d80d3337e0487a05b8c6c7903ede0))
+
+### Chores
+
+* **deps:** bump gitlab.com/gitlab-org/api/client-go ([70f2af1](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/70f2af17f062fec4b8eebe236bbe20f7a85639eb))
+
+### Continuous Integration
+
+* **deps:** bump the major-minor-patch group with 2 updates ([ae883b9](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/ae883b99ec0f29a1915802c24a06284b9844629d))
+* **layout:** regenerate kickr layout ([9865d36](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/9865d3653fead6982b7fcc50bb4fed55ba3a0b57))
+
 ## [1.2.21](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.2.20...v1.2.21) (2025-10-15)
 
 ### Chores
