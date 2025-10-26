@@ -8,6 +8,7 @@ ci:
     - codecov
     - codeql
     - harden-runner
+    - kickr:github-app
     - ossf-scorecard
   docker: {}
   release:
@@ -19,3 +20,5 @@ license: mit
 maintainers:
   - name: kilianpaquier
 platform: github
+pre-commit:
+  - conventional-commits
