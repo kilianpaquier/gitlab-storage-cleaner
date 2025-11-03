@@ -37,8 +37,8 @@ github.com/inconshreveable/mousetrap v1.1.0 h1:wN+x4NVGpMsO7ErUn/mUI3vEoE6Jt13X2
 github.com/inconshreveable/mousetrap v1.1.0/go.mod h1:vpF70FUmC8bwa3OWnCshd2FqLfsEA9PFc4w1p2J65bw=
 github.com/jarcoal/httpmock v1.4.1 h1:0Ju+VCFuARfFlhVXFc2HxlcQkfB+Xq12/EotHko+x2A=
 github.com/jarcoal/httpmock v1.4.1/go.mod h1:ftW1xULwo+j0R0JJkJIIi7UKigZUXCLLanykgjwBXL0=
-github.com/kilianpaquier/pooling v1.0.13 h1:tgyMGih1vx6wJ+RbW+Mk+I4B42QqU+eaNvpQLX1wu1Y=
-github.com/kilianpaquier/pooling v1.0.13/go.mod h1:PqY4O7rq3akl5nEYk8oUyT7rLo47nfmseB4anQbKbEo=
+github.com/kilianpaquier/pooling v1.0.14 h1:0fxPl0ynghbp5dEglqc6+SnZIw9v0S+tDtOkHiACsGM=
+github.com/kilianpaquier/pooling v1.0.14/go.mod h1:R49RAEkeigTK4SCxz4FKNu8jxTq8eyAr+gRFEs9d1io=
 github.com/kr/pretty v0.2.1/go.mod h1:ipq/a2n7PKx3OHsz4KJII5eveXtPO4qwEXGdVfWzfnI=
 github.com/kr/pretty v0.3.1 h1:flRD4NNwYAUpkphVc1HcthR4KEIFJ65n8Mw5qdRn3LE=
 github.com/kr/pretty v0.3.1/go.mod h1:hoEshYVHaxMs3cyo3Yncou5ZscifuDolrwPKZanG3xk=
@@ -80,8 +80,8 @@ github.com/stretchr/testify v1.11.1 h1:7s2iGBzp5EwR7/aIZr8ao5+dra3wiQyKjjFuvgVKu
 github.com/stretchr/testify v1.11.1/go.mod h1:wZwfW3scLgRK+23gO65QZefKpKQRnfz6sD981Nm4B6U=
 github.com/xo/terminfo v0.0.0-20220910002029-abceb7e1c41e h1:JVG44RsyaB9T2KIHavMF/ppJZNG9ZpyihvCd0w101no=
 github.com/xo/terminfo v0.0.0-20220910002029-abceb7e1c41e/go.mod h1:RbqR21r5mrJuqunuUZ/Dhy/avygyECGrLceyNeo4LiM=
-gitlab.com/gitlab-org/api/client-go v0.157.0 h1:B+/Ku1ek3V/MInR/SmvL4FOqE0YYx51u7lBVYIHC2ic=
-gitlab.com/gitlab-org/api/client-go v0.157.0/go.mod h1:CQVoxjEswJZeXft4Mi+H+OF1MVrpNVF6m4xvlPTQ2J4=
+gitlab.com/gitlab-org/api/client-go v0.157.1 h1:oYbOYk0A2Q+bc1drw8fikSvgi5GImQ9Cj0L0zkZ+PfY=
+gitlab.com/gitlab-org/api/client-go v0.157.1/go.mod h1:CQVoxjEswJZeXft4Mi+H+OF1MVrpNVF6m4xvlPTQ2J4=
 golang.org/x/exp v0.0.0-20250808145144-a408d31f581a h1:Y+7uR/b1Mw2iSXZ3G//1haIiSElDQZ8KWh0h+sZPG90=
 golang.org/x/exp v0.0.0-20250808145144-a408d31f581a/go.mod h1:rT6SFzZ7oxADUDx58pcaKFTcZ+inxAa9fTrYx/uVYwg=
 golang.org/x/oauth2 v0.30.0 h1:dnDm7JmhM45NNpd8FDDeLhK6FwqbOf4MLCM9zb1BOHI=
