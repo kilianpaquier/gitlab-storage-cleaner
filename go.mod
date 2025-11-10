@@ -2,7 +2,7 @@ module github.com/kilianpaquier/gitlab-storage-cleaner
 
 go 1.24
 
-toolchain go1.25.1
+toolchain go1.25.4
 
 require (
 	github.com/charmbracelet/log v0.4.2
