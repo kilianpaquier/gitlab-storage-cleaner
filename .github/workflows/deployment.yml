@@ -90,7 +90,7 @@ jobs:
         with:
           dry_run: true
           # renovate: datasource=github-tags packageName=semantic-release/semantic-release depName=semantic-release
-          semantic_version: v25.0.1
+          semantic_version: v25.0.2
           extra_plugins: |-
             @semantic-release/changelog
             @semantic-release/commit-analyzer
@@ -263,7 +263,7 @@ jobs:
         with:
           dry_run: ${{ inputs.release != 'release' }}
           # renovate: datasource=github-tags packageName=semantic-release/semantic-release depName=semantic-release
-          semantic_version: v25.0.1
+          semantic_version: v25.0.2
           extra_plugins: |-
             @semantic-release/changelog
             @semantic-release/commit-analyzer
