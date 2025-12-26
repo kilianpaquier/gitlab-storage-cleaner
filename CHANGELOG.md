@@ -1,3 +1,20 @@
+## [1.3.0](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.2.22...v1.3.0) (2025-12-26)
+
+### Features
+
+* **deps:** bump gitlab.com/gitlab-org/api/client-go from 0.157.0 to 1.10.0 ([8d20ea5](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/8d20ea59319c00719afe878730d2893828b4e8c5))
+
+### Chores
+
+* **deps:** bump the minor-patch group across 1 directory with 2 updates ([d21f7ac](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/d21f7ac7b8ab2ad6fdc460e995a4554776bdbd29))
+* **deps:** update dependency go to v1.25.5 ([b54b1ed](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/b54b1ede43fcfcb076cfc05efadd6d650e3576dc))
+
+### Continuous Integration
+
+* **deps:** upgrade toolchain version ([ce72d66](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/ce72d664b860a7b24986fd40dbbe52720ddbd553))
+* **layout:** regenerate kickr layout ([27e37fe](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/27e37fe10748484784b031d19b2a255deea4f0b4))
+* **layout:** regenerate kickr layout ([0d95e0f](https://github.com/kilianpaquier/gitlab-storage-cleaner/commit/0d95e0f1a400e27e8d79a5c4a7dfe59278e97587))
+
 ## [1.2.22](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.2.21...v1.2.22) (2025-10-26)
 
 ### Documentation
