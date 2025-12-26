@@ -123,23 +123,13 @@ func TestReadJobs(t *testing.T) {
 					ID:                7,
 					ArtifactsExpireAt: lo.ToPtr(now.Add(time.Hour)),
 					CreatedAt:         &start,
-					Artifacts: []struct {
-						FileType   string `json:"file_type"`
-						Filename   string `json:"filename"`
-						Size       int    `json:"size"`
-						FileFormat string `json:"file_format"`
-					}{{}}, // at least one element to need cleanup
+					Artifacts:         []gitlab.JobArtifact{{}}, // at least one element to need cleanup
 				},
 				{
 					ID:                8,
 					ArtifactsExpireAt: lo.ToPtr(now.Add(time.Hour)),
 					CreatedAt:         &start,
-					Artifacts: []struct {
-						FileType   string `json:"file_type"`
-						Filename   string `json:"filename"`
-						Size       int    `json:"size"`
-						FileFormat string `json:"file_format"`
-					}{{}}, // at least one element to need cleanup
+					Artifacts:         []gitlab.JobArtifact{{}}, // at least one element to need cleanup
 				},
 			}).Then(httpmock.NewJsonResponderOrPanic(http.StatusOK, []*gitlab.Job{})))
 

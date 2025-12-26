@@ -84,8 +84,8 @@ func TestDeleteArtifacts(t *testing.T) {
 	)
 	require.NoError(t, err)
 
-	projectID := 5
-	jobID := 5
+	projectID := int64(5)
+	jobID := int64(5)
 	url := fmt.Sprintf("https://gitlab.com/api/v4/projects/%d/jobs/%d/artifacts", projectID, jobID)
 
 	job := models.Job{ID: jobID, ProjectID: projectID}
@@ -122,17 +122,12 @@ func TestJobFromGitLab(t *testing.T) {
 	t.Run("success", func(t *testing.T) {
 		// Arrange
 		now := time.Now()
-		projectID := 5
+		projectID := int64(5)
 		gitlab := gitlab.Job{
 			ID:                1,
 			CreatedAt:         lo.ToPtr(now),
 			ArtifactsExpireAt: lo.ToPtr(now.Add(time.Hour)),
-			Artifacts: []struct {
-				FileType   string `json:"file_type"`
-				Filename   string `json:"filename"`
-				Size       int    `json:"size"`
-				FileFormat string `json:"file_format"`
-			}{{}},
+			Artifacts:         []gitlab.JobArtifact{{}},
 		}
 		expected := models.Job{
 			ArtifactsCount:    1,

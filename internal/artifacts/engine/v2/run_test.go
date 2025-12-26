@@ -49,7 +49,7 @@ func TestRun(t *testing.T) {
 		t.Cleanup(httpmock.Reset)
 
 		// projects endpoint mock
-		projectID := 7
+		projectID := int64(7)
 		httpmock.RegisterResponder(http.MethodGet, projectsURL,
 			httpmock.NewJsonResponderOrPanic(http.StatusOK, []*gitlab.Project{
 				{ID: projectID, PathWithNamespace: "project_path"},
@@ -57,39 +57,24 @@ func TestRun(t *testing.T) {
 			}).Then(httpmock.NewJsonResponderOrPanic(http.StatusOK, []*gitlab.Project{})))
 
 		// jobs endpoint mock
-		jobID := 10
+		jobID := int64(10)
 		httpmock.RegisterResponder(http.MethodGet, fmt.Sprintf(jobsURL, projectID),
 			httpmock.NewJsonResponderOrPanic(http.StatusOK, []*gitlab.Job{
 				{
-					ID: jobID,
-					Artifacts: []struct {
-						FileType   string `json:"file_type"`
-						Filename   string `json:"filename"`
-						Size       int    `json:"size"`
-						FileFormat string `json:"file_format"`
-					}{{}}, // one artifact
+					ID:                jobID,
+					Artifacts:         []gitlab.JobArtifact{{}},          // one artifact
 					ArtifactsExpireAt: lo.ToPtr(now.Add(time.Hour)),      // artifacts not expired
 					CreatedAt:         lo.ToPtr(now.Add(-2 * time.Hour)), // job is old
 				},
 				{
-					ID: 18,
-					Artifacts: []struct {
-						FileType   string `json:"file_type"`
-						Filename   string `json:"filename"`
-						Size       int    `json:"size"`
-						FileFormat string `json:"file_format"`
-					}{{}}, // one artifact
+					ID:                18,
+					Artifacts:         []gitlab.JobArtifact{{}},          // one artifact
 					ArtifactsExpireAt: lo.ToPtr(now.Add(-time.Hour)),     // artifacts already expired
 					CreatedAt:         lo.ToPtr(now.Add(-2 * time.Hour)), // job is old
 				},
 				{
-					ID: 23,
-					Artifacts: []struct {
-						FileType   string `json:"file_type"`
-						Filename   string `json:"filename"`
-						Size       int    `json:"size"`
-						FileFormat string `json:"file_format"`
-					}{}, // no artifacts
+					ID:        23,
+					Artifacts: []gitlab.JobArtifact{}, // no artifacts
 				},
 			}).Then(httpmock.NewJsonResponderOrPanic(http.StatusOK, []*gitlab.Job{})))
 

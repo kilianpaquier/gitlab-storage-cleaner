@@ -16,8 +16,8 @@ type Job struct {
 	ArtifactsExpireAt time.Time
 	Cleaned           bool
 	CreatedAt         time.Time
-	ID                int
-	ProjectID         int
+	ID                int64
+	ProjectID         int64
 }
 
 // Artifact represents a simplified view of a gitlab artifact.
@@ -69,7 +69,7 @@ func (j Job) DeleteArtifacts(ctx context.Context, client *gitlab.Client) error {
 }
 
 // JobFromGitLab converts a GitLab job to its simplified view.
-func JobFromGitLab(projectID int, job *gitlab.Job) Job {
+func JobFromGitLab(projectID int64, job *gitlab.Job) Job {
 	return Job{
 		ArtifactsCount:    len(job.Artifacts),
 		ArtifactsExpireAt: lo.FromPtr(job.ArtifactsExpireAt),

@@ -8,7 +8,7 @@ import (
 
 // Project is a simplified view of a gitlab project with only useful information used during artifacts command.
 type Project struct {
-	ID                int
+	ID                int64
 	PathWithNamespace string
 	JobsCleaned       int
 }
