@@ -87,32 +87,6 @@ jobs:
           python-version: 3.13.7
       - uses: pre-commit/action@2c7b3805fd2a0fd8c1884dcaebf91fc102a13ecd # v3.0.1
 
-  docker-hadolint:
-    name: Docker Hadolint
-    runs-on: ubuntu-latest
-    if: ${{ needs.run-workflow.outputs.skip == 'false' }}
-    needs: run-workflow
-    permissions:
-      pull-requests: write
-      security-events: write
-    steps:
-      # https://docs.stepsecurity.io/harden-runner/workflow-runs
-      # https://github.com/marketplace/actions/harden-runner
-      - uses: step-security/harden-runner@20cf305ff2072d973412fa9b1e3a4f227bda3c76 # v2.14.0
-        with:
-          disable-sudo-and-containers: false # docker use
-          egress-policy: audit
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
-      - uses: hadolint/hadolint-action@2332a7b74a6de0dda2e2221d575162eba76ba5e5 # v3.3.0
-        with:
-          format: sarif
-          output-file: hadolint-results.sarif
-      - if: ${{ !cancelled() }}
-        uses: github/codeql-action/upload-sarif@5d4e8d1aca955e8d8589aabd499c5cae939e33c7 # v4.31.9
-        with:
-          sarif_file: hadolint-results.sarif
-          category: docker-hadolint
-
   go-vulncheck:
     name: Go Vulnerability Check
     runs-on: ubuntu-latest
@@ -229,7 +203,6 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ always() && (github.event_name != 'pull_request' || !github.event.pull_request.draft) }}
     needs:
-      - docker-hadolint
       - go-test
       - pre-commit
     steps:

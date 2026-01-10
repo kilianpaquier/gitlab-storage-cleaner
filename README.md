@@ -15,7 +15,7 @@
 
 - [How to use ?](#how-to-use-)
   - [Go](#go)
-  - [Docker](#docker)
+  - [Mise](#mise)
   - [Gitlab CICD](#gitlab-cicd)
   - [Linux](#linux)
 - [Commands](#commands)
@@ -29,10 +29,10 @@
 go install github.com/kilianpaquier/gitlab-storage-cleaner/cmd/gitlab-storage-cleaner@latest
 ```
 
-### Docker
+### Mise
 
 ```sh
-docker run ghcr.io/kilianpaquier/gitlab-storage-cleaner:v1 artifacts
+mise use -g github:kilianpaquier/gitlab-storage-cleaner
 ```
 
 ### Gitlab CICD

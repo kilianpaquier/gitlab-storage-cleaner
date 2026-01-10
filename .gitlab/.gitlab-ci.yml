@@ -3,9 +3,7 @@ stages:
 
 .artifacts-cleanup:
   stage: cleanup
-  image:
-    name: ghcr.io/kilianpaquier/gitlab-storage-cleaner
-    entrypoint: [""]
+  image: docker.io/library/alpine:3.23.2
   needs: []
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule"
@@ -14,8 +12,14 @@ stages:
     GITLAB_TOKEN: <your_gitlab_access_token>
     PATHS: ^$CI_PROJECT_NAMESPACE\/.*$ # regexp matching
     THRESHOLD_DURATION: 168h
+  before_script:
+    - export PATH="$HOME/.local/share/mise/shims:$PATH"
+    - apk update -q && apk add -q curl
+    - curl https://mise.run | MISE_INSTALL_PATH=/usr/local/bin/mise MISE_VERSION=$MISE_VERSION sh
+    # renovate: datasource=github-tags packageName=kilianpaquier/gitlab-storage-cleaner depName=gitlab-storage-cleaner
+    - mise use -g github:kilianpaquier/gitlab-storage-cleaner@v1.3.0
   script:
-    - /app/gitlab-storage-cleaner artifacts \
+    - gitlab-storage-cleaner artifacts \
       --token "$GITLAB_TOKEN" \
       --server "$CI_SERVER_HOST" \
       --paths "$PATHS" \
@@ -28,7 +32,7 @@ artifacts-cleanup:dry-run:
 artifacts-cleanup:
   extends: .artifacts-cleanup
   script:
-    - /app/gitlab-storage-cleaner artifacts \
+    - gitlab-storage-cleaner artifacts \
       --token "$GITLAB_TOKEN" \
       --server "$CI_SERVER_HOST" \
       --paths "$PATHS" \

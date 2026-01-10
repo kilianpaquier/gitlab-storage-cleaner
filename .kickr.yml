@@ -10,7 +10,6 @@ ci:
     - harden-runner
     - kickr:github-app
     - ossf-scorecard
-  docker: {}
   release:
     auth: github-token
 dependencies:

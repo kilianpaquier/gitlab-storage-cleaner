@@ -9,29 +9,6 @@ version: 2
 enable-beta-ecosystems: true
 updates:
 
-  - package-ecosystem: docker
-    directory: /
-    labels:
-      - dependabot
-      - dependencies
-    schedule:
-      interval: daily
-      time: "12:00"
-      timezone: "Etc/UTC"
-    groups:
-      major:
-        update-types:
-          - major
-      minor/patch:
-        update-types:
-          - minor
-          - patch
-    commit-message:
-      include: scope
-      prefix: chore
-    cooldown:
-      default-days: 5
-
   - package-ecosystem: gomod
     directory: /
     labels:

@@ -40,12 +40,3 @@ build:
 			-X 'github.com/kilianpaquier/gitlab-storage-cleaner/internal/build.version=${VERSION}' \
 		" \
 		-o gitlab-storage-cleaner ./cmd/gitlab-storage-cleaner
-
-.PHONY: docker
-docker:
-	@docker build . \
-		-f Dockerfile \
-		-t gitlab-storage-cleaner:${VERSION} \
-		--build-arg GIT_REF_NAME=$(shell git rev-parse --abbrev-ref HEAD) \
-		--build-arg GIT_COMMIT=$(shell git rev-parse HEAD) \
-		--build-arg VERSION=${VERSION}
