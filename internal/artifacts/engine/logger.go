@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"io"
+	"log/slog"
 
 	"github.com/panjf2000/ants/v2"
 )
@@ -13,16 +14,16 @@ type Logger interface {
 	ants.Logger
 
 	// Info logs a message at level INFO.
-	Info(msg any, keyvals ...any)
+	Info(msg string, keyvals ...any)
 
 	// Error logs a message at level ERROR.
-	Error(msg any, keyvals ...any)
+	Error(msg string, keyvals ...any)
 
 	// Warn logs a message at level WARN.
-	Warn(msg any, keyvals ...any)
+	Warn(msg string, keyvals ...any)
 
 	// Debug logs a message at level DEBUG.
-	Debug(msg any, keyvals ...any)
+	Debug(msg string, keyvals ...any)
 }
 
 type loggerKeyType string
@@ -49,16 +50,16 @@ var _ Logger = &noopLogger{} // ensure interface is implemented
 func (*noopLogger) Printf(string, ...any) {}
 
 // Debug does nothing.
-func (*noopLogger) Debug(any, ...any) {}
+func (*noopLogger) Debug(string, ...any) {}
 
 // Error does nothing.
-func (*noopLogger) Error(any, ...any) {}
+func (*noopLogger) Error(string, ...any) {}
 
 // Info does nothing.
-func (*noopLogger) Info(any, ...any) {}
+func (*noopLogger) Info(string, ...any) {}
 
 // Warn does nothing.
-func (*noopLogger) Warn(any, ...any) {}
+func (*noopLogger) Warn(string, ...any) {}
 
 type testLogger struct{ writer io.Writer }
 
@@ -72,28 +73,28 @@ func NewTestLogger(writer io.Writer) Logger {
 	return &testLogger{writer: writer}
 }
 
-// Debug implements shared.Logger.
-func (b *testLogger) Debug(msg any, keyvals ...any) {
+// Debug implements Logger.
+func (b *testLogger) Debug(msg string, keyvals ...any) {
 	b.print(msg, keyvals...)
 }
 
-// Error implements shared.Logger.
-func (b *testLogger) Error(msg any, keyvals ...any) {
+// Error implements Logger.
+func (b *testLogger) Error(msg string, keyvals ...any) {
 	b.print(msg, keyvals...)
 }
 
-// Info implements shared.Logger.
-func (b *testLogger) Info(msg any, keyvals ...any) {
+// Info implements Logger.
+func (b *testLogger) Info(msg string, keyvals ...any) {
 	b.print(msg, keyvals...)
 }
 
-// Printf implements shared.Logger.
+// Printf implements Logger.
 func (b *testLogger) Printf(format string, args ...any) {
 	b.writer.Write(fmt.Appendf(nil, format, args...))
 }
 
-// Warn implements shared.Logger.
-func (b *testLogger) Warn(msg any, keyvals ...any) {
+// Warn implements Logger.
+func (b *testLogger) Warn(msg string, keyvals ...any) {
 	b.print(msg, keyvals...)
 }
 
@@ -103,4 +104,39 @@ func (b *testLogger) print(msg any, keyvals ...any) {
 		b.writer.Write(fmt.Appendf(nil, " %s=%v", keyvals[i], keyvals[i+1]))
 	}
 	b.writer.Write([]byte("\n"))
+}
+
+func NewSlogLogger(log *slog.Logger) Logger {
+	return &slogLogger{log}
+}
+
+type slogLogger struct {
+	log *slog.Logger
+}
+
+var _ Logger = (*slogLogger)(nil)
+
+// Printf implements Logger.
+func (s *slogLogger) Printf(format string, args ...any) {
+	s.log.Info(fmt.Sprintf(format, args...))
+}
+
+// Debug implements Logger.
+func (s *slogLogger) Debug(msg string, keyvals ...any) {
+	s.log.Debug(msg, keyvals...)
+}
+
+// Error implements Logger.
+func (s *slogLogger) Error(msg string, keyvals ...any) {
+	s.log.Error(msg, keyvals...)
+}
+
+// Info implements Logger.
+func (s *slogLogger) Info(msg string, keyvals ...any) {
+	s.log.Info(msg, keyvals...)
+}
+
+// Warn implements Logger.
+func (s *slogLogger) Warn(msg string, keyvals ...any) {
+	s.log.Warn(msg, keyvals...)
 }

@@ -1,6 +1,6 @@
 # gitlab-storage-cleaner <!-- omit in toc -->
 
-<p align="center">
+<div align="center">
   <img alt="GitHub Release" src="https://img.shields.io/github/v/release/kilianpaquier/gitlab-storage-cleaner?include_prereleases&sort=semver&style=for-the-badge">
   <img alt="GitHub Issues" src="https://img.shields.io/github/issues-raw/kilianpaquier/gitlab-storage-cleaner?style=for-the-badge">
   <img alt="GitHub License" src="https://img.shields.io/github/license/kilianpaquier/gitlab-storage-cleaner?style=for-the-badge">
@@ -9,7 +9,7 @@
   <img alt="Go Version" src="https://img.shields.io/github/go-mod/go-version/kilianpaquier/gitlab-storage-cleaner?style=for-the-badge">
   <img alt="Go Report Card" src="https://goreportcard.com/badge/github.com/kilianpaquier/gitlab-storage-cleaner?style=for-the-badge">
   <img alt="OpenSSF Scorecard" src="https://img.shields.io/ossf-scorecard/github.com/kilianpaquier/gitlab-storage-cleaner?label=OpenSSF+Scorecard&style=for-the-badge">
-</p>
+</div>
 
 ---
 

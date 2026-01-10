@@ -2,28 +2,23 @@ package cobra
 
 import (
 	"errors"
+	"fmt"
+	"log/slog"
 	"os"
-	"time"
 
-	"github.com/charmbracelet/log"
 	"github.com/spf13/cobra"
 )
 
-const app = "gitlab-storage-cleaner"
-
 var (
-	logger = log.NewWithOptions(os.Stderr, log.Options{
-		CallerFormatter: log.ShortCallerFormatter,
-		ReportCaller:    true,
-		ReportTimestamp: true,
-		TimeFormat:      time.RFC3339,
-	})
-	logLevel  = "info"
+	leveler   = new(slog.LevelVar)
+	logger    = slog.New(slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{Level: leveler}))
 	logFormat = "text"
-	rootCmd   = &cobra.Command{
-		Use:               app,
+	logLevel  = "info"
+
+	rootCmd = &cobra.Command{
+		Use:               "gitlab-storage-cleaner",
 		SilenceErrors:     true, // don't print errors with cobra, let logger.Fatal handle them
-		PersistentPreRunE: func(*cobra.Command, []string) error { return preRun() },
+		PersistentPreRunE: preRun,
 	}
 )
 
@@ -31,36 +26,33 @@ func init() {
 	rootCmd.PersistentFlags().StringVar(&logLevel, "log-level", "info", "set logging level")
 	rootCmd.PersistentFlags().StringVar(&logFormat, "log-format", "text", `set logging format (either "text" or "json")`)
 
-	_ = preRun() // ensure logging is correctly configured with default values even when a bad input flag is given
+	_ = preRun(nil, nil) // ensure logging is correctly configured with default values even when a bad input flag is given
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
 	if err := rootCmd.Execute(); err != nil {
-		logger.Fatal(err)
+		logger.Error(err.Error())
+		os.Exit(1) //nolint:revive
 	}
 }
 
-func preRun() error {
-	styles := log.DefaultStyles()
+func preRun(*cobra.Command, []string) error {
 	switch logFormat {
 	case "text":
-		logger.SetFormatter(log.TextFormatter)
-		for _, level := range []log.Level{log.DebugLevel, log.InfoLevel, log.WarnLevel, log.ErrorLevel, log.FatalLevel} {
-			styles.Levels[level] = styles.Levels[level].MaxWidth(len(level.String()))
-		}
-		logger.SetStyles(styles)
+		// nothing specific to do since default logger is text
 	case "json":
-		logger.SetFormatter(log.JSONFormatter)
+		logger = slog.New(slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{Level: leveler}))
 	default:
 		return errors.New(`invalid --log-format argument, must be either "json" or "text"`)
 	}
 
-	level, err := log.ParseLevel(logLevel)
-	if err != nil {
-		level = log.InfoLevel
+	var level slog.Level
+	if err := level.UnmarshalText([]byte(logLevel)); err != nil {
+		level = slog.LevelInfo
 	}
-	logger.SetLevel(level)
+	leveler.Set(level)
+	logger.Debug(fmt.Sprintf("running with level '%s'", level))
 	return nil
 }
