@@ -106,6 +106,7 @@ func (b *testLogger) print(msg any, keyvals ...any) {
 	b.writer.Write([]byte("\n"))
 }
 
+// NewSlogLogger creates a new Logger implementation based on slog.Logger.
 func NewSlogLogger(log *slog.Logger) Logger {
 	return &slogLogger{log}
 }
