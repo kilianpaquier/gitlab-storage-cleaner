@@ -4,10 +4,10 @@ import (
 	"regexp"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
 	gitlab "gitlab.com/gitlab-org/api/client-go"
 
 	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/artifacts/models"
+	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/testutils"
 )
 
 func TestMatches(t *testing.T) {
@@ -23,7 +23,7 @@ func TestMatches(t *testing.T) {
 		matches := project.Matches(regexps...)
 
 		// Assert
-		assert.False(t, matches)
+		testutils.False(t, matches)
 	})
 
 	t.Run("matches", func(t *testing.T) {
@@ -38,7 +38,7 @@ func TestMatches(t *testing.T) {
 		matches := project.Matches(regexps...)
 
 		// Assert
-		assert.True(t, matches)
+		testutils.True(t, matches)
 	})
 }
 
@@ -52,6 +52,6 @@ func TestProjectFromGitLab(t *testing.T) {
 		project := models.ProjectFromGitLab(&gitlab)
 
 		// Assert
-		assert.Equal(t, expected, project)
+		testutils.Equal(t, expected, project)
 	})
 }

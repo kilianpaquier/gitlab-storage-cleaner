@@ -8,11 +8,10 @@ import (
 
 	"github.com/jarcoal/httpmock"
 	"github.com/samber/lo"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 	gitlab "gitlab.com/gitlab-org/api/client-go"
 
 	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/artifacts/models"
+	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/testutils"
 )
 
 func TestNeedCleanup(t *testing.T) {
@@ -24,7 +23,7 @@ func TestNeedCleanup(t *testing.T) {
 		clean := job.NeedCleanup(0)
 
 		// Assert
-		assert.False(t, clean)
+		testutils.False(t, clean)
 	})
 
 	t.Run("false_already_expired", func(t *testing.T) {
@@ -40,7 +39,7 @@ func TestNeedCleanup(t *testing.T) {
 		clean := job.NeedCleanup(0)
 
 		// Assert
-		assert.False(t, clean)
+		testutils.False(t, clean)
 	})
 
 	t.Run("false_too_recent", func(t *testing.T) {
@@ -56,7 +55,7 @@ func TestNeedCleanup(t *testing.T) {
 		clean := job.NeedCleanup(time.Hour)
 
 		// Assert
-		assert.False(t, clean)
+		testutils.False(t, clean)
 	})
 
 	t.Run("success_true_no_creation_date", func(t *testing.T) {
@@ -67,7 +66,7 @@ func TestNeedCleanup(t *testing.T) {
 		clean := job.NeedCleanup(0)
 
 		// Assert
-		assert.True(t, clean)
+		testutils.True(t, clean)
 	})
 }
 
@@ -82,7 +81,7 @@ func TestDeleteArtifacts(t *testing.T) {
 		gitlab.WithHTTPClient(&http.Client{Transport: httpmock.DefaultTransport}),
 		gitlab.WithoutRetries(),
 	)
-	require.NoError(t, err)
+	testutils.NoError(testutils.Require(t), err)
 
 	projectID := int64(5)
 	jobID := int64(5)
@@ -100,7 +99,8 @@ func TestDeleteArtifacts(t *testing.T) {
 		err := job.DeleteArtifacts(ctx, client)
 
 		// Assert
-		assert.ErrorContains(t, err, "delete artifacts")
+		testutils.Error(testutils.Require(t), err)
+		testutils.Contains(t, err.Error(), "delete artifacts")
 	})
 
 	t.Run("success_deletion", func(t *testing.T) {
@@ -113,8 +113,8 @@ func TestDeleteArtifacts(t *testing.T) {
 		err := job.DeleteArtifacts(ctx, client)
 
 		// Assert
-		require.NoError(t, err)
-		assert.Equal(t, 1, httpmock.GetTotalCallCount())
+		testutils.NoError(testutils.Require(t), err)
+		testutils.Equal(t, 1, httpmock.GetTotalCallCount())
 	})
 }
 
@@ -141,6 +141,6 @@ func TestJobFromGitLab(t *testing.T) {
 		project := models.JobFromGitLab(projectID, &gitlab)
 
 		// Assert
-		assert.Equal(t, expected, project)
+		testutils.Equal(t, expected, project)
 	})
 }

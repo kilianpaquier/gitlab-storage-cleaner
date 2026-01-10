@@ -11,13 +11,12 @@ import (
 	"github.com/jarcoal/httpmock"
 	pooling "github.com/kilianpaquier/pooling/pkg"
 	"github.com/samber/lo"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 	gitlab "gitlab.com/gitlab-org/api/client-go"
 
 	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/artifacts/engine"
 	artifacts "github.com/kilianpaquier/gitlab-storage-cleaner/internal/artifacts/engine/v1"
 	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/artifacts/models"
+	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/testutils"
 )
 
 func TestReadProjects(t *testing.T) {
@@ -30,10 +29,10 @@ func TestReadProjects(t *testing.T) {
 	client, err := gitlab.NewClient("",
 		gitlab.WithHTTPClient(&http.Client{Transport: httpmock.DefaultTransport}),
 		gitlab.WithoutRetries())
-	require.NoError(t, err)
+	testutils.NoError(testutils.Require(t), err)
 
 	runOptions, err := engine.NewRunOptions(engine.WithPaths("^hey_.*$", "^hoï_.*$"))
-	require.NoError(t, err)
+	testutils.NoError(testutils.Require(t), err)
 
 	t.Run("error_list_projects", func(t *testing.T) {
 		// Arrange
@@ -49,10 +48,10 @@ func TestReadProjects(t *testing.T) {
 
 		// Assert
 		// verify channel first because it will block until its closed
-		assert.Empty(t, lo.ChannelToSlice(projects))
+		testutils.Equal(t, 0, len(lo.ChannelToSlice(projects)))
 		logs := buf.String()
-		assert.Contains(t, logs, "an error")
-		assert.Contains(t, logs, "failed to retrieve projects")
+		testutils.Contains(t, logs, "an error")
+		testutils.Contains(t, logs, "failed to retrieve projects")
 	})
 
 	t.Run("success_populate_channel", func(t *testing.T) {
@@ -74,8 +73,8 @@ func TestReadProjects(t *testing.T) {
 
 		// Assert
 		// verify channel first because it will block until its closed
-		assert.Len(t, lo.ChannelToSlice(projects), 3)
-		assert.Contains(t, buf.String(), "skipping project cleaning project_id=9 project_path=two_hey")
+		testutils.Equal(t, 3, len(lo.ChannelToSlice(projects)))
+		testutils.Contains(t, buf.String(), "skipping project cleaning project_id=9 project_path=two_hey")
 	})
 }
 
@@ -89,7 +88,7 @@ func TestReadJobs(t *testing.T) {
 	client, err := gitlab.NewClient("",
 		gitlab.WithHTTPClient(&http.Client{Transport: httpmock.DefaultTransport}),
 		gitlab.WithoutRetries())
-	require.NoError(t, err)
+	testutils.NoError(testutils.Require(t), err)
 
 	project := models.Project{ID: 5}
 
@@ -107,8 +106,8 @@ func TestReadJobs(t *testing.T) {
 
 		// Assert
 		logs := buf.String()
-		assert.Contains(t, logs, "an error")
-		assert.Contains(t, logs, "failed to retrieve project jobs")
+		testutils.Contains(t, logs, "an error")
+		testutils.Contains(t, logs, "failed to retrieve project jobs")
 	})
 
 	t.Run("success_populate_channel", func(t *testing.T) {
@@ -137,7 +136,7 @@ func TestReadJobs(t *testing.T) {
 		t.Cleanup(func() { close(jobs) })
 
 		runOptions, err := engine.NewRunOptions(engine.WithThresholdDuration(time.Hour))
-		require.NoError(t, err)
+		testutils.NoError(testutils.Require(t), err)
 
 		var buf strings.Builder
 		ctx := context.WithValue(ctx, engine.LoggerKey, engine.NewTestLogger(&buf))
@@ -146,11 +145,11 @@ func TestReadJobs(t *testing.T) {
 		artifacts.ReadJobs(ctx, client, project, runOptions)(jobs)
 
 		// Assert
-		assert.Len(t, jobs, 2) // two elements, one for each job
-		assert.Equal(t, 2, httpmock.GetTotalCallCount())
+		testutils.Equal(t, 2, len(jobs)) // two elements, one for each job
+		testutils.Equal(t, 2, httpmock.GetTotalCallCount())
 		logs := buf.String()
-		assert.Contains(t, logs, "running project cleanup")
-		assert.Contains(t, logs, "ended project cleanup")
+		testutils.Contains(t, logs, "running project cleanup")
+		testutils.Contains(t, logs, "ended project cleanup")
 	})
 }
 
@@ -164,7 +163,7 @@ func TestDeleteArtifacts(t *testing.T) {
 	client, err := gitlab.NewClient("",
 		gitlab.WithHTTPClient(&http.Client{Transport: httpmock.DefaultTransport}),
 		gitlab.WithoutRetries())
-	require.NoError(t, err)
+	testutils.NoError(testutils.Require(t), err)
 
 	job := models.Job{ID: 7, ProjectID: 5}
 
@@ -177,7 +176,7 @@ func TestDeleteArtifacts(t *testing.T) {
 		artifacts.DeleteArtifacts(ctx, client, job, engine.RunOptions{DryRun: true})(nil)
 
 		// Assert
-		assert.Contains(t, buf.String(), "running in dry run mode, skipping job's artifacts deletion")
+		testutils.Contains(t, buf.String(), "running in dry run mode, skipping job's artifacts deletion")
 	})
 
 	t.Run("error_delete_artifacts", func(t *testing.T) {
@@ -194,8 +193,8 @@ func TestDeleteArtifacts(t *testing.T) {
 
 		// Assert
 		logs := buf.String()
-		assert.Contains(t, logs, "an error")
-		assert.Contains(t, logs, "failed to delete job's artifacts")
+		testutils.Contains(t, logs, "an error")
+		testutils.Contains(t, logs, "failed to delete job's artifacts")
 	})
 
 	t.Run("success_delete_artifacts", func(t *testing.T) {
@@ -211,6 +210,6 @@ func TestDeleteArtifacts(t *testing.T) {
 		artifacts.DeleteArtifacts(ctx, client, job, engine.RunOptions{})(nil)
 
 		// Assert
-		assert.Empty(t, buf.String())
+		testutils.Equal(t, "", buf.String())
 	})
 }

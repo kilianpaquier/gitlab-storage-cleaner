@@ -9,12 +9,11 @@ import (
 
 	"github.com/jarcoal/httpmock"
 	"github.com/samber/lo"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 	gitlab "gitlab.com/gitlab-org/api/client-go"
 
 	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/artifacts/engine"
 	artifacts "github.com/kilianpaquier/gitlab-storage-cleaner/internal/artifacts/engine/v2"
+	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/testutils"
 )
 
 const (
@@ -35,7 +34,7 @@ func TestRun(t *testing.T) {
 		gitlab.WithHTTPClient(&http.Client{Transport: httpmock.DefaultTransport}),
 		gitlab.WithoutRetries(),
 	)
-	require.NoError(t, err)
+	testutils.NoError(testutils.Require(t), err)
 
 	var buf strings.Builder
 	opts := []engine.RunOption{
@@ -93,13 +92,17 @@ func TestRun(t *testing.T) {
 		err := artifacts.Run(ctx, client, opts...)
 
 		// Assert
-		require.NoError(t, err)
-		assert.Equal(t, expectedCalls, httpmock.GetCallCountInfo())
+		testutils.NoError(testutils.Require(t), err)
+		for k, v := range expectedCalls {
+			actual, ok := httpmock.GetCallCountInfo()[k]
+			testutils.True(t, ok)
+			testutils.Equal(t, v, actual)
+		}
 		logs := buf.String()
-		assert.Contains(t, logs, "starting project execution")
-		assert.Contains(t, logs, "ending project execution")
-		assert.NotContains(t, logs, "failed to retrieve projects")
-		assert.NotContains(t, logs, "failed to retrieve project jobs")
-		assert.NotContains(t, logs, "failed to delete job's artifacts")
+		testutils.Contains(t, logs, "starting project execution")
+		testutils.Contains(t, logs, "ending project execution")
+		testutils.NotContains(t, logs, "failed to retrieve projects")
+		testutils.NotContains(t, logs, "failed to retrieve project jobs")
+		testutils.NotContains(t, logs, "failed to delete job's artifacts")
 	})
 }
