@@ -18,7 +18,7 @@ repos:
       - id: commitizen-branch
         args:
           - --rev-range
-          - ${GITHUB_BASE_REF:+origin/}${GITHUB_BASE_REF:-HEAD~1}..HEAD
+          - ${CI_MERGE_REQUEST_TARGET_BRANCH_NAME:+origin/}${CI_MERGE_REQUEST_TARGET_BRANCH_NAME:-HEAD~1}..HEAD
         stages: [pre-commit]
 
   - repo: https://github.com/gitleaks/gitleaks

@@ -20,11 +20,11 @@ stages:
     - mise use -g github:kilianpaquier/gitlab-storage-cleaner@v1.3.0
   script:
     - gitlab-storage-cleaner artifacts \
-      --token "$GITLAB_TOKEN" \
-      --server "$CI_SERVER_HOST" \
-      --paths "$PATHS" \
-      --threshold-duration "$THRESHOLD_DURATION" \
-      --dry-run
+        --token "$GITLAB_TOKEN" \
+        --server "$CI_SERVER_HOST" \
+        --paths "$PATHS" \
+        --threshold-duration "$THRESHOLD_DURATION" \
+        --dry-run
 
 artifacts-cleanup:dry-run:
   extends: .artifacts-cleanup
@@ -33,7 +33,7 @@ artifacts-cleanup:
   extends: .artifacts-cleanup
   script:
     - gitlab-storage-cleaner artifacts \
-      --token "$GITLAB_TOKEN" \
-      --server "$CI_SERVER_HOST" \
-      --paths "$PATHS" \
-      --threshold-duration "$THRESHOLD_DURATION"
+        --token "$GITLAB_TOKEN" \
+        --server "$CI_SERVER_HOST" \
+        --paths "$PATHS" \
+        --threshold-duration "$THRESHOLD_DURATION"

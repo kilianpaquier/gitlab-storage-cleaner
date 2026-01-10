@@ -3,20 +3,15 @@
 version: 1
 description: Easily clean gitlab maintained repositories storage (jobs artifacts only) with a simple command
 ci:
-  provider: github
+  provider: gitlab
   options:
-    - codecov
-    - codeql
-    - harden-runner
-    - kickr:github-app
-    - ossf-scorecard
-  release:
-    auth: github-token
+    - kickr
+  release: {}
 dependencies:
-  manager: dependabot
+  manager: renovate
 license: mit
 maintainers:
-  - name: kilianpaquier
-platform: github
+  - name: u.kilianpaquier
+platform: gitlab
 pre-commit:
   - conventional-commits
