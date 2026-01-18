@@ -83,6 +83,7 @@ func TestArtifactsFlags(t *testing.T) {
 
 	t.Run("from_env_alt", func(t *testing.T) {
 		// Arrange
+		t.Setenv("CI_API_V4_URL", "")
 		t.Setenv("CI_SERVER_HOST", "https://gitlab.example.com")
 		t.Setenv("CLEANER_PATHS", "path1,path2")
 		t.Setenv("GL_TOKEN", "token")
