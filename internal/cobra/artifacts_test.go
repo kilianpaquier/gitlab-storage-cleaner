@@ -10,6 +10,8 @@ import (
 func TestArtifactsFlags(t *testing.T) {
 	t.Run("missing_required", func(t *testing.T) {
 		// Arrange
+		t.Setenv("CI_API_V4_URL", "")
+		t.Setenv("CI_SERVER_HOST", "")
 		cmd := artifactsCmd()
 
 		// Act

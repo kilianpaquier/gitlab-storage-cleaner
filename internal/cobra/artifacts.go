@@ -25,7 +25,7 @@ const (
 )
 
 // artifactsCmd creates a new cobra command for cleaning GitLab artifacts.
-func artifactsCmd() *cobra.Command { //nolint:gocognit
+func artifactsCmd() *cobra.Command { //nolint:gocognit,funlen
 	var (
 		token  string
 		server string
