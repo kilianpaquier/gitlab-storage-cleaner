@@ -4,6 +4,7 @@ Package testutils provides simple utility functions for testing.
 package testutils
 
 import (
+	"errors"
 	"strings"
 	"testing"
 )
@@ -13,8 +14,16 @@ type require struct {
 	testing.TB
 }
 
+// Error logs the args and fails the test immediately.
+func (r require) Error(args ...any) {
+	r.Helper()
+	r.Log(args...)
+	r.FailNow()
+}
+
 // Errorf logs the formatted error message and fails the test immediately.
 func (r require) Errorf(format string, args ...any) {
+	r.Helper()
 	r.Logf(format, args...)
 	r.FailNow()
 }
@@ -49,8 +58,16 @@ func Error(t testing.TB, err error) {
 	}
 }
 
+// ErrorIs asserts that err is or wraps target.
+func ErrorIs(t testing.TB, err, target error) {
+	t.Helper()
+	if !errors.Is(err, target) {
+		t.Errorf("expected error '%s', got '%s'", target, err)
+	}
+}
+
 // False asserts that the condition is false.
-func False(t testing.TB, condition bool) { //nolint:revive // input condition to control flow
+func False(t testing.TB, condition bool) { //nolint:revive
 	t.Helper()
 	if condition {
 		t.Error("expected false, got true")
@@ -82,7 +99,7 @@ func NotNil(t testing.TB, object any) {
 }
 
 // True asserts that the condition is true.
-func True(t testing.TB, condition bool) { //nolint:revive // input condition to control flow
+func True(t testing.TB, condition bool) { //nolint:revive
 	t.Helper()
 	if !condition {
 		t.Error("expected true, got false")

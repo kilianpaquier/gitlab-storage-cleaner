@@ -31,7 +31,7 @@ func TestReadProjects(t *testing.T) {
 		gitlab.WithoutRetries())
 	testutils.NoError(testutils.Require(t), err)
 
-	runOptions, err := engine.NewRunOptions(engine.WithPaths("^hey_.*$", "^hoï_.*$"))
+	runOptions, err := engine.NewRunOptions(engine.WithPaths("^hey_.*$", "^hoï_.*$"), engine.WithThresholdDuration(168*time.Hour))
 	testutils.NoError(testutils.Require(t), err)
 
 	t.Run("error_list_projects", func(t *testing.T) {

@@ -6,12 +6,13 @@ stages:
   image: docker.io/library/alpine:3.23.2
   needs: []
   rules:
-    - if: $CI_PIPELINE_SOURCE == "schedule"
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
       when: manual
   variables:
     GITLAB_TOKEN: <your_gitlab_access_token>
-    PATHS: ^$CI_PROJECT_NAMESPACE\/.*$ # regexp matching
-    THRESHOLD_DURATION: 168h
+    CLEANER_PATHS: ^$CI_PROJECT_NAMESPACE\/.*$ # regexp matching
+    CLEANER_THRESHOLD_DURATION: 168h
+    CLEANER_DRY_RUN: "true"
   before_script:
     - export PATH="$HOME/.local/share/mise/shims:$PATH"
     - apk update -q && apk add -q curl
@@ -19,21 +20,12 @@ stages:
     # renovate: datasource=github-tags packageName=kilianpaquier/gitlab-storage-cleaner depName=gitlab-storage-cleaner
     - mise use -g github:kilianpaquier/gitlab-storage-cleaner@v1.3.0
   script:
-    - gitlab-storage-cleaner artifacts \
-        --token "$GITLAB_TOKEN" \
-        --server "$CI_SERVER_HOST" \
-        --paths "$PATHS" \
-        --threshold-duration "$THRESHOLD_DURATION" \
-        --dry-run
+    - gitlab-storage-cleaner artifacts
 
 artifacts-cleanup:dry-run:
   extends: .artifacts-cleanup
 
 artifacts-cleanup:
   extends: .artifacts-cleanup
-  script:
-    - gitlab-storage-cleaner artifacts \
-        --token "$GITLAB_TOKEN" \
-        --server "$CI_SERVER_HOST" \
-        --paths "$PATHS" \
-        --threshold-duration "$THRESHOLD_DURATION"
+  variables:
+    CLEANER_DRY_RUN: "false"

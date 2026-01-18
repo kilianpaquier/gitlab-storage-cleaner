@@ -60,8 +60,7 @@ Available Commands:
   artifacts   Clean artifacts of provided project(s)' gitlab storage
   completion  Generate the autocompletion script for the specified shell
   help        Help about any command
-  upgrade     Upgrade or install gitlab-storage-cleaner
-  version     Show current gitlab-storage-cleaner version
+  version     Show current version
 
 Flags:
   -h, --help                help for gitlab-storage-cleaner
@@ -74,8 +73,6 @@ Use "gitlab-storage-cleaner [command] --help" for more information about a comma
 ### Artifacts
 
 ```
-Clean artifacts of provided project(s)' gitlab storage
-
 Usage:
   gitlab-storage-cleaner artifacts [flags]
 
@@ -91,3 +88,17 @@ Global Flags:
       --log-format string   set logging format (either "text" or "json") (default "text")
       --log-level string    set logging level (default "info")
 ```
+
+#### Flags
+
+Both CLI flags can be used and environment variables, while the priority is still given to the CLI flags.
+
+| CLI flag               | Environment variable(s)           | Required |
+| ---------------------- | --------------------------------- | -------- |
+| `--log-format`         | `LOG_FORMAT`                      | No       |
+| `--log-level`          | `LOG_LEVEL`                       | No       |
+| `--token`              | `GITLAB_TOKEN`, `GL_TOKEN`        | Yes      |
+| `--server`             | `CI_API_V4_URL`, `CI_SERVER_HOST` | Yes      |
+| `--dry-run`            | `CLEANER_DRY_RUN`                 | No       |
+| `--paths`              | `CLEANER_PATHS`                   | Yes      |
+| `--threshold-duration` | `CLEANER_THRESHOLD_DURATION`      | No       |

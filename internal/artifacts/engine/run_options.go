@@ -8,11 +8,6 @@ import (
 	"time"
 )
 
-const (
-	// DefaultThresholdDuration is the default duration threshold.
-	DefaultThresholdDuration = 7 * 24 * time.Hour
-)
-
 // RunOption is the signature function for artifact cleanup feature options.
 type RunOption func(RunOptions) RunOptions
 
@@ -118,7 +113,7 @@ func NewRunOptions(opts ...RunOption) (RunOptions, error) {
 		ro.logger = &noopLogger{}
 	}
 	if ro.ThresholdDuration <= 0 {
-		ro.ThresholdDuration = DefaultThresholdDuration
+		errs = append(errs, fmt.Errorf("invalid threshold duration '%d'", ro.ThresholdDuration))
 	}
 
 	return ro, errors.Join(errs...)
