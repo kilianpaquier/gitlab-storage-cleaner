@@ -1,3 +1,37 @@
+## [1.4.0](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.3.0...v1.4.0) (2026-01-18)
+
+### Features
+
+* **flags:** allow environment variables to be used ([48844ea](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/48844ea82e5b64f72181a330ea24b58fffaaaa15))
+
+### Chores
+
+* **deps:** bump github.com/panjf2000/ants/v2 in the minor-patch group ([f2ed7cb](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/f2ed7cbed339db882143c64a5f7563b2bbb4a231))
+* **deps:** bump gitlab.com/gitlab-org/api/client-go ([9b29df8](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/9b29df8f450d7eb311a3e4693060001d8dd8df25))
+* **deps:** update module gitlab.com/gitlab-org/api/client-go to v1.12.0 ([ba2577a](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/ba2577a26f9a08c2d6a97d0c84d1f12e8255ddc2))
+* **deps:** update module gitlab.com/gitlab-org/api/client-go to v1.13.0 ([61ac981](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/61ac981be5b91098096f1d5cd05ed77551277da7))
+
+### Code Refactoring
+
+* use slog logger instead of charmbracelet to reduce dependencies ([c04f3de](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/c04f3de9da41a2750e1294802c8953455a94b3cd))
+
+### Continuous Integration
+
+* **kickr:** remove unnecessary description in configuration ([b1a8245](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/b1a82455af8400342d2cdf8e9bd5a143a604f594))
+* **layout:** regenerate kickr layout ([284f2b5](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/284f2b57ed278da4a01176a84d63607f4ef98cbb))
+* migrate to GitLab CICD ([498e7da](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/498e7da6872e3f9ef59657c5db7b769137bd40fe))
+* remove docker build in favor of direct releases artifacts use (.gitlab-ci.yml example updated with new usage methodologie) ([ab4b46b](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/ab4b46bf49935622de1c8fb8c1ce9b54bda974fa))
+
+### Styles
+
+* **lint:** add missing godoc for NewSlogLogger ([36adffc](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/36adffc4170c8d420f2befd57c7825f1befc7033))
+
+### Tests
+
+* remove env with GitLab CICD predefined variables ([792082b](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/792082bc1970d1e76672f0153fa4793e1d9e5593))
+* remove env with GitLab CICD predefined variables ([22648f0](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/22648f0f79d68b54ba2c712de6c25bcf3f6d6e07))
+* remove testify dependency ([54b8170](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/54b81702d802ff085d07b350b2330042a4898a79))
+
 ## [1.3.0](https://github.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.2.22...v1.3.0) (2025-12-26)
 
 ### Features
