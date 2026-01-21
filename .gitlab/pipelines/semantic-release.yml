@@ -68,6 +68,8 @@ semantic-release-info:
 
 semantic-release:
   interruptible: false
+  dependencies:
+    - go-build
   variables:
     GIT_DEPTH: "0"
     GITLAB_TOKEN: $RELEASE_TOKEN
