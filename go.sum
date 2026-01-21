@@ -19,8 +19,8 @@ github.com/inconshreveable/mousetrap v1.1.0 h1:wN+x4NVGpMsO7ErUn/mUI3vEoE6Jt13X2
 github.com/inconshreveable/mousetrap v1.1.0/go.mod h1:vpF70FUmC8bwa3OWnCshd2FqLfsEA9PFc4w1p2J65bw=
 github.com/jarcoal/httpmock v1.4.1 h1:0Ju+VCFuARfFlhVXFc2HxlcQkfB+Xq12/EotHko+x2A=
 github.com/jarcoal/httpmock v1.4.1/go.mod h1:ftW1xULwo+j0R0JJkJIIi7UKigZUXCLLanykgjwBXL0=
-github.com/kilianpaquier/pooling v1.0.14 h1:0fxPl0ynghbp5dEglqc6+SnZIw9v0S+tDtOkHiACsGM=
-github.com/kilianpaquier/pooling v1.0.14/go.mod h1:R49RAEkeigTK4SCxz4FKNu8jxTq8eyAr+gRFEs9d1io=
+github.com/kilianpaquier/pooling v1.0.15 h1:DG6nyB8la9S93HfKYOEA25LWdmnGzseiYyuHoSkJZ4U=
+github.com/kilianpaquier/pooling v1.0.15/go.mod h1:fCXA5qn6jr7QrKGzENBtJJE/rNwArnlfB4NenD+YF5U=
 github.com/mattn/go-colorable v0.1.13 h1:fFA4WZxdEF4tXPZVKMLwD8oUnCTTo08duU7wxecdEvA=
 github.com/mattn/go-colorable v0.1.13/go.mod h1:7S9/ev0klgBDR4GtXTXX8a3vIGJpMovkB8vQcUbaXHg=
 github.com/mattn/go-isatty v0.0.20 h1:xfD0iDuEKnDkl03q4limB+vH+GxLEtL/jb4xVJSWWEY=
