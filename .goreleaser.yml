@@ -2,6 +2,18 @@
 
 version: 2
 
+announce:
+  skip: true
+changelog:
+  disable: true
+release:
+  disable: true
+
+checksum:
+  name_template: checksums.txt
+snapshot:
+  version_template: "{{ .Env.VERSION }}"
+
 builds:
   - main: ./cmd/gitlab-storage-cleaner
     env:
@@ -19,12 +31,6 @@ builds:
       - amd64
       - arm64
 
-announce:
-  skip: true
-
-changelog:
-  disable: true
-
 archives:
   - formats: tar.gz
     wrap_in_directory: false
@@ -37,9 +43,6 @@ archives:
       - goos: windows
         formats: zip
 
-checksum:
-  name_template: checksums.txt
-
 nfpms:
   - maintainer: u.kilianpaquier
     license: MIT
@@ -49,6 +52,5 @@ nfpms:
       {{- .Arch }}
       {{- if .Arm }}v{{ .Arm }}{{ end }}
     formats:
-      - apk
       - deb
       - rpm

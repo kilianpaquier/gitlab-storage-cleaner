@@ -19,12 +19,10 @@ variables:
   PRE_COMMIT_FILE: .pre-commit-config.yaml
 
   GO_CI_LINT_ARGS: --config=.golangci.yml --timeout=240s --allow-parallel-runners --output.checkstyle.path="reports/go-ci-lint.checkstyle.xml" --output.text.path=stdout
-  GO_CI_LINT_IMAGE: docker.io/golangci/golangci-lint:v2.8.0-alpine
-  GO_IMAGE: docker.io/library/golang:1.25.6
   GO_OUTDATED_DISABLED: "false" # https://github.com/psampaz/go-mod-outdated
   GO_SBOM_DISABLED: "true"
   GO_TEST_FLAGS: -v -coverpkg=./... -covermode=count -timeout=30s
-  GO_TEST_IMAGE: docker.io/library/golang:1.25.6
+  GO_TEST_IMAGE: $GO_IMAGE
 
 pre-commit:
   variables:
@@ -32,7 +30,7 @@ pre-commit:
 
 go-build:
   image:
-    name: ghcr.io/goreleaser/goreleaser:v2.13.3
+    name: ghcr.io/goreleaser/goreleaser:latest
     entrypoint: [""]
   rules:
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
@@ -41,8 +39,6 @@ go-build:
     - if: $GO_TEST_IMAGE != ""
       exists:
         - .goreleaser.yml
-  variables:
-    VERSION: $SEMREL_INFO_NEXT_VERSION
   script:
     - goreleaser release --clean --config .goreleaser.yml --skip=validate --skip=announce --skip=publish --snapshot
   artifacts:
