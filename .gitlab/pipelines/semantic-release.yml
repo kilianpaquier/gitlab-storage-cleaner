@@ -47,11 +47,17 @@ workflow:
     # on production or integration branch(es)
     - if: '$CI_COMMIT_REF_NAME =~ $PROD_REF || $CI_COMMIT_REF_NAME =~ $INTEG_REF'
 
-semantic-release-info:
+.semrel-base:
   variables:
     GIT_DEPTH: "0"
     GITLAB_TOKEN: $RELEASE_TOKEN
-  after_script:
+
+semantic-release-info:
+  stage: build
+  variables:
+    SEMREL_DRY_RUN: "true"
+  script:
+    - !reference [semantic-release, script]
     - source "$SEMREL_CONFIG_DIR/semrel.out.env" && rm "$SEMREL_CONFIG_DIR/semrel.out.env"
     - >
       echo "BRANCH_SHA=$(echo "$CI_COMMIT_REF_NAME" | sha256sum | cut -c -8)" >> "$SEMREL_CONFIG_DIR/semrel.out.env"
@@ -71,6 +77,3 @@ semantic-release:
   interruptible: false
   dependencies:
     - go-build
-  variables:
-    GIT_DEPTH: "0"
-    GITLAB_TOKEN: $RELEASE_TOKEN

@@ -32,6 +32,8 @@ go-build:
   image:
     name: ghcr.io/goreleaser/goreleaser:latest
     entrypoint: [""]
+  needs:
+    - semantic-release-info
   rules:
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
       when: never
