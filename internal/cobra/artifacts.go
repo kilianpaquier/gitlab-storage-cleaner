@@ -49,6 +49,7 @@ func artifactsCmd() *cobra.Command { //nolint:gocognit,funlen
 				}
 			}
 
+			// validate paths environment variable
 			if !cmd.Flags().Changed(flagPaths) {
 				if env := getenv(envPrefix + flagPaths); env != "" {
 					paths = strings.Split(env, ",")

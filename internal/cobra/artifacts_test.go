@@ -4,18 +4,28 @@ import (
 	"testing"
 	"time"
 
+	"github.com/spf13/cobra"
+
 	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/testutils"
 )
 
 func TestArtifactsFlags(t *testing.T) {
+	norun := func(cmd *cobra.Command) *cobra.Command {
+		cmd.RunE = func(*cobra.Command, []string) error {
+			return nil
+		}
+		return cmd
+	}
+
 	t.Run("missing_required", func(t *testing.T) {
 		// Arrange
 		t.Setenv("CI_API_V4_URL", "")
 		t.Setenv("CI_SERVER_HOST", "")
-		cmd := artifactsCmd()
+
+		cmd := norun(artifactsCmd())
 
 		// Act
-		err := cmd.Execute()
+		err := cmd.ExecuteContext(t.Context())
 
 		// Assert
 		testutils.Error(testutils.Require(t), err)
@@ -31,10 +41,10 @@ func TestArtifactsFlags(t *testing.T) {
 				t.Setenv("GITLAB_TOKEN", "token")
 				t.Setenv(env, "invalid")
 
-				cmd := artifactsCmd()
+				cmd := norun(artifactsCmd())
 
 				// Act
-				err := cmd.Execute()
+				err := cmd.ExecuteContext(t.Context())
 
 				// Assert
 				testutils.Error(testutils.Require(t), err)
@@ -51,10 +61,10 @@ func TestArtifactsFlags(t *testing.T) {
 		t.Setenv("CLEANER_THRESHOLD_DURATION", "72h")
 		t.Setenv("GITLAB_TOKEN", "token")
 
-		cmd := artifactsCmd()
+		cmd := norun(artifactsCmd())
 
 		// Act
-		err := cmd.Execute()
+		err := cmd.ExecuteContext(t.Context())
 
 		// Assert
 		testutils.NoError(testutils.Require(t), err)
@@ -88,10 +98,10 @@ func TestArtifactsFlags(t *testing.T) {
 		t.Setenv("CLEANER_PATHS", "path1,path2")
 		t.Setenv("GL_TOKEN", "token")
 
-		cmd := artifactsCmd()
+		cmd := norun(artifactsCmd())
 
 		// Act
-		err := cmd.Execute()
+		err := cmd.ExecuteContext(t.Context())
 
 		// Assert
 		testutils.NoError(testutils.Require(t), err)
@@ -120,11 +130,11 @@ func TestArtifactsFlags(t *testing.T) {
 		t.Setenv("CLEANER_THRESHOLD_DURATION", "92h")
 		t.Setenv("GITLAB_TOKEN", "token")
 
-		cmd := artifactsCmd()
+		cmd := norun(artifactsCmd())
 		cmd.SetArgs([]string{"--" + flagPaths, `^$CI_PROJECT_NAMESPACE\/.*$`, "--" + flagDryRun, "--" + flagThresholdDuration, "72h"})
 
 		// Act
-		err := cmd.Execute()
+		err := cmd.ExecuteContext(t.Context())
 
 		// Assert
 		testutils.NoError(testutils.Require(t), err)
