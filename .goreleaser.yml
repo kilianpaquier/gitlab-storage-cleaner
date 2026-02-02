@@ -2,13 +2,6 @@
 
 version: 2
 
-announce:
-  skip: true
-changelog:
-  disable: true
-release:
-  disable: true
-
 checksum:
   name_template: checksums.txt
 snapshot:
@@ -21,7 +14,7 @@ builds:
     ldflags:
       - -X github.com/kilianpaquier/gitlab-storage-cleaner/internal/build.branch={{ .Branch }}
       - -X github.com/kilianpaquier/gitlab-storage-cleaner/internal/build.commit={{ .Commit }}
-      - -X github.com/kilianpaquier/gitlab-storage-cleaner/internal/build.date={{ .CommitDate }}
+      - -X github.com/kilianpaquier/gitlab-storage-cleaner/internal/build.date={{ .Date }}
       - -X github.com/kilianpaquier/gitlab-storage-cleaner/internal/build.version={{ .Env.VERSION }}
     goos:
       - linux

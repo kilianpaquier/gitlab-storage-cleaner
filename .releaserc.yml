@@ -82,9 +82,12 @@ plugins:
       successComment: 🎉 This issue has been resolved in version v${nextRelease.version} 🎉
       successCommentCondition: <% return true; %>
       assets:
-        - label: CHANGELOG.md
-          path: CHANGELOG.md
-        - path: dist
+        - path: ./CHANGELOG.md
+        - path: dist/checksums.txt
+        - path: dist/*.deb
+        - path: dist/*.rpm
+        - path: dist/*.tar.gz
+        - path: dist/*.zip
   - - "@semantic-release/exec"
     - analyzeCommitsCmd: echo "SEMREL_INFO_LAST_VERSION=${lastRelease.version}" > semrel.out.env
       verifyReleaseCmd: |
