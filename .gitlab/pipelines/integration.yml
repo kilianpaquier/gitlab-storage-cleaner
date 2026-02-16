@@ -38,9 +38,7 @@ go-build:
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
       when: never
     # https://gitlab.com/to-be-continuous/golang/-/blob/master/templates/gitlab-ci-golang.yml?ref_type=heads#L670
-    - if: $GO_TEST_IMAGE != ""
-      exists:
-        - .goreleaser.yml
+    - if: '$GO_TEST_IMAGE != ""'
   script:
     - goreleaser release --clean --config .goreleaser.yml --snapshot
   artifacts:
