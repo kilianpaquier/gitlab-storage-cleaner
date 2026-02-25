@@ -7,11 +7,11 @@ toolchain go1.26.0
 require (
 	github.com/fogfactory/pipe v0.1.1
 	github.com/jarcoal/httpmock v1.4.1
-	github.com/kilianpaquier/pooling v1.0.15
+	github.com/kilianpaquier/pooling v1.0.16
 	github.com/panjf2000/ants/v2 v2.11.5
 	github.com/samber/lo v1.52.0
 	github.com/spf13/cobra v1.10.2
-	gitlab.com/gitlab-org/api/client-go v1.36.0
+	gitlab.com/gitlab-org/api/client-go v1.39.0
 )
 
 require (
