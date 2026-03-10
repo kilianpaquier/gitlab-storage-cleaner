@@ -6,7 +6,7 @@ import (
 
 	"github.com/fogfactory/pipe"
 	"github.com/panjf2000/ants/v2"
-	gitlab "gitlab.com/gitlab-org/api/client-go"
+	gitlab "gitlab.com/gitlab-org/api/client-go/v2"
 
 	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/artifacts/engine"
 )

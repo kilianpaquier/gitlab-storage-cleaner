@@ -1,6 +1,6 @@
 module github.com/kilianpaquier/gitlab-storage-cleaner
 
-go 1.24.0
+go 1.25.0
 
 toolchain go1.26.1
 
@@ -11,7 +11,7 @@ require (
 	github.com/panjf2000/ants/v2 v2.11.5
 	github.com/samber/lo v1.53.0
 	github.com/spf13/cobra v1.10.2
-	gitlab.com/gitlab-org/api/client-go v1.46.0
+	gitlab.com/gitlab-org/api/client-go/v2 v2.2.1
 )
 
 require (

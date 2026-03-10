@@ -9,7 +9,7 @@ import (
 
 	"github.com/jarcoal/httpmock"
 	"github.com/samber/lo"
-	gitlab "gitlab.com/gitlab-org/api/client-go"
+	gitlab "gitlab.com/gitlab-org/api/client-go/v2"
 
 	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/artifacts/engine"
 	artifacts "github.com/kilianpaquier/gitlab-storage-cleaner/internal/artifacts/engine/v1"

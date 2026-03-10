@@ -4,7 +4,7 @@ import (
 	"regexp"
 	"testing"
 
-	gitlab "gitlab.com/gitlab-org/api/client-go"
+	gitlab "gitlab.com/gitlab-org/api/client-go/v2"
 
 	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/artifacts/models"
 	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/testutils"

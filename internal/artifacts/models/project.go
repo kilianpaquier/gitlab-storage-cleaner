@@ -3,7 +3,7 @@ package models
 import (
 	"regexp"
 
-	gitlab "gitlab.com/gitlab-org/api/client-go"
+	gitlab "gitlab.com/gitlab-org/api/client-go/v2"
 )
 
 // Project is a simplified view of a gitlab project with only useful information used during artifacts command.

@@ -5,7 +5,7 @@ import (
 
 	pooling "github.com/kilianpaquier/pooling/pkg"
 	"github.com/samber/lo"
-	gitlab "gitlab.com/gitlab-org/api/client-go"
+	gitlab "gitlab.com/gitlab-org/api/client-go/v2"
 
 	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/artifacts/engine"
 	"github.com/kilianpaquier/gitlab-storage-cleaner/internal/artifacts/models"

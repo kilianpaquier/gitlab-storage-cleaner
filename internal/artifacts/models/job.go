@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/samber/lo"
-	gitlab "gitlab.com/gitlab-org/api/client-go"
+	gitlab "gitlab.com/gitlab-org/api/client-go/v2"
 )
 
 // Job is a simplified view of a gitlab job with only useful information for artifacts deletion feature.
