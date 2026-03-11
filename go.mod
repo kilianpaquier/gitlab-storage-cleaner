@@ -11,7 +11,7 @@ require (
 	github.com/panjf2000/ants/v2 v2.11.5
 	github.com/samber/lo v1.53.0
 	github.com/spf13/cobra v1.10.2
-	gitlab.com/gitlab-org/api/client-go/v2 v2.2.1
+	gitlab.com/gitlab-org/api/client-go/v2 v2.4.0
 )
 
 require (
