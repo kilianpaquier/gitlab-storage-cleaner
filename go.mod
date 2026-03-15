@@ -8,10 +8,10 @@ require (
 	github.com/fogfactory/pipe v0.1.1
 	github.com/jarcoal/httpmock v1.4.1
 	github.com/kilianpaquier/pooling v1.0.16
-	github.com/panjf2000/ants/v2 v2.11.5
+	github.com/panjf2000/ants/v2 v2.11.6
 	github.com/samber/lo v1.53.0
 	github.com/spf13/cobra v1.10.2
-	gitlab.com/gitlab-org/api/client-go/v2 v2.4.0
+	gitlab.com/gitlab-org/api/client-go/v2 v2.5.0
 )
 
 require (
