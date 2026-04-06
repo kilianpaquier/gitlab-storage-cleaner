@@ -1,3 +1,63 @@
+## [1.4.1](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.4.0...v1.4.1) (2026-04-06)
+
+### Documentation
+
+* **readme:** add archive notice ([08a98d3](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/08a98d301016faa01851b88b8a5f42bf45ef96a8))
+
+### Chores
+
+* **cobra:** show usage only on arguments errors ([282c9d9](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/282c9d9a702bbdca6f1497f4975ab964e3ff6f6d))
+* **deps:** update go dependencies ([3f0a1e6](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/3f0a1e65e75a3f1ae07c5371035c9a5c80d025fb))
+* **deps:** update go dependencies ([ec8c209](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/ec8c20907b7e14c4a65973eb778ae44e4121a9c3))
+* **deps:** update go dependencies ([a8d2b3f](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/a8d2b3f19f9a7dd4562037d04c8e77fbaf7b9f5c))
+* **deps:** update go dependencies ([be01036](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/be0103613d18bc4e616312920092815ed7895612))
+* **deps:** update go dependencies ([2b26098](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/2b26098312344f2ecc3abbd5472a67da9218d3f9))
+* **deps:** update module gitlab.com/gitlab-org/api/client-go to v1.14.0 ([dfe5fde](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/dfe5fde519a5a49cf2bffa23540c24bc8edc635d))
+* **deps:** update module gitlab.com/gitlab-org/api/client-go to v1.16.0 ([c771b8e](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/c771b8ef451c293050af3a4bbff503750f12d7e7))
+* **deps:** update module gitlab.com/gitlab-org/api/client-go to v1.17.0 ([8170769](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/8170769e46859e0e33c6862d69591e2767526398))
+* **deps:** update module gitlab.com/gitlab-org/api/client-go to v1.18.0 ([5a1c75e](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/5a1c75e5f4d71f77966230425c12c639702b32c6))
+* **deps:** update module gitlab.com/gitlab-org/api/client-go to v1.19.0 ([4b2d92b](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/4b2d92bbc12a0ecc502a2bb63ecdee9c5d71413b))
+* **deps:** update module gitlab.com/gitlab-org/api/client-go to v1.22.0 ([7e0862e](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/7e0862ef873d305cb39f841a16a1c568af0d1652))
+* **deps:** update module gitlab.com/gitlab-org/api/client-go to v1.24.0 ([3c53db6](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/3c53db6f33f710053b1bbe951a88e3b3eb15ae24))
+* **deps:** update module gitlab.com/gitlab-org/api/client-go to v1.25.0 ([7e796e8](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/7e796e8ed85a927e283bc8a4c71b322013c02ef5))
+* **deps:** update module gitlab.com/gitlab-org/api/client-go to v1.29.0 ([3c10a32](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/3c10a325ed7fc87ac4840a6a9c49fa32e5c9f230))
+* **deps:** update module gitlab.com/gitlab-org/api/client-go to v1.30.0 ([05750ba](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/05750ba3a0f02fc0160470d245ee91bf190110b8))
+* **deps:** update module gitlab.com/gitlab-org/api/client-go to v1.31.0 ([66fca7d](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/66fca7d42c1cfe48a71bba8447ccdb253b120044))
+* **deps:** update module gitlab.com/gitlab-org/api/client-go to v1.33.0 ([144ae9f](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/144ae9f5464bb959d06ff777f6267c29948c711b))
+* **deps:** update module gitlab.com/gitlab-org/api/client-go to v1.34.0 ([51229f4](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/51229f45fec3e30b70514a72caba3f5d99eee222))
+* **deps:** update module gitlab.com/gitlab-org/api/client-go to v1.35.0 ([74c8475](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/74c8475a4c75756f413b5180c3c5e8ccc3d808bc))
+* **deps:** update module gitlab.com/gitlab-org/api/client-go to v1.36.0 ([02bc910](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/02bc910b66d01209ad42519a69a6fa0696741189))
+* **deps:** update module gitlab.com/gitlab-org/api/client-go to v1.40.1 ([ade30a9](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/ade30a987a461feaeb644d7aa7f44bc284c4fa66))
+* **deps:** update module gitlab.com/gitlab-org/api/client-go to v1.41.0 ([71668e7](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/71668e7ccdd50bbeb2a012dbb368a075ce6c4d7c))
+* **deps:** update module gitlab.com/gitlab-org/api/client-go to v1.43.0 ([a19e52f](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/a19e52f4779f5d4892a410109a293358742648b0))
+* **deps:** update module gitlab.com/gitlab-org/api/client-go to v2 ([9630558](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/963055895e9a610abb5fdd70816e34d64afb27ea))
+* **deps:** update module gitlab.com/gitlab-org/api/client-go/v2 to v2.11.0 ([45b1ac1](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/45b1ac1f4cdad2effb7c38dd7e271ec191418ae5))
+* **deps:** update module gitlab.com/gitlab-org/api/client-go/v2 to v2.4.0 ([8baf890](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/8baf890faeb12d7554408922926d67b160fc45d2))
+* **deps:** update module gitlab.com/gitlab-org/api/client-go/v2 to v2.6.0 ([9c77ed7](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/9c77ed76c209da92382fb2afa531987f051f6ba5))
+* **deps:** update module gitlab.com/gitlab-org/api/client-go/v2 to v2.8.0 ([62927f5](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/62927f5f02c5cae2ef4346eb5d7d97cfa8f46e6e))
+* **deps:** upgrade pooling dependencies ([969054b](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/969054ba8c3b0f327b457e30a17272828ac35e55))
+
+### Continuous Integration
+
+* **build:** use snapshot when building with goreleaser ([92f6ae9](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/92f6ae9d539b06356c9670990e556d3b03ffc164))
+* **deps:** update dependency go to v1.25.6 ([fb9c5b2](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/fb9c5b2d7f7389112e51b6a02f01d27ab2002d60))
+* **deps:** update dependency go to v1.25.7 ([ba9cf5c](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/ba9cf5cef987841033759493079d4498bea8a111))
+* **deps:** update dependency go to v1.26.0 ([1530c66](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/1530c6632e8b19a0cf0bb93c0c0e7af545a2be3e))
+* **deps:** update dependency go to v1.26.1 ([6bc8ad5](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/6bc8ad5620c0a9db060c395008c5109f19f98836))
+* **layout:** regenerate kickr layout ([d090161](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/d090161913799eb8bd85f02309356953ff86fd6a))
+* **layout:** regenerate kickr layout ([72b61e0](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/72b61e01fc2e00e99187977fbe0a83c6355e4174))
+* **layout:** regenerate kickr layout ([3c1d185](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/3c1d185d27fbb438f8bbd7d44287e32a6a2ec604))
+* **layout:** regenerate kickr layout ([6ea9cee](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/6ea9cee8973a184e9c4cd6b537b10d9c3854d4f5))
+* **layout:** regenerate kickr layout ([beedf27](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/beedf27ff5c1b78e3d1dfe5d88757034533dcff9))
+* **layout:** regenerate kickr layout ([8a7f0b3](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/8a7f0b377e21572037b8843115980ebbb7aef953))
+* remove sbom jobs deactivation ([d27e366](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/d27e36651cab23868da570e701c7e6fd416a1cec))
+* **sbom:** fix invalid options ([adfa42c](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/adfa42c69ee4d79207dac3d25b88238ccf239742))
+* **semrel:** ensure project configuration is used ([eace9d0](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/eace9d0737b0e1939ec01561c07a894af971a657))
+
+### Styles
+
+* **lint:** enable nolintlint require option and perfsprint loop option ([53381a9](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/commit/53381a992e82b6b54aa01534f6d69c9e7454a10d))
+
 ## [1.4.0](https://gitlab.com/kilianpaquier/gitlab-storage-cleaner/compare/v1.3.0...v1.4.0) (2026-01-18)
 
 ### Features
