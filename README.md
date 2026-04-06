@@ -9,6 +9,12 @@
   <img alt="Go Report Card" src="https://goreportcard.com/badge/gitlab.com/kilianpaquier/gitlab-storage-cleaner?style=for-the-badge">
 </div>
 
+> [!WARNING]
+> This project is archived as of v1.4.1.
+> Recommended way to clean artifacts from GitLab projects is to define a
+> [pipeline automatic cleanup](https://docs.gitlab.com/ci/pipelines/settings/#automatic-pipeline-cleanup)
+> and [limit artifacts retention](https://docs.gitlab.com/ci/jobs/job_artifacts/#keep-artifacts-from-most-recent-successful-jobs).
+
 ---
 
 - [How to use ?](#how-to-use-)
